@@ -17,7 +17,7 @@ class DataParser:
         os.makedirs(os.path.dirname(output_path), exist_ok=True)
 
         # OCR에서 추출된 텍스트 로드
-        with open(f'quiz_texts/{file_name}.txt', 'r', encoding='utf-8') as file:
+        with open(f'quiz_texts/{prefix}/{file_name}.txt', 'r', encoding='utf-8') as file:
             data = file.read()
             # OpenAI GPT-4 요청용 프롬프트 작성
             prompt = f"""
