@@ -33,6 +33,7 @@ class QuizGenerator:
                         "topic": "<topic>", // same as data,
                         "sub_topic": "<sub_topic>", // you can change with similar one,
                         "question_text": "<question_text>", // generate the question text for this quiz following the subject, topic and sub_topic
+                        // Ensure that the generated content matches the tone, style, and structure of the provided data.
                         "example": [
                             <example_text>
                         ], // if you need further explanations for this quiz. you can generate the example text for this quiz but no necessary
@@ -47,7 +48,7 @@ class QuizGenerator:
                     }},
                     {{...}} // generate the 20 questions
                 }},
-                    
+            - Ensure that the questions are framed with technical language and specialized terms, suitable for an academic or expert-level audience. 
             """
 
         # OpenAI API 호출
@@ -70,5 +71,6 @@ class QuizGenerator:
 
         return quiz_data
 
+
 generator = QuizGenerator()
-generator.generating_quiz("EDU_quiz_set_1", 141)
+generator.generating_quiz("PSY_quiz_set_1", 201)
