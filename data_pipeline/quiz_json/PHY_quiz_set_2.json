@@ -1,0 +1,352 @@
+{
+    "quiz_type": "PHY",
+    "quiz_set_id": "quiz_set_2",
+    "quiz": [
+        {
+            "quiz_id": "quiz_161",
+            "quiz_content": {
+                "subject": "운동생리학",
+                "topic": "에너지 시스템",
+                "sub_topic": "무산소 대사",
+                "question_text": "운동 중 ATP-PC 시스템이 주요 에너지원으로 동원되는 시기는?",
+                "example": [
+                    "ATP-PC 시스템은 고강도, 단시간 운동에서 주로 사용됩니다."
+                ],
+                "options": {
+                    "1": "장거리 달리기",
+                    "2": "단거리 질주",
+                    "3": "마라톤",
+                    "4": "수영"
+                },
+                "correct_option": 2,
+                "description": "단거리 질주는 높은 강도로 짧은 시간 동안 진행되므로 ATP-PC 시스템이 가장 적합한 에너지원입니다."
+            }
+        },
+        {
+            "quiz_id": "quiz_162",
+            "quiz_content": {
+                "subject": "운동생리학",
+                "topic": "근육 구조와 기능",
+                "sub_topic": "근 섬유 유형",
+                "question_text": "Type I 근섬유의 특징으로 옳지 않은 것은?",
+                "options": {
+                    "1": "느린 수축 속도",
+                    "2": "높은 미토콘드리아 밀도",
+                    "3": "고강도, 저기간 활동에 적합",
+                    "4": "높은 내구성"
+                },
+                "correct_option": 3,
+                "description": "Type I 근섬유는 낮은 강도로 오랜 시간 지속되는 활동에 적합하며, 고강도 활동에는 적합하지 않습니다."
+            }
+        },
+        {
+            "quiz_id": "quiz_163",
+            "quiz_content": {
+                "subject": "운동생리학",
+                "topic": "운동 후 회복",
+                "sub_topic": "활동적 회복",
+                "question_text": "활동적 회복(active recovery)의 효과로 옳지 않은 것은?",
+                "options": {
+                    "1": "젖산 제거 촉진",
+                    "2": "혈류 증가",
+                    "3": "근육 손상 가속화",
+                    "4": "피로 회복 지원"
+                },
+                "correct_option": 3,
+                "description": "활동적 회복은 젖산 제거 및 혈류 증가를 통해 피로 회복을 돕고, 근육 손상을 가속화하지 않습니다."
+            }
+        },
+        {
+            "quiz_id": "quiz_164",
+            "quiz_content": {
+                "subject": "운동생리학",
+                "topic": "체온 조절",
+                "sub_topic": "운동 중 발한",
+                "question_text": "운동 중 체온 상승을 조절하기 위한 체내 메커니즘으로 올바른 것은?",
+                "options": {
+                    "1": "발한 억제",
+                    "2": "혈관수축",
+                    "3": "증발열 발산",
+                    "4": "글리코겐 저장 증가"
+                },
+                "correct_option": 3,
+                "description": "운동 중 체온 상승을 완화하는 가장 효과적인 방법은 발한을 통한 증발열 발산입니다."
+            }
+        },
+        {
+            "quiz_id": "quiz_165",
+            "quiz_content": {
+                "subject": "운동생리학",
+                "topic": "근섬유 유형",
+                "sub_topic": "근섬유의 피로 저항력",
+                "question_text": "Type IIa 근섬유가 Type IIx 근섬유에 비해 가지는 장점은 무엇인가?",
+                "options": {
+                    "1": "고속 수축 가능",
+                    "2": "낮은 피로 저항력",
+                    "3": "높은 피로 저항력",
+                    "4": "짧은 지속 시간"
+                },
+                "correct_option": 3,
+                "description": "Type IIa 근섬유는 고속 수축과 함께 높은 피로 저항력을 가지며, 지속 시간이 긴 활동을 수행할 수 있습니다."
+            }
+        },
+        {
+            "quiz_id": "quiz_166",
+            "quiz_content": {
+                "subject": "운동생리학",
+                "topic": "심혈관 적응",
+                "sub_topic": "운동 시 심박수 변화",
+                "question_text": "운동 시 심박수 변화의 주요 요인으로 적절한 것을 모두 고른 것은?",
+                "example": [
+                    "운동 시 심박수 변화는 신경계와 내분비계의 변화에 의해 발생합니다."
+                ],
+                "options": {
+                    "1": "교감신경 활성화",
+                    "2": "부교감신경 억제",
+                    "3": "심근 수축력 감소",
+                    "4": "교감신경 활성화, 부교감신경 억제"
+                },
+                "correct_option": 4,
+                "description": "운동 시 심박수는 교감신경의 활성화와 부교감신경의 억제에 의해 증가합니다."
+            }
+        },
+        {
+            "quiz_id": "quiz_167",
+            "quiz_content": {
+                "subject": "운동생리학",
+                "topic": "신체 조절",
+                "sub_topic": "체내 삼투압 조절",
+                "question_text": "운동 중 삼투압 조절을 위해 신체에서 분비되는 주요 호르몬은?",
+                "options": {
+                    "1": "인슐린",
+                    "2": "글루카곤",
+                    "3": "알도스테론",
+                    "4": "코르티솔"
+                },
+                "correct_option": 3,
+                "description": "운동 중 체내 삼투압을 조절하기 위해 알도스테론이 분비되어 나트륨 흡수를 촉진합니다."
+            }
+        },
+        {
+            "quiz_id": "quiz_168",
+            "quiz_content": {
+                "subject": "운동생리학",
+                "topic": "심폐 기능",
+                "sub_topic": "1회 박출량 변화",
+                "question_text": "운동 중 1회 박출량 증가를 이끄는 생리적 요인으로 옳지 않은 것은?",
+                "options": {
+                    "1": "혈장량 증가",
+                    "2": "심근 수축력 증가",
+                    "3": "정맥 환류 감소",
+                    "4": "심장 용적 증가"
+                },
+                "correct_option": 3,
+                "description": "운동 중에는 정맥 환류가 증가하여 1회 박출량이 증가하며, 감소하지 않습니다."
+            }
+        },
+        {
+            "quiz_id": "quiz_169",
+            "quiz_content": {
+                "subject": "운동생리학",
+                "topic": "에너지 시스템",
+                "sub_topic": "젖산 축적",
+                "question_text": "젖산 축적이 유발되는 주요 원인은?",
+                "options": {
+                    "1": "무산소 상태에서의 에너지원 고갈",
+                    "2": "산소 공급 증가",
+                    "3": "포도당 부족",
+                    "4": "ATP 생성량 증가"
+                },
+                "correct_option": 1,
+                "description": "무산소 상태에서 에너지원이 고갈될 때 젖산이 축적됩니다."
+            }
+        },
+        {
+            "quiz_id": "quiz_170",
+            "quiz_content": {
+                "subject": "운동생리학",
+                "topic": "신경계 기능",
+                "sub_topic": "운동 중 신경 활성화",
+                "question_text": "고강도 운동 시 교감신경계 활성화에 의해 나타나는 변화로 올바른 것은?",
+                "options": {
+                    "1": "소화기계 활성 증가",
+                    "2": "심박수 증가",
+                    "3": "혈관 확장 감소",
+                    "4": "땀 분비 감소"
+                },
+                "correct_option": 2,
+                "description": "고강도 운동 시 교감신경계의 활성화는 심박수를 증가시킵니다."
+            }
+        },
+        {
+            "quiz_id": "quiz_171",
+            "quiz_content": {
+                "subject": "운동생리학",
+                "topic": "운동과 호르몬 반응",
+                "sub_topic": "코르티솔 반응",
+                "question_text": "장시간 지속적인 운동 시 주로 증가하는 호르몬은?",
+                "options": {
+                    "1": "인슐린",
+                    "2": "글루카곤",
+                    "3": "에피네프린",
+                    "4": "코르티솔"
+                },
+                "correct_option": 4,
+                "description": "장시간 운동 시 스트레스 반응으로 인해 코르티솔의 수치가 증가합니다."
+            }
+        },
+        {
+            "quiz_id": "quiz_172",
+            "quiz_content": {
+                "subject": "운동생리학",
+                "topic": "근력과 스트레칭",
+                "sub_topic": "근육의 신장성 수축",
+                "question_text": "근육의 신장성 수축이 주로 발생하는 운동은?",
+                "options": {
+                    "1": "팔굽혀펴기 위에서 정지",
+                    "2": "등척성 수축",
+                    "3": "스쿼트 앉을 때",
+                    "4": "고정된 철봉 위로 올라가다"
+                },
+                "correct_option": 3,
+                "description": "신장성 수축은 근육이 늘어날 때 발생하며, 스쿼트에서 앉을 때 근육이 신장성 수축을 겪습니다."
+            }
+        },
+        {
+            "quiz_id": "quiz_173",
+            "quiz_content": {
+                "subject": "운동생리학",
+                "topic": "대사 변화",
+                "sub_topic": "지방 대사",
+                "question_text": "지방이 주요 에너지원으로 사용되기 시작하는 운동 시간은 일반적으로 몇 분 이후인가?",
+                "options": {
+                    "1": "5분",
+                    "2": "15분",
+                    "3": "30분",
+                    "4": "60분"
+                },
+                "correct_option": 3,
+                "description": "지방은 일반적으로 운동 시작 후 20~30분 이후에 주요 에너지원으로 사용됩니다."
+            }
+        },
+        {
+            "quiz_id": "quiz_174",
+            "quiz_content": {
+                "subject": "운동생리학",
+                "topic": "에너지 대사",
+                "sub_topic": "탄수화물 대사",
+                "question_text": "빠른 진행과 고강도 운동에 주로 사용되는 에너지원은?",
+                "options": {
+                    "1": "지방산",
+                    "2": "글리코겐",
+                    "3": "단백질",
+                    "4": "젖산"
+                },
+                "correct_option": 2,
+                "description": "고강도 운동에서는 글리코겐이 빠르고 효율적으로 사용됩니다."
+            }
+        },
+        {
+            "quiz_id": "quiz_175",
+            "quiz_content": {
+                "subject": "운동생리학",
+                "topic": "근육 피로",
+                "sub_topic": "근육 피로의 원인",
+                "question_text": "근육 피로의 주요 원인이 아닌 것은?",
+                "options": {
+                    "1": "ATP 고갈",
+                    "2": "젖산 축적",
+                    "3": "근형질세망의 칼슘 부족",
+                    "4": "근섬유 크기 증가"
+                },
+                "correct_option": 4,
+                "description": "근육 피로는 ATP 고갈, 젖산 축적, 칼슘 부족과 관련이 있으며, 근섬유 크기 증가는 피로와 관련이 없습니다."
+            }
+        },
+        {
+            "quiz_id": "quiz_176",
+            "quiz_content": {
+                "subject": "운동생리학",
+                "topic": "대사 변화",
+                "sub_topic": "단백질 대사",
+                "question_text": "단백질이 주요 에너지원으로 활용되는 시기는?",
+                "options": {
+                    "1": "고단백 식이 직후",
+                    "2": "체내 글리코겐 고갈 후",
+                    "3": "격렬한 운동 초기",
+                    "4": "스트레칭 중"
+                },
+                "correct_option": 2,
+                "description": "단백질은 일반적으로 글리코겐이 고갈된 후 에너지원으로 활용됩니다."
+            }
+        },
+        {
+            "quiz_id": "quiz_177",
+            "quiz_content": {
+                "subject": "운동생리학",
+                "topic": "심폐 기능",
+                "sub_topic": "VO2max",
+                "question_text": "장기 유산소 훈련 후 VO2max 증가의 주된 원인이 아닌 것은?",
+                "options": {
+                    "1": "미토콘드리아 수의 증가",
+                    "2": "혈중 젖산 농도 증가",
+                    "3": "심장 박출량 증가",
+                    "4": "모세혈관 밀도 증가"
+                },
+                "correct_option": 2,
+                "description": "VO2max 증가는 미토콘드리아 수와 심장 박출량 증가로 인해 발생하며, 혈중 젖산 농도의 증가는 그 원인이 아닙니다."
+            }
+        },
+        {
+            "quiz_id": "quiz_178",
+            "quiz_content": {
+                "subject": "운동생리학",
+                "topic": "운동과 대사",
+                "sub_topic": "혈류 분배",
+                "question_text": "운동 중 근육에 대한 혈류의 분포를 조절하는 메커니즘은?",
+                "options": {
+                    "1": "심박수 감소",
+                    "2": "혈관 수축",
+                    "3": "혈관 확장",
+                    "4": "혈류 저항 증가"
+                },
+                "correct_option": 3,
+                "description": "운동 중 특히 근육에 필요할 때 혈관이 확장되어 혈류가 증가합니다."
+            }
+        },
+        {
+            "quiz_id": "quiz_179",
+            "quiz_content": {
+                "subject": "운동생리학",
+                "topic": "훈련과 호흡",
+                "sub_topic": "호흡률",
+                "question_text": "운동 강도 증가에 따른 호흡률 변화가 가장 큰 시점은?",
+                "options": {
+                    "1": "운동 초기",
+                    "2": "유산소 임계점 도달 시",
+                    "3": "운동 중간",
+                    "4": "운동 종료 후"
+                },
+                "correct_option": 2,
+                "description": "유산소 임계점에 도달하면 호흡률이 현저하게 증가합니다."
+            }
+        },
+        {
+            "quiz_id": "quiz_180",
+            "quiz_content": {
+                "subject": "운동생리학",
+                "topic": "호르몬 반응",
+                "sub_topic": "성장호르몬",
+                "question_text": "유산소 운동 중 성장호르몬의 역할은?",
+                "options": {
+                    "1": "혈당 수치 감소",
+                    "2": "단백질 합성 억제",
+                    "3": "지방 분해 촉진",
+                    "4": "골격근량 감소"
+                },
+                "correct_option": 3,
+                "description": "유산소 운동 중 성장호르몬은 지방 분해를 촉진하여 에너지원으로 사용되도록 합니다."
+            }
+        }
+    ]
+}
