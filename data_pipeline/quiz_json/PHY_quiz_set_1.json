@@ -1,0 +1,421 @@
+{
+    "quiz_type": "PHY",
+    "quiz_set_id": "quiz_set_1",
+    "quiz": [
+        {
+            "quiz_id": "quiz_81",
+            "quiz_content": {
+                "subject": "운동생리학",
+                "topic": "에너지 시스템",
+                "sub_topic": "에너지 합성",
+                "question_text": "ATP를 합성하는데 사용되는 에너지원이 아닌 것은?",
+                "example": null,
+                "options": {
+                    "1": "근중성지방",
+                    "2": "비타민C",
+                    "3": "글루코스",
+                    "4": "젖산"
+                },
+                "correct_option": 2,
+                "description": "ATP 합성을 위한 전통적인 에너지원은 지방, 탄수화물 및 단백질입니다. 비타민 C는 에너지원으로 사용되지 않습니다."
+            }
+        },
+        {
+            "quiz_id": "quiz_82",
+            "quiz_content": {
+                "subject": "운동생리학",
+                "topic": "근육 구조와 기능",
+                "sub_topic": "근수축 메커니즘",
+                "question_text": "근수축에 필수적인 Cat 이온을 저장, 분비하는 근육 세포 내 소기관은?",
+                "example": null,
+                "options": {
+                    "1": "근형질세망(sarcoplasmic reticulum)",
+                    "2": "위성세포(satellite cell)",
+                    "3": "미토콘드리아(mitochondria)",
+                    "4": "근핵 (myonuclear)"
+                },
+                "correct_option": 1,
+                "description": "근형질세망은 근육 내에서 칼슘 이온을 저장하고 방출하여 근수축 및 이완을 조절합니다."
+            }
+        },
+        {
+            "quiz_id": "quiz_83",
+            "quiz_content": {
+                "subject": "운동생리학",
+                "topic": "운동 후 회복",
+                "sub_topic": "EPOC",
+                "question_text": "운동 후 초과산소섭취량(EPOC)에 영향을 미치는 요인으로 적절하지 않은 것은?",
+                "example": null,
+                "options": {
+                    "1": "운동 중 증가한 체온",
+                    "2": "운동 중 증가한 젖산",
+                    "3": "운동 중 증가한 호르몬(에피네프린, 노르에피네프린)",
+                    "4": "운동 중 증가한 크레아틴인산(phosphocreatine, PC)"
+                },
+                "correct_option": 4,
+                "description": "EPOC는 주로 운동 중 대사 및 심혈관 계통의 변화에 영향을 받지만, 크레아틴인산의 증가는 EPOC와 직접적인 관련이 적습니다."
+            }
+        },
+        {
+            "quiz_id": "quiz_84",
+            "quiz_content": {
+                "subject": "운동생리학",
+                "topic": "체온 조절",
+                "sub_topic": "수중 운동",
+                "question_text": "수중 운동 시 체온유지를 위한 요인으로 옳지 않은 것은?",
+                "example": null,
+                "options": {
+                    "1": "폐활량",
+                    "2": "체지방량",
+                    "3": "운동 강도",
+                    "4": "물의 온도"
+                },
+                "correct_option": 1,
+                "description": "폐활량은 체온 조절과 직접적인 관련이 없습니다. 수중에서 체온유지는 주로 체지방량, 물의 온도, 및 운동 강도에 의해 영향을 받습니다."
+            }
+        },
+        {
+            "quiz_id": "quiz_85",
+            "quiz_content": {
+                "subject": "운동생리학",
+                "topic": "근섬유 유형",
+                "sub_topic": "근섬유 동원 순서",
+                "question_text": "운동강도 증가에 따라 동원되는 근섬유 순서로 옳은 것은?",
+                "example": null,
+                "options": {
+                    "1": "Type IIa 섬유 → Type IIx 섬유 → Type I 섬유",
+                    "2": "Type IIx 섬유 → Type IIa 섬유 → Type I 섬유",
+                    "3": "Type I 섬유 → Type IIa 섬유 → Type IIx 섬유",
+                    "4": "Type I 섬유 → Type IIx 섬유 → Type IIa 섬유"
+                },
+                "correct_option": 3,
+                "description": "운동강도가 증가함에 따라 일반적으로 Type I 섬유가 먼저 사용되고, 이후 Type IIa, 마지막으로 Type IIx 섬유가 동원됩니다."
+            }
+        },
+        {
+            "quiz_id": "quiz_86",
+            "quiz_content": {
+                "subject": "운동생리학",
+                "topic": "심폐 적응",
+                "sub_topic": "유산소 훈련",
+                "question_text": "장기간 규칙적 유산소 훈련의 결과로 최대 운동 시 나타나는 심폐기능의 적응으로 옳은 것을 모두 고른 것은?",
+                "example": [
+                    "보기:",
+                    "㉠ 최대산소섭취량 증가",
+                    "㉡ 심장용적과 심근수축력 증가",
+                    "㉢ 심박출량 증가"
+                ],
+                "options": {
+                    "1": "㉠, ㉡",
+                    "2": "㉡, ㉢",
+                    "3": "㉠, ㉢",
+                    "4": "㉠, ㉡, ㉢"
+                },
+                "correct_option": 4,
+                "description": "유산소 훈련을 통해 심폐기능은 최대산소섭취량, 심장 용적 및 심근 수축력이 증가하는 방식으로 적응합니다."
+            }
+        },
+        {
+            "quiz_id": "quiz_87",
+            "quiz_content": {
+                "subject": "운동생리학",
+                "topic": "신체 조절",
+                "sub_topic": "피드백 메커니즘",
+                "question_text": "항상성 유지를 위한 신체 조절 중 부적피드백(negative feedback)이 아닌 것은?",
+                "example": null,
+                "options": {
+                    "1": "세포외액의 CO2 조절",
+                    "2": "체온 상승에 따른 땀 분비 증가",
+                    "3": "혈당 유지를 위한 호르몬 조절",
+                    "4": "출산 시 자궁 수축 활성화 증가"
+                },
+                "correct_option": 4,
+                "description": "출산 시 자궁 수축은 양성 피드백에 의해 조절됩니다."
+            }
+        },
+        {
+            "quiz_id": "quiz_88",
+            "quiz_content": {
+                "subject": "운동생리학",
+                "topic": "심혈관 기능",
+                "sub_topic": "박출량 증가 원인",
+                "question_text": "운동 중 1회 박출량(stroke volume) 증가 원인으로 옳지 않은 것은?",
+                "example": null,
+                "options": {
+                    "1": "대동맥압 증가에 따른 후부하(after load) 증가",
+                    "2": "호흡펌프작용에 의한 정맥회귀(venous return) 증가",
+                    "3": "골격근 수축에 의한 근육펌프작용 증가",
+                    "4": "교감신경 자극에 의한 심근 수축력 증가"
+                },
+                "correct_option": 1,
+                "description": "대동맥압 증가에 따른 후부하는 박출량 증가에 부정적 영향을 미칩니다."
+            }
+        },
+        {
+            "quiz_id": "quiz_89",
+            "quiz_content": {
+                "subject": "운동생리학",
+                "topic": "에너지 대사",
+                "sub_topic": "에너지원 사용",
+                "question_text": "보기의 ㉠, ㉡에 들어갈 내용이 바르게 연결된 것은?",
+                "example": [
+                    "보기:",
+                    "100",
+                    "80",
+                    "60",
+                    "민 체육진흥공단",
+                    "40",
+                    "0",
+                    "25",
+                    "65",
+                    "85",
+                    "운동강도(%VO2MAX)",
+                    "훈련한 운동 선수의 운동강도에 따른 에너지원 사용"
+                ],
+                "options": {
+                    "1": "혈중 포도당 - 근중성지방",
+                    "2": "혈중 유리지방산 - 근글리코겐",
+                    "3": "근글리코겐 - 혈중 포도당",
+                    "4": "근중성지방 - 혈중유리지방산"
+                },
+                "correct_option": null,
+                "description": "문제가 제대로 주어지지 않아 선택지를 해결할 수 없습니다."
+            }
+        },
+        {
+            "quiz_id": "quiz_90",
+            "quiz_content": {
+                "subject": "운동생리학",
+                "topic": "신경계 기능",
+                "sub_topic": "소뇌의 역할",
+                "question_text": "운동 중 소뇌의 기능에 대한 설명으로 옳은 것을 모두 고른 것은?",
+                "example": [
+                    "보기:",
+                    "㉠ 골격근 운동 조절의 최종 단계 역할",
+                    "㉡ 빠른 동작의 정확한 수행을 위한 통합 조절",
+                    "㉢ 고유수용기로부터 유입되는 정보를 활용하여 동작 수정"
+                ],
+                "options": {
+                    "1": "㉠, ㉡",
+                    "2": "㉡, ㉢",
+                    "3": "㉠, ㉢",
+                    "4": "㉠, ㉡, ㉢"
+                },
+                "correct_option": 4,
+                "description": "소뇌는 골격근 운동 조절, 빠른 동작의 정확도 및 고유수용기 정보를 활용한 동작 수정에 중요한 역할을 합니다."
+            }
+        },
+        {
+            "quiz_id": "quiz_91",
+            "quiz_content": {
+                "subject": "운동생리학",
+                "topic": "운동에 따른 생리적 변화",
+                "sub_topic": "운동과 환기량",
+                "question_text": "운동에 따른 환기량의 변화로 옳은 것을 모두 고른 것은?",
+                "example": [
+                    "㉠ 운동 시작 직전에는 운동 수행에 대한 기대감으로 환기량이 증가할 수 있다.",
+                    "㉡ 운동 초기 환기량 변화의 주된 요인은 경동맥에 위치한 화학수용기 반응이다.",
+                    "㉢ 운동 강도가 증가하면 1회 호흡량은 감소하고 호흡수는 현저히 증가한다.",
+                    "② 회복기 환기량은 운동 중 생성된 체내 수소이온 및 이산화탄소 농도와 관련 있다."
+                ],
+                "options": {
+                    "1": "㉠, ㉡",
+                    "2": "㉠, ㉢",
+                    "3": "㉡, ②",
+                    "4": "㉠, ②"
+                },
+                "correct_option": 1,
+                "description": "운동 시작 시 환기량은 여러 요인에 의해 변화할 수 있으며 특히 경동맥의 화학수용기 반응과 관련이 있습니다."
+            }
+        },
+        {
+            "quiz_id": "quiz_92",
+            "quiz_content": {
+                "subject": "운동생리학",
+                "topic": "대사과정",
+                "sub_topic": "ATP 생성과 에너지 대사",
+                "question_text": "<보기>의 ㉠, ㉡에 들어갈 내용이 바르게 연결된 것은?",
+                "example": [
+                    "1개의 포도당 분해에 따른 유산소성 ATP 생성",
+                    "고에너지 생산",
+                    "2 ATP",
+                    "2 NADH",
+                    "해당작용",
+                    "피루브산에서 2 NADH",
+                    "아세틸조효소A까지 2 ATP",
+                    "6 NADH",
+                    "2 FADH2",
+                    "합계 ㉡ ATP 32",
+                    "B 산화",
+                    "크랩스회로 35"
+                ],
+                "options": {
+                    "1": "32",
+                    "2": "35",
+                    "3": "34",
+                    "4": "30"
+                },
+                "correct_option": 2,
+                "description": "ATP는 에너지 대사의 산물로, 해당작용, 아세틸조효소A 생성 과정, 크랩스회로 등을 통해 생성됩니다."
+            }
+        },
+        {
+            "quiz_id": "quiz_93",
+            "quiz_content": {
+                "subject": "운동생리학",
+                "topic": "에너지 소비와 대사",
+                "sub_topic": "METs와 칼로리 소비",
+                "question_text": "체중이 80kg인 사람이 10METs로 10분간 달리기 했을 때 소비 칼로리는? (단, 1MET=3.5ml.kg·min-1, O2 1L당 5Kcal 생성)",
+                "example": null,
+                "options": {
+                    "1": "130Kcal",
+                    "2": "140Kcal",
+                    "3": "150Kcal",
+                    "4": "160Kcal"
+                },
+                "correct_option": 3,
+                "description": "칼로리 소비량은 METs 값을 통해 계산하며, 운동 강도와 지속 시간 및 체중이 중요합니다."
+            }
+        },
+        {
+            "quiz_id": "quiz_94",
+            "quiz_content": {
+                "subject": "운동생리학",
+                "topic": "세포의 이온 농도",
+                "sub_topic": "신경세포의 안정시 막전위",
+                "question_text": "<보기>는 신경 세포의 안정 시 막전위에 영향을 주는 Na+과 K+에 대한 그림이다. ㉠~㉣에 들어갈 내용이 바르게 연결된 것은?",
+                "example": [
+                    "세포외액 150mM Na+, 5mM K+",
+                    "세포내액 15mM Na+, 150mM K+",
+                    "ATP Na+/K+ 펌프"
+                ],
+                "options": {
+                    "1": "K+, Na+, Na+",
+                    "2": "Na+, K+, Na+",
+                    "3": "K+, Na+, K+",
+                    "4": "Na+, K+, K+"
+                },
+                "correct_option": 2,
+                "description": "신경세포의 안정 시 막전위는 Na+/K+ 펌프에 의해 유지되며, Na+는 세포외로, K+는 세포내로 이동하는 것이 일반적입니다."
+            }
+        },
+        {
+            "quiz_id": "quiz_95",
+            "quiz_content": {
+                "subject": "운동생리학",
+                "topic": "심폐기능과 훈련 효과",
+                "sub_topic": "최대산소섭취량",
+                "question_text": "<보기>의 최대산소섭취량 공식에서 장기간 지구성 훈련에 의해 증가되는 요소를 모두 고른 것은?",
+                "example": [
+                    "최대산소섭취량 = ㉠ 최대1회박출량X㉡ 최대심박수X㉢ 최대동정맥산소차"
+                ],
+                "options": {
+                    "1": "㉠",
+                    "2": "㉢",
+                    "3": "㉡",
+                    "4": "㉠, ㉢"
+                },
+                "correct_option": 4,
+                "description": "지구성 훈련은 심장 기능 개선과 혈액 산소 운반 능력을 향상시켜 최대산소섭취량을 증가시킵니다."
+            }
+        },
+        {
+            "quiz_id": "quiz_96",
+            "quiz_content": {
+                "subject": "운동생리학",
+                "topic": "훈련 효과와 건강 체력",
+                "sub_topic": "신체의 변화와 체력 향상",
+                "question_text": "<보기>의 내용이 모두 증가되었을 때 향상되는 건강체력 요소는?",
+                "example": [
+                    "모세혈관의 밀도",
+                    "미토콘드리아의 수와 크기",
+                    "동정맥 산소차(arterial-venous oxygen difference)"
+                ],
+                "options": {
+                    "1": "유연성",
+                    "2": "순발력",
+                    "3": "심폐지구력",
+                    "4": "근력"
+                },
+                "correct_option": 3,
+                "description": "심폐지구력은 심박수 및 산소 교환 능력과 관련 있으며 모세혈관, 미토콘드리아 등에서 영향을 받습니다."
+            }
+        },
+        {
+            "quiz_id": "quiz_97",
+            "quiz_content": {
+                "subject": "운동생리학",
+                "topic": "호르몬 반응과 운동",
+                "sub_topic": "운동 시 호르몬 변화",
+                "question_text": "1시간 이내의 중강도 운동 시 시간 경과에 따라 혈중 농도가 점차 감소하는 호르몬은?",
+                "example": null,
+                "options": {
+                    "1": "에피네프린(epinephrine)",
+                    "2": "인슐린(insulin)",
+                    "3": "성장호르몬(growth hormone)",
+                    "4": "코르티솔 (cortisol)"
+                },
+                "correct_option": 2,
+                "description": "중강도 운동에서는 일반적으로 인슐린의 분비가 감소하면서 혈중 농도가 떨어지게 됩니다."
+            }
+        },
+        {
+            "quiz_id": "quiz_98",
+            "quiz_content": {
+                "subject": "운동생리학",
+                "topic": "감각수용기",
+                "sub_topic": "고유수용기",
+                "question_text": "18. <보기>에서 설명하는 고유수용기는?",
+                "example": [
+                    "감각 및 운동신경의 말단이 연결되어 있다.",
+                    "감마운동뉴런을 통해 조절된다.",
+                    "근육의 길이 정보를 중추신경계로 보낸다."
+                ],
+                "options": {
+                    "1": "근방추(muscle spindle)",
+                    "2": "골지건기관(Golgi tendon organ)",
+                    "3": "자유신경종말(free nerve ending)",
+                    "4": "파치니안 소체(Pacinian corpuscle)"
+                },
+                "correct_option": 1,
+                "description": "근방추는 근육의 길이를 감지하고 중추신경계에 정보를 전달하는 고유수용기입니다."
+            }
+        },
+        {
+            "quiz_id": "quiz_99",
+            "quiz_content": {
+                "subject": "운동생리학",
+                "topic": "근력",
+                "sub_topic": "근력 결정요인",
+                "question_text": "19. 근력 결정요인으로 옳지 않은 것은?",
+                "example": null,
+                "options": {
+                    "1": "근육 횡단면적",
+                    "2": "근절의 적정 길이",
+                    "3": "근섬유 구성비",
+                    "4": "근섬유막 두께"
+                },
+                "correct_option": 4,
+                "description": "근섬유막 두께는 근력 결정에 직접적인 영향을 미치지 않습니다."
+            }
+        },
+        {
+            "quiz_id": "quiz_100",
+            "quiz_content": {
+                "subject": "운동생리학",
+                "topic": "근육 수축",
+                "sub_topic": "수축 형태",
+                "question_text": "20. 상완이두근의 움직임에 대한 근육 수축 형태로 옳지 않은 것은?",
+                "example": null,
+                "options": {
+                    "1": "자세를 유지할 때 - 등척성 수축",
+                    "2": "턱걸이 올라갈 때 - 단축성 수축",
+                    "3": "턱걸이 내려갈 때 - 신장성 수축",
+                    "4": "공을 던질 때 - 등속성 수축"
+                },
+                "correct_option": 4,
+                "description": "공을 던질 때는 등속성 수축보다는 주로 단축성이나 신장성 수축이 발생합니다."
+            }
+        }
+    ]
+}
