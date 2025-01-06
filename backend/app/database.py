@@ -2,9 +2,11 @@ import os
 from pymongo import MongoClient
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+from urllib.parse import quote_plus
 
 # MongoDB 설정
-MONGO_URI = 'mongodb://localhost:27017'
+password = quote_plus("9bZYDLX@UWs2yF7")
+MONGO_URI = f"mongodb+srv://jeongbeenson19:{password}@aqua.wchta.mongodb.net/?retryWrites=true&w=majority&appName=aqua"
 mongo_client = MongoClient(MONGO_URI)
 mongo_db = mongo_client['quiz_db']
 
