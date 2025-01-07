@@ -10,8 +10,8 @@ password = quote_plus(os.environ['MONGO_PW'])
 MONGO_URI = f"mongodb+srv://jeongbeenson19:{password}@aqua.wchta.mongodb.net/?retryWrites=true&w=majority&appName=aqua"
 mongo_client = MongoClient(
     MONGO_URI,
-    ssl=True,
-    ssl_cert_reqs=ssl.CERT_NONE
+    tls=True,
+    tlsAllowInvalidCertificates=True
 )
 
 mongo_db = mongo_client['quiz_db']
