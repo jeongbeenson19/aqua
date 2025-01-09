@@ -17,9 +17,23 @@ app.add_middleware(
 
 
 @app.get("/quizzes")
-async def get_subject_quizzes(
-    subject: str = Query(..., description="The subject of the quiz, e.g., 'math' or 'science'"),
-    user_id: str = Header(None, description="User ID for personalized quiz progress")
+async def fetch_quiz_set(
+    subject: str = Query(
+        ...,
+        description=(
+            "퀴즈의 과목입니다. 허용 가능한 값: [SCT, EDU, PSY, HIS, PHY, KIN, ETH]. "
+            "각각 '스포츠사회학', '스포츠교육학', '스포츠심리학', '한국체육사', '운동생리학', '운동역학', '스포츠윤리'을 의미합니다. "
+            "예: subject=EDU (스포츠 교육학 퀴즈 요청)"
+        )
+    ),
+    user_id: str = Header(
+        ...,
+        description=(
+            "사용자의 고유 ID. 헤더에서 제공되어야 하며, "
+            "필수 입력값입니다. 예: user_id=user_123"
+        )
+)
+
 ):
     # MongoDB 컬렉션 이름 생성
     collection_name = f"{subject.lower()}"
@@ -36,7 +50,7 @@ async def get_subject_quizzes(
 
     # MongoDB에서 해당 set_id에 해당하는 퀴즈셋 조회
     collection = mongo_db[collection_name]
-    quiz_set_id = f"quiz_set_{set_id}"
+    quiz_set_id = f"quiz_set_{int(set_id) + 1}"
     quiz_set = collection.find_one({"quiz_set_id": quiz_set_id}, {"_id": 0})
 
     if not quiz_set:
