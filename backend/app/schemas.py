@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, ValidationError, model_validator
 from typing import List, Dict
 
 
@@ -22,3 +22,24 @@ class QuizSet(BaseModel):
     quiz_type: str
     quiz_set_id: str
     quiz: List[Quiz]
+
+
+class QuizResultItem(BaseModel):
+    result_id: int
+    quiz_id: str
+    user_answer: str
+    is_correct: int
+
+    @model_validator(mode="before")  # 모드가 "before"일 경우, 모델을 생성하기 전에 유효성 검사
+    def validate_is_correct(cls, values):
+        is_correct = values.get('is_correct')
+        if is_correct not in (0, 1):
+            raise ValueError("is_correct must be either 0 (incorrect) or 1 (correct)")
+        return values
+
+
+class QuizResults(BaseModel):
+    quiz_set_id: str
+    quiz_type: str
+    score: int
+    quiz_results: List[QuizResultItem]

@@ -1,8 +1,8 @@
-from fastapi import FastAPI, HTTPException, Header, Query
+from fastapi import FastAPI, HTTPException, Header, Query, Depends
 from sqlalchemy.orm import Session
 from database import mongo_db, SessionLocal
 from crud import get_last_set_id_from_mysql
-from schemas import QuizSet
+from schemas import QuizSet, QuizResults
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
@@ -57,3 +57,53 @@ async def fetch_quiz_set(
         raise HTTPException(status_code=404, detail=f"No quiz set found for set_id_{quiz_set_id} in subject '{subject}'.")
 
     return {"subject": subject, "set_id": set_id, "quiz_set": quiz_set}
+
+
+@app.post("/submit-quiz")
+async def submit_quiz(
+    user_id: str = Header(
+        ...,
+        description=(
+            "사용자의 고유 ID. 헤더에서 제공되어야 하며, "
+            "필수 입력값입니다. 예: user_id=user_123"
+        )
+    ),
+    quiz_results: QuizResults = Depends()
+):
+    """
+    퀴즈 결과를 제출하고 점수를 계산하여 저장합니다.
+    """
+    from database import SessionLocal
+    from models import QuizSetResult, QuizResult
+
+    quiz_set_id = quiz_results.quiz_set_id
+    quiz_type = quiz_results.quiz_type
+    score = quiz_results.score
+
+    # QuizSetResult 생성
+    with SessionLocal() as db:
+        # QuizSetResult 생성
+        quiz_set_result = QuizSetResult(
+            user_id=user_id,
+            quiz_set_id=quiz_set_id,
+            quiz_type=quiz_type,
+            score=score,
+        )
+        db.add(quiz_set_result)
+        db.commit()
+
+        db.refresh(quiz_set_result)
+
+        # QuizResult 저장
+        for result in quiz_results.quiz_results:
+            quiz_result = QuizResult(
+                result_id=quiz_set_result.id,  # 참조할 result_id를 quiz_set_result.id로 설정
+                quiz_id=result.quiz_id,  # Quiz question ID
+                user_answer=result.user_answer,  # User's answer
+                is_correct=result.is_correct  # Correct or incorrect answer
+            )
+            db.add(quiz_result)
+
+        db.commit()
+
+    return {"quiz_set_id": quiz_set_result.id, "score": quiz_set_result.score}
