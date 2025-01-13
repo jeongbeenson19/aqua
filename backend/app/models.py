@@ -22,8 +22,8 @@ class QuizSetResult(Base):
     quiz_type = Column(String, nullable=False)  # Subject ID
     score = Column(Integer, nullable=False)  # Total score
 
-    # Relationship with QuizResult
-    quiz_results = relationship("QuizResult", back_populates="quiz_set", cascade="all, delete-orphan")
+    # Relationship with QuizResult (one-to-many, quiz_results will be a list of QuizResult objects)
+    quiz_results = relationship("QuizResult", backref="quiz_set", cascade="all, delete-orphan")
 
 
 class QuizResult(Base):
@@ -34,7 +34,3 @@ class QuizResult(Base):
     quiz_id = Column(String, nullable=False)  # Quiz question ID
     user_answer = Column(String, nullable=False)  # User's answer
     is_correct = Column(Integer, nullable=False)  # 1 for correct, 0 for incorrect
-
-    # Relationship with QuizSetResult
-    quiz_set = relationship("QuizSetResult", back_populates="quiz_results")
-
