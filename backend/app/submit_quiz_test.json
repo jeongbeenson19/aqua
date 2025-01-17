@@ -15,7 +15,7 @@
     },
     {
       "quiz_id": "quiz_23",
-      "user_answer": "3",
+      "user_answer": "1",
       "is_correct": 1
     },
     {
@@ -40,12 +40,12 @@
     },
     {
       "quiz_id": "quiz_28",
-      "user_answer": "4",
+      "user_answer": "2",
       "is_correct": 1
     },
     {
       "quiz_id": "quiz_29",
-      "user_answer": "1",
+      "user_answer": "2",
       "is_correct": 0
     },
     {
@@ -65,7 +65,7 @@
     },
     {
       "quiz_id": "quiz_33",
-      "user_answer": "1",
+      "user_answer": "4",
       "is_correct": 1
     },
     {
@@ -75,12 +75,12 @@
     },
     {
       "quiz_id": "quiz_35",
-      "user_answer": "3",
+      "user_answer": "1",
       "is_correct": 1
     },
     {
       "quiz_id": "quiz_36",
-      "user_answer": "4",
+      "user_answer": "2",
       "is_correct": 1
     },
     {
