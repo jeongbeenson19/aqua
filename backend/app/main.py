@@ -1,3 +1,5 @@
+import os
+import requests
 from fastapi import FastAPI, HTTPException, Header, Query, Path
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
@@ -16,6 +18,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+DISCORD_WEBHOOK_URL = os.environ["DISCORD_WEBHOOK_URL"]
 
 
 @app.get("/quizzes")
@@ -184,3 +188,38 @@ async def fetch_attempted_quiz_set(
     return combined_data
 
 
+@app.post("/report/{quiz_type}/{quiz_set_id}/{quiz_id}")
+async def create_quiz_report(
+        title: str,
+        description: str,
+        quiz_type: str = Path(..., description=""),
+        quiz_set_id: str = Path(..., description=""),
+        quiz_id: str = Path(..., description=""),
+
+):
+    """
+    유저가 발견한 오류를 디스코드 웹 훅으로 전송합니다.
+    """
+    embed = {
+        "title": title,
+        "description": description,
+        "color": 3447003,  # 블루 컬러
+        "fields": [
+            {"name": "Quiz Type", "value": quiz_type, "inline": True},
+            {"name": "Quiz Set ID", "value": quiz_set_id, "inline": True},
+            {"name": "Quiz ID", "value": quiz_id, "inline": True},
+        ],
+    }
+
+    # 디스코드 웹훅 요청 데이터
+    payload = {
+        "content": "**새로운 오류 제보가 접수되었습니다!**",
+        "embeds": [embed]
+    }
+
+    # 웹훅 전송
+    response = requests.post(DISCORD_WEBHOOK_URL, json=payload)
+    if response.status_code != 204:  # 204 No Content는 성공 응답
+        raise HTTPException(status_code=response.status_code, detail="Failed to send webhook")
+
+    return {"message": "Bug report sent to Discord successfully"}
