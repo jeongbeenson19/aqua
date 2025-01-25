@@ -1,13 +1,15 @@
 import os
 import requests
-from fastapi import FastAPI, HTTPException, Header, Query, Path
+from fastapi import FastAPI, HTTPException, Header, Query, Path, Depends
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import RedirectResponse
 from sqlalchemy.orm import Session
-from crud import get_last_set_id_from_mysql
-from database import mongo_db, SessionLocal, engine
-from models import QuizSetResult, QuizResult
-from schemas import QuizResults
-from utils import is_collection_exists, validate_quiz_length, validate_quiz_result_length
+from app.crud import get_last_set_id_from_mysql
+from app.database import mongo_db, SessionLocal, engine
+from app.models import QuizSetResult, QuizResult, User
+from app.schemas import QuizResults
+from app.utils import is_collection_exists, validate_quiz_length, validate_quiz_result_length, get_or_create_user, get_db, create_jwt_token, decode_jwt
+
 
 app = FastAPI()
 
@@ -20,11 +22,72 @@ app.add_middleware(
 )
 
 DISCORD_WEBHOOK_URL = os.environ["DISCORD_WEBHOOK_URL"]
+KAKAO_CLIENT_ID = os.environ["KAKAO_CLIENT_ID"]
+KAKAO_REDIRECT_URI = os.environ["KAKAO_REDIRECT_URI"]
 
 
-@app.get("/quizzes")
+# 로그인 요청 URL 생성
+@app.get("/auth/kakao/login")
+def kakao_login():
+    kakao_auth_url = (
+        f"https://kauth.kakao.com/oauth/authorize?"
+        f"client_id={KAKAO_CLIENT_ID}&"
+        f"redirect_uri={KAKAO_REDIRECT_URI}&"
+        f"response_type=code"
+    )
+    return RedirectResponse(kakao_auth_url)
+
+
+# 카카오 로그인 콜백 처리
+@app.get("/auth/kakao/callback")
+def kakao_callback(code: str, db: Session = Depends(get_db)):
+    # Access Token 요청
+    token_url = "https://kauth.kakao.com/oauth/token"
+    token_data = {
+        "grant_type": "authorization_code",
+        "client_id": KAKAO_CLIENT_ID,
+        "redirect_uri": KAKAO_REDIRECT_URI,
+        "code": code,
+    }
+    headers = {"Content-Type": "application/x-www-form-urlencoded"}
+    token_response = requests.post(token_url, data=token_data, headers=headers)
+    if not token_response.ok:
+        raise HTTPException(status_code=400, detail="Failed to get access token")
+
+    token_json = token_response.json()
+    access_token = token_json["access_token"]
+
+    # 사용자 정보 요청
+    user_info_url = "https://kapi.kakao.com/v2/user/me"
+    headers = {"Authorization": f"Bearer {access_token}"}
+    user_info_response = requests.get(user_info_url, headers=headers)
+    if not user_info_response.ok:
+        raise HTTPException(status_code=400, detail="Failed to get user info")
+
+    user_info = user_info_response.json()
+
+    # 사용자 정보 추출 및 회원가입/로그인 처리
+    kakao_id = user_info.get("id")
+    kakao_account = user_info.get("kakao_account", {})
+    email = kakao_account.get("email")
+    nickname = kakao_account.get("profile", {}).get("nickname")
+
+    user = get_or_create_user(db, kakao_id=kakao_id, email=email, nickname=nickname)
+
+    # JWT 생성
+    jwt_token = create_jwt_token(user_id=user.id)
+
+    return {
+        "message": "Login successful",
+        "jwt_token": jwt_token,
+        "user_id": user.user_id,
+        "kakao_id": user.kakao_id
+    }
+
+
+@app.get("/quiz/{quiz_type}/{user_id}")
 async def fetch_quiz_set(
-    quiz_type: str = Query(
+    quiz_type: str = Path(
         ...,
         description=(
             "퀴즈의 과목입니다. 허용 가능한 값: [SCT, EDU, PSY, HIS, PHY, KIN, ETH]. "
@@ -32,15 +95,20 @@ async def fetch_quiz_set(
             "예: quiz_type=EDU (스포츠 교육학 퀴즈 요청)"
         )
     ),
-    user_id: str = Header(
+    user_id: str = Path(
         ...,
         description=(
             "사용자의 고유 ID. 헤더에서 제공되어야 하며, "
             "필수 입력값입니다. 예: user_id=user_123"
-        )
-    )
+        ),
 
+    ),
+    user: User = Depends(decode_jwt)
 ):
+    # 요청 처리 로직
+    if user.user_id != user_id:
+        raise HTTPException(status_code=403, detail="User ID mismatch")
+
     # MongoDB 컬렉션 이름 생성
     collection_name = f"{quiz_type.lower()}"
 
@@ -66,10 +134,10 @@ async def fetch_quiz_set(
     return {"quiz_type": quiz_type, "set_id": set_id, "quiz_set": quiz_set}
 
 
-@app.post("/submit-quiz")
+@app.post("/quiz/submit/{user_id}")
 async def submit_quiz(
     quiz_results: QuizResults,
-    user_id: str = Header(..., description="사용자의 고유 ID")
+    user_id: str = Path(..., description="사용자의 고유 ID"),
 ):
     """
     퀴즈 결과를 제출하고 점수를 저장합니다.
@@ -118,11 +186,13 @@ async def submit_quiz(
 
 @app.get("/attempted/{user_id}/list")
 async def fetch_attempted_quiz_sets_list(
-    user_id: str = Path(..., description="사용자의 고유 ID")
+    user_id: str = Path(..., description="사용자의 고유 ID"),
+    user: User = Depends(decode_jwt)
 ):
-    """
-    유저의 풀이 기록을 호출하여 리스트로 반환합니다.
-    """
+    # 요청 처리 로직
+    if user.user_id != user_id:
+        raise HTTPException(status_code=403, detail="User ID mismatch")
+
     with Session(engine) as session_quiz_set_result:
         # user_id가 일치하는 데이터를 필터링
         attempted_quiz_sets_list = session_quiz_set_result.query(QuizSetResult).filter(
