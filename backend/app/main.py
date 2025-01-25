@@ -243,6 +243,12 @@ async def fetch_attempted_quiz_set(
         # MongoDB에서 해당 quiz_id의 데이터를 찾기
         quiz_data = next((quiz for quiz in quiz_set["quiz"] if quiz["quiz_id"] == quiz_id), None)
         if quiz_data:
+            # Remove the unwanted fields (quiz_id, subject, topic, sub_topic)
+            quiz_content = quiz_data["quiz_content"]
+            quiz_content.pop("subject", None)
+            quiz_content.pop("topic", None)
+            quiz_content.pop("sub_topic", None)
+
             combined_data[quiz_id] = {
                 "quiz": quiz_data,
                 "user_answer": int(result["user_answer"]),
