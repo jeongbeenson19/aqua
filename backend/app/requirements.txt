@@ -90,6 +90,7 @@ python-dateutil==2.9.0.post0
 python-json-logger==2.0.7
 pytz==2024.2
 PyYAML==6.0.2
+PyJWT==2.10.1
 pyzmq==26.2.0
 referencing==0.35.1
 requests==2.32.3
