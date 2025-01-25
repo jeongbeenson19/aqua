@@ -1,4 +1,4 @@
-from pydantic import BaseModel, ValidationError, model_validator
+from pydantic import BaseModel, ValidationError, model_validator, conint
 from typing import List, Dict
 
 
@@ -25,10 +25,9 @@ class QuizSet(BaseModel):
 
 
 class QuizResultItem(BaseModel):
-    result_id: int
     quiz_id: str
     user_answer: str
-    is_correct: int
+    is_correct: conint(ge=0, le=1)
 
     @model_validator(mode="before")  # 모드가 "before"일 경우, 모델을 생성하기 전에 유효성 검사
     def validate_is_correct(cls, values):
