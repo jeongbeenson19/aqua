@@ -299,3 +299,105 @@ async def create_quiz_report(
         raise HTTPException(status_code=response.status_code, detail="Failed to send webhook")
 
     return {"message": "Bug report sent to Discord successfully"}
+
+
+@app.get("/my_page/plot/sunburst/{user_id}")
+async def my_page_plot(
+        user_id: str = Path(..., description="")
+):
+    """
+    마이페이지에 출력한 sunburst 플롯을 요청합니다.
+    """
+    import pandas as pd
+    import plotly.express as px
+
+    with Session(engine) as session_quiz_set_result:
+        attempted_quiz_set_result = session_quiz_set_result.query(QuizSetResult).filter(
+            QuizSetResult.user_id == user_id
+        ).all()
+
+    quiz_set_result_dict = {
+        quiz_set.id: {
+            "quiz_set_id": quiz_set.quiz_set_id,
+            "quiz_type": quiz_set.quiz_type
+        }
+        for quiz_set in attempted_quiz_set_result
+    }
+
+    for result_id, quiz_set_result in quiz_set_result_dict.items():
+        with Session(engine) as session_quiz_result:
+            attempted_quiz_set = session_quiz_result.query(QuizResult).filter(
+                QuizResult.result_id == result_id
+            ).all()
+
+        quiz_result_dict = {
+            quiz.quiz_id: {
+                "user_answer": quiz.user_answer,
+                "is_correct": quiz.is_correct
+            }
+            for quiz in attempted_quiz_set
+        }
+
+        collection_name = f"{quiz_set_result['quiz_type'].lower()}"
+
+        if not is_collection_exists(mongo_db, collection_name):
+            raise Exception(f"Collection '{collection_name}' does not exist.")
+
+            # MongoDB에서 해당 set_id에 해당하는 퀴즈셋 조회
+        collection = mongo_db[collection_name]
+        quiz_set = collection.find_one({"quiz_set_id": quiz_set_result['quiz_set_id']}, {"_id": 0})
+
+        if not quiz_set:
+            raise HTTPException(status_code=404,
+                                detail=f"No quiz set found for set_id_{quiz_set_result['quiz_set_id']} in subject '{quiz_set_result['quiz_type']}'.")
+
+        combined_data = {}
+        for quiz_id, result in quiz_result_dict.items():
+            # MongoDB에서 해당 quiz_id의 데이터를 찾기
+            quiz_data = next((quiz for quiz in quiz_set["quiz"] if quiz["quiz_id"] == quiz_id), None)
+            if quiz_data:
+                # Remove the unwanted fields (quiz_id, subject, topic, sub_topic)
+                quiz_content = quiz_data["quiz_content"]
+                quiz_content.pop("sub_topic", None)
+                quiz_content.pop("question_text", None)
+                quiz_content.pop("example", None)
+                quiz_content.pop("options", None)
+                quiz_content.pop("correct_option", None)
+                quiz_content.pop("description", None)
+
+                combined_data[quiz_id] = {
+                    "quiz": quiz_data,
+                    "is_correct": result["is_correct"]
+                }
+            else:
+                combined_data[quiz_id] = {
+                    "quiz": None,  # MongoDB에 퀴즈 데이터가 없을 경우
+                    "is_correct": result["is_correct"]
+                }
+
+        # JSON 데이터를 DataFrame으로 변환
+        rows = []
+        for quiz_id, details in combined_data.items():
+            row = {
+                "quiz_id": quiz_id,
+                "subject": details["quiz"]["quiz_content"]["subject"],
+                "topic": details["quiz"]["quiz_content"]["topic"],
+                "is_correct": "Correct" if details["is_correct"] else "Incorrect"
+            }
+            rows.append(row)
+
+        df = pd.DataFrame(rows)
+
+        # Sunburst 차트를 그리기 위한 데이터 구조
+        fig = px.sunburst(
+            df,
+            path=["subject", "topic", "is_correct"],  # 계층적 경로
+            values=None,  # 비율 기반이 아닌 개수를 사용
+            color="is_correct",  # 정답/오답을 색상으로 표현
+            color_discrete_map={"Correct": "green", "Incorrect": "red"},
+        )
+
+        # fig.show()
+        plot_json = fig.to_json()
+
+        return {"plot": plot_json}
