@@ -1,10 +1,10 @@
 import os
 import requests
-from fastapi import FastAPI, HTTPException, Header, Query, Path, Depends
+from fastapi import FastAPI, HTTPException, Path, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import RedirectResponse
 from sqlalchemy.orm import Session
-from app.crud import get_last_set_id_from_mysql
+from app.crud import get_last_set_id_from_mysql, update_user_progress
 from app.database import mongo_db, SessionLocal, engine
 from app.models import QuizSetResult, QuizResult, User
 from app.schemas import QuizResults
@@ -176,6 +176,8 @@ async def submit_quiz(
 
                 session_quiz_result.commit()
                 print("All quiz results committed successfully.")
+
+            update_user_progress(session=Session(engine), user_id=user_id, quiz_type=quiz_type)
 
         return {"quiz_set_id": quiz_set_result.id, "score": quiz_set_result.score}
 
