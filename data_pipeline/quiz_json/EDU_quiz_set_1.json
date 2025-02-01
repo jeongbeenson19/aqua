@@ -6,7 +6,7 @@
             "quiz_id": "quiz_21",
             "quiz_content": {
                 "subject": "스포츠교육학",
-                "topic": "평가의 신뢰도",
+                "topic": "평가론",
                 "sub_topic": "검사 방법",
                 "question_text": "<보기>에서 설명하는 스포츠 교육 평가의 신뢰도 검사 방법은?",
                 "example": [
@@ -27,7 +27,7 @@
             "quiz_id": "quiz_22",
             "quiz_content": {
                 "subject": "스포츠교육학",
-                "topic": "교수 스타일",
+                "topic": "지도방법론",
                 "sub_topic": "모스턴의 교수법",
                 "question_text": "<보기>의 수업 장면에서 활용한 모스턴(M. Mosston)의 교수 스타일에 관한 설명으로 적절하지 않은 것은?",
                 "example": [
@@ -53,7 +53,7 @@
             "quiz_id": "quiz_23",
             "quiz_content": {
                 "subject": "스포츠교육학",
-                "topic": "지도자 변인",
+                "topic": "참여자 이해론",
                 "sub_topic": "학습성취와 관련된 변인",
                 "question_text": "로젠샤인(B. Rosenshine)과 퍼스트(N.Furst)가 제시한 학습성취와 관련된 지도자 변인에 해당하지 않는 것은?",
                 "example": null,
@@ -71,7 +71,7 @@
             "quiz_id": "quiz_24",
             "quiz_content": {
                 "subject": "스포츠교육학",
-                "topic": "교수 전략",
+                "topic": "지도방법론",
                 "sub_topic": "링크의 교수 전략",
                 "question_text": "링크(J.Rink)가 제시한 교수 전략(teaching strategy) 중 한 명의 지도자가 수업에서 공간을 나누어 두 가지 이상의 과제를 동시에 진행하는 것은?",
                 "example": null,
@@ -89,7 +89,7 @@
             "quiz_id": "quiz_25",
             "quiz_content": {
                 "subject": "스포츠교육학",
-                "topic": "스포츠윤리센터 설립",
+                "topic": "정책과 제도",
                 "sub_topic": "국민체육진흥법",
                 "question_text": "㉠, ㉡에 들어갈 용어가 바르게 연결된 것은?",
                 "example": [
@@ -109,7 +109,7 @@
             "quiz_id": "quiz_26",
             "quiz_content": {
                 "subject": "스포츠교육학",
-                "topic": "운동지도의 원리",
+                "topic": "프로그램론",
                 "sub_topic": "지도 원칙",
                 "question_text": "스포츠 교육 프로그램의 지도 원리에 관한 설명이 적절하지 않은 것은?",
                 "example": null,
@@ -127,7 +127,7 @@
             "quiz_id": "quiz_27",
             "quiz_content": {
                 "subject": "스포츠교육학",
-                "topic": "교수모형",
+                "topic": "지도 방법론",
                 "sub_topic": "직접교수모형",
                 "question_text": "직접교수모형에 관한 설명으로 적절하지 않은 것은?",
                 "example": null,
@@ -145,7 +145,7 @@
             "quiz_id": "quiz_28",
             "quiz_content": {
                 "subject": "스포츠교육학",
-                "topic": "스포츠 정책",
+                "topic": "정책과 제도",
                 "sub_topic": "스포츠 정책 기본 원칙",
                 "question_text": "스포츠기본법 제7조 '스포츠 정책 수립·시행의 기본원칙' 중 국가와 지방자치단체의 스포츠 정책에 관한 고려사항에 해당하지 않는 것은?",
                 "example": null,
@@ -163,7 +163,7 @@
             "quiz_id": "quiz_29",
             "quiz_content": {
                 "subject": "스포츠교육학",
-                "topic": "교수 스타일",
+                "topic": "배경과 개념",
                 "sub_topic": "포괄형 교수 스타일",
                 "question_text": "모스턴(M. Mosston)의 포괄형(inclusion) 교수 스타일에 관한 설명으로 적절하지 않은 것은?",
                 "example": null,
@@ -181,7 +181,7 @@
             "quiz_id": "quiz_30",
             "quiz_content": {
                 "subject": "스포츠교육학",
-                "topic": "학습 과제 연습 방법",
+                "topic": "프로그램론",
                 "sub_topic": "연습 구조",
                 "question_text": "보기에서 설명하는 링크(J. Rink)의 학습 과제 연습 방법은?",
                 "example": [
@@ -202,7 +202,7 @@
             "quiz_id": "quiz_31",
             "quiz_content": {
                 "subject": "스포츠교육학",
-                "topic": "교수 기능",
+                "topic": "지도 방법론",
                 "sub_topic": "쿠닌의 교수 원리",
                 "question_text": "보기에서 해당하는 쿠닌(J. Kounin)의 교수 기능은?",
                 "example": [
@@ -223,7 +223,7 @@
             "quiz_id": "quiz_32",
             "quiz_content": {
                 "subject": "스포츠교육학",
-                "topic": "관찰기법",
+                "topic": "지도방법론",
                 "sub_topic": "스포츠 지도자 행동 관찰",
                 "question_text": "보기에서 활용된 스포츠 지도 행동의 관찰기법은?",
                 "example": [
@@ -248,7 +248,7 @@
             "quiz_id": "quiz_33",
             "quiz_content": {
                 "subject": "스포츠교육학",
-                "topic": "스포츠 지도 방법",
+                "topic": "지도방법론",
                 "sub_topic": "참여 증진 방법",
                 "question_text": "배구 수업에서 운동기능이 낮은 학습자의 참여 증진을 위한 스포츠 지도 방법으로 적절하지 않은 것은?",
                 "example": null,
@@ -266,7 +266,7 @@
             "quiz_id": "quiz_34",
             "quiz_content": {
                 "subject": "스포츠교육학",
-                "topic": "학습 목표 설정",
+                "topic": "배경과 개념",
                 "sub_topic": "목표 설정 요소",
                 "question_text": "메이거(R. Mager)가 제시한 학습 목표 설정의 요소가 아닌 것은?",
                 "example": null,
@@ -284,7 +284,7 @@
             "quiz_id": "quiz_35",
             "quiz_content": {
                 "subject": "스포츠교육학",
-                "topic": "수업 모형",
+                "topic": "프로그램론",
                 "sub_topic": "탐구수업모형",
                 "question_text": "<보기>에서 메츨러(M. Metzler)의 탐구수업모형에 관한 설명으로 옳은 것을 모두 고른 것은?",
                 "example": [
@@ -307,7 +307,7 @@
             "quiz_id": "quiz_36",
             "quiz_content": {
                 "subject": "스포츠교육학",
-                "topic": "평가",
+                "topic": "평가론",
                 "sub_topic": "심동적 영역",
                 "question_text": "스포츠 참여자 평가에서 심동적(psychomotor) 영역에 해당하는 것은?",
                 "example": null,
@@ -325,7 +325,7 @@
             "quiz_id": "quiz_37",
             "quiz_content": {
                 "subject": "스포츠교육학",
-                "topic": "운동기능",
+                "topic": "참여자 이해론",
                 "sub_topic": "학습 전이",
                 "question_text": "<보기>에 해당하는 운동기능의 학습 전이(transfer) 유형은?",
                 "example": [
@@ -345,7 +345,7 @@
             "quiz_id": "quiz_38",
             "quiz_content": {
                 "subject": "스포츠교육학",
-                "topic": "교육 프로그램",
+                "topic": "프로그램론",
                 "sub_topic": "구성요소",
                 "question_text": "스포츠 교육 프로그램의 구성요소에 관한 설명으로 적절하지 않은 것은?",
                 "example": null,
@@ -363,7 +363,7 @@
             "quiz_id": "quiz_39",
             "quiz_content": {
                 "subject": "스포츠교육학",
-                "topic": "수업 모형",
+                "topic": "지도방법론",
                 "sub_topic": "개별화지도모형",
                 "question_text": "메츨러(M. Metzler)의 개별화지도모형의 주제로 적절한 것은?",
                 "example": null,
@@ -381,7 +381,7 @@
             "quiz_id": "quiz_40",
             "quiz_content": {
                 "subject": "스포츠교육학",
-                "topic": "학교체육진흥법",
+                "topic": "정책과 제도",
                 "sub_topic": "학교운동부지도자",
                 "question_text": "학교체육진흥법 시행령(시행 2021.4.21.) 제3조 '학교운동부지도자의 자격기준 등'에서 제시한 학교운동부지도자 재임용의 평가 내용이 아닌 것은?",
                 "example": null,
