@@ -4,6 +4,7 @@ from fastapi import FastAPI, HTTPException, Path, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import RedirectResponse
 from sqlalchemy.orm import Session
+from urllib.parse import urlencode
 from app.crud import get_last_set_id_from_mysql, update_user_progress
 from app.database import mongo_db, SessionLocal, engine
 from app.models import QuizSetResult, QuizResult, User
@@ -24,7 +25,7 @@ app.add_middleware(
 DISCORD_WEBHOOK_URL = os.environ["DISCORD_WEBHOOK_URL"]
 KAKAO_CLIENT_ID = os.environ["KAKAO_CLIENT_ID"]
 KAKAO_REDIRECT_URI = os.environ["KAKAO_REDIRECT_URI"]
-
+LOGIN_REDIRECT_URI = "http://localhost:3000/redirection"
 
 # 로그인 요청 URL 생성
 @app.get("/auth/kakao/login")
@@ -77,14 +78,13 @@ def kakao_callback(code: str, db: Session = Depends(get_db)):
     # JWT 생성
     jwt_token = create_jwt_token(user_id=user.id)
 
-    return {
-        "message": "Login successful",
+    query_params = urlencode({
         "jwt_token": jwt_token,
         "user_id": user.user_id,
-        "kakao_id": user.kakao_id
-    }
+    })
 
-
+    redirect_url = f"{LOGIN_REDIRECT_URI}?{query_params}"
+    return RedirectResponse(url=redirect_url)
 @app.get("/quiz/{quiz_type}/{user_id}")
 async def fetch_quiz_set(
     quiz_type: str = Path(
@@ -399,7 +399,7 @@ async def my_page_plot(
             color_discrete_map={"Correct": "green", "Incorrect": "red"},
         )
 
-        # fig.show()
+        fig.show()
         plot_json = fig.to_json()
 
         return {"plot": plot_json}
