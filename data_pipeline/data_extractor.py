@@ -69,7 +69,7 @@ def detect_text(image_path, output_path):
 
 
 # PDF 슬라이싱 및 OCR 수행
-pdf_path = "quiz_pdf/2023A.pdf"
+pdf_path = "quiz_pdf/2024B.pdf"
 doc_nm = str(pdf_path).split("/")[-1].split(".")[0]
 output_folder = f"quiz_image/{doc_nm}"
 

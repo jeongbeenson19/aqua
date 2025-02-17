@@ -2,7 +2,6 @@ import os
 import json
 import data_parser
 
-
 # DataParser 객체 생성
 parser = data_parser.DataParser()
 
@@ -19,10 +18,10 @@ def parsing_text(text_directory_path):
             print(f"Processed {file_name} successfully.")
 
             # 데이터 파싱 실행
-            return parser.parsing_data(base_file_name)
+            parser.parsing_data(base_file_name)
 
 
-def json_parser(json_directory_path):
+def json_parser(json_directory_path, directory_name):
     # 디렉토리 내 모든 파일을 순회하면서 .json 파일을 처리
 
     # JSON을 임시로 저장할 리스트
@@ -42,7 +41,7 @@ def json_parser(json_directory_path):
                 all_data.extend(data['questions'])  # 각 JSON 파일 내의 'questions' 필드를 리스트에 추가
 
     # 합쳐진 데이터를 하나의 JSON 파일로 저장
-    output_path = f'quiz_json/merged_json_{directory_name}_1.json'
+    output_path = f'quiz_json\\merged_json_{directory_name}_1.json'
     with open(output_path, 'w', encoding='utf-8') as json_file:
         json.dump({"questions": all_data}, json_file, ensure_ascii=False, indent=4)
 
@@ -79,13 +78,13 @@ def split_and_map_json_with_type(input_file, output_dir, quiz_set_counter, quiz_
             "quiz_set_id": quiz_set_id,
             "quiz": []
         }
-
         for question in subset:
             output_data["quiz"].append({
-                "quiz_id": f"quiz_{quiz_id_counter}",
+                "quiz_id": f"{quiz_type}_{quiz_id_counter}",
                 "quiz_content": question
             })
             quiz_id_counter += 1
+        quiz_id_counter -= 20
 
         # 파일 저장
         output_file = os.path.join(output_dir, f"{quiz_type}_{quiz_set_id}.json")
@@ -95,14 +94,15 @@ def split_and_map_json_with_type(input_file, output_dir, quiz_set_counter, quiz_
     print(f"Successfully split and saved {total_files} files in {output_dir}.")
 
 
-directory_name = "2023A"
+directory_name = "2024B"
 # 디렉토리 내 모든 .txt 파일 찾기
-text_directory_path = f'quiz_texts/{directory_name}'  # quiz_texts 디렉토리로 설정
+text_directory_path = f'quiz_texts\\{directory_name}'  # quiz_texts 디렉토리로 설정
 # 디렉토리 내 모든 .json 파일 찾기
-json_directory_path = f'quiz_json/{directory_name}'  # JSON 파일이 저장된 디렉토리 경로
+json_directory_path = f'quiz_json\\{directory_name}'  # JSON 파일이 저장된 디렉토리 경로
 
-parsing_text(text_directory_path)
-input_file = json_parser(json_directory_path)
+# parsing_text(text_directory_path)
+input_file = json_parser(json_directory_path, directory_name)
+# input_file = "quiz_json/merged_json_2023A_1.json"
 output_dir = "quiz_json"  # 출력 디렉토리
 split_and_map_json_with_type(input_file, output_dir, 1, 1)
 

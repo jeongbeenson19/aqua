@@ -25,7 +25,7 @@ class DataParser:
             {{"questions":[
                 {{
                     "subject": "<subject_name>",  // Select one subject from the following: 스포츠사회학, 스포츠교육학, 스포츠심리학, 한국체육사, 운동생리학, 운동역학, 스포츠윤리
-                    "topic": "<topic_name>",  // Extract the topic based on the context of the question
+                    "topic": "<topic_name>",  // Generate the topic based on the context of the question
                     "sub_topic": "<sub_topic_name>",  // Generate a sub_topic based on the content or field of study related to the question
                     "question_text": "<question_text>",  // Extract the full question text as it appears in the OCR data
                     "example": [
