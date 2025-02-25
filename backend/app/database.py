@@ -28,7 +28,6 @@ db_name = os.getenv('RDS_DB_NAME')  # RDS에서 사용 중인 데이터베이스
 # DATABASE_URL = f"mysql+mysqlconnector://admin:{my_password}@{rds_host}:{rds_port}/{db_name}"
 DATABASE_URL = os.getenv('DATABASE_PY_URL')
 
-
 # SQLAlchemy 엔진 및 세션 생성
 engine = create_engine(DATABASE_URL, echo=True)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)

@@ -2,6 +2,7 @@ import os
 import requests
 from fastapi import FastAPI, HTTPException, Path, Depends
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.middleware.trustedhost import TrustedHostMiddleware
 from fastapi.responses import RedirectResponse
 from sqlalchemy.orm import Session
 from urllib.parse import urlencode
@@ -22,6 +23,11 @@ app.add_middleware(
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
+)
+
+app.add_middleware(
+    TrustedHostMiddleware,
+    allowed_hosts=["*"]
 )
 
 DISCORD_WEBHOOK_URL = os.getenv("DISCORD_WEBHOOK_URL")
@@ -45,6 +51,7 @@ def kakao_login():
 @app.get("/auth/kakao/callback")
 def kakao_callback(code: str, db: Session = Depends(get_db)):
     # Access Token 요청
+    print(f"Received code: {code}")
     token_url = "https://kauth.kakao.com/oauth/token"
     token_data = {
         "grant_type": "authorization_code",
@@ -55,7 +62,9 @@ def kakao_callback(code: str, db: Session = Depends(get_db)):
     headers = {"Content-Type": "application/x-www-form-urlencoded"}
     token_response = requests.post(token_url, data=token_data, headers=headers)
     if not token_response.ok:
-        raise HTTPException(status_code=400, detail="Failed to get access token")
+        print(f"Token Response Status: {token_response.status_code}")
+        print(f"Token Response Body: {token_response.text}")
+        raise HTTPException(status_code=400, detail=f"Failed to get access token\n{token_data}")
 
     token_json = token_response.json()
     access_token = token_json["access_token"]
@@ -75,10 +84,20 @@ def kakao_callback(code: str, db: Session = Depends(get_db)):
     email = kakao_account.get("email")
     nickname = kakao_account.get("profile", {}).get("nickname")
 
-    user = get_or_create_user(db, kakao_id=kakao_id, email=email, nickname=nickname)
+    try:
+        user = get_or_create_user(db, kakao_id=kakao_id, email=email, nickname=nickname)
+        print(f"User Retrieved or Created: {user}")
+    except Exception as e:
+        print(f"Error in get_or_create_user: {str(e)}")
+        raise HTTPException(status_code=500, detail="Database error while processing user")
 
     # JWT 생성
-    jwt_token = create_jwt_token(user_id=user.id)
+    try:
+        jwt_token = create_jwt_token(user_id=user.id)
+        print(f"JWT Created: {jwt_token}")
+    except Exception as e:
+        print(f"Error in create_jwt_token: {str(e)}")
+        raise HTTPException(status_code=500, detail="Error generating JWT token")
 
     query_params = urlencode({
         "jwt_token": jwt_token,
@@ -86,7 +105,9 @@ def kakao_callback(code: str, db: Session = Depends(get_db)):
     })
 
     redirect_url = f"{LOGIN_REDIRECT_URI}?{query_params}"
-    return RedirectResponse(url=redirect_url)
+    return RedirectResponse(url=redirect_url, status_code=303)
+
+
 @app.get("/quiz/{quiz_type}/{user_id}")
 async def fetch_quiz_set(
     quiz_type: str = Path(
