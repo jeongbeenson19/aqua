@@ -25,10 +25,9 @@ my_password = os.getenv('MYSQL_PW')
 db_name = os.getenv('RDS_DB_NAME')  # RDS에서 사용 중인 데이터베이스 이름
 
 # RDS에 연결할 DATABASE_URL 생성
-DATABASE_URL = f"mysql+mysqlconnector://admin:{my_password}@{rds_host}:{rds_port}/{db_name}"
+# DATABASE_URL = f"mysql+mysqlconnector://admin:{my_password}@{rds_host}:{rds_port}/{db_name}"
+DATABASE_URL = os.getenv('DATABASE_PY_URL')
 
-# 테스트용 로컬 DATABASE_URL
-# DATABASE_URL = f"mysql+mysqlconnector://root:{my_password}@localhost/user_db"
 
 # SQLAlchemy 엔진 및 세션 생성
 engine = create_engine(DATABASE_URL, echo=True)
