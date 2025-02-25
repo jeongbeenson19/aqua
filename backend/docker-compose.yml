@@ -7,6 +7,7 @@ services:
     depends_on:
       - db
     environment:
+<<<<<<< HEAD
       DATABASE_URL: "mysql+mysqlconnector://$admin:${MYSQL_PW}@${RDS_HOST}:${RDS_PORT}/${RDS_DB_NAME}"
 
   db:

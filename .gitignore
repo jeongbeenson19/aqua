@@ -201,3 +201,5 @@ data_pipeline
 *.pem
 
 json_to_mongo.py
+
+*.env

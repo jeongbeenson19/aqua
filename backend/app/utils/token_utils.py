@@ -3,13 +3,15 @@ import jwt
 from datetime import datetime, timedelta
 from fastapi import Security, HTTPException, Depends
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
+from dotenv import load_dotenv
 from app.database import SessionLocal
 from app.models import User
 from .user_utils import get_db
 
+load_dotenv()
 
-SECRET_KEY = os.environ["SECRET_KEY"]  # 토큰 서명용 비밀키
-ALGORITHM = os.environ["ALGORITHM"]            # 해싱 알고리즘
+SECRET_KEY = os.getenv("SECRET_KEY")  # 토큰 서명용 비밀키
+ALGORITHM = os.getenv("ALGORITHM")            # 해싱 알고리즘
 
 security = HTTPBearer()
 
