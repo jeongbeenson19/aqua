@@ -1,0 +1,27 @@
+services:
+  fastapi:
+    build: .
+    container_name: aqua
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: "mysql+mysqlconnector://root:${my_password}@localhost/user_db"
+
+  db:
+    image: mysql:8.0  # MySQL 사용
+    container_name: mysql-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_DATABASE: mydatabase
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+volumes:
+  mysql_data:

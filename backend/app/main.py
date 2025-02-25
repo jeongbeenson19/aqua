@@ -5,12 +5,14 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import RedirectResponse
 from sqlalchemy.orm import Session
 from urllib.parse import urlencode
+from dotenv import load_dotenv
 from app.crud import get_last_set_id_from_mysql, update_user_progress
 from app.database import mongo_db, SessionLocal, engine
 from app.models import QuizSetResult, QuizResult, User
 from app.schemas import QuizResults
 from app.utils import is_collection_exists, validate_quiz_length, validate_quiz_result_length, get_or_create_user, get_db, create_jwt_token, decode_jwt
 
+load_dotenv()
 
 app = FastAPI()
 
@@ -22,9 +24,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-DISCORD_WEBHOOK_URL = os.environ["DISCORD_WEBHOOK_URL"]
-KAKAO_CLIENT_ID = os.environ["KAKAO_CLIENT_ID"]
-KAKAO_REDIRECT_URI = os.environ["KAKAO_REDIRECT_URI"]
+DISCORD_WEBHOOK_URL = os.getenv("DISCORD_WEBHOOK_URL")
+KAKAO_CLIENT_ID = os.getenv("KAKAO_CLIENT_ID")
+KAKAO_REDIRECT_URI = os.getenv("KAKAO_REDIRECT_URI")
 LOGIN_REDIRECT_URI = "http://localhost:3000/redirection"
 
 # 로그인 요청 URL 생성
