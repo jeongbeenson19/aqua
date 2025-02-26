@@ -426,3 +426,46 @@ async def my_page_plot(
         plot_json = fig.to_json()
 
         return {"plot": plot_json}
+
+
+@app.get("/my_page/mean_score/{user_id}")
+async def get_mean_score(
+    user_id: str = Path(..., description="유저 ID")
+):
+    """
+    유저의 과목별 평균 점수 반환
+    """
+    import pandas as pd
+    with Session(engine) as session_quiz_set_result:
+        attempted_quiz_set_result = session_quiz_set_result.query(QuizSetResult).filter(
+            QuizSetResult.user_id == user_id
+        ).all()
+
+    quiz_set_result_dict = {
+        quiz_set.id: {
+            "quiz_set_id": quiz_set.quiz_set_id,
+            "quiz_type": quiz_set.quiz_type,
+            "score": quiz_set.score
+        }
+        for quiz_set in attempted_quiz_set_result
+    }
+
+    rows = []
+    for quiz_set_index, details in quiz_set_result_dict.items():
+        row = {
+            "quiz_set_index": quiz_set_index,
+            "quiz_set_id": details["quiz_set_id"],
+            "quiz_type": details["quiz_type"],
+            "score": details["score"]
+        }
+        rows.append(row)
+
+    df = pd.DataFrame(rows)
+
+    if df.empty:
+        return {"message": "No quiz results found for this user."}
+
+    mean_scores = df.groupby("quiz_type")["score"].mean().to_dict()
+
+    return {"user_id": user_id, "mean_scores": mean_scores}
+
