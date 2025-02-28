@@ -331,7 +331,7 @@ async def my_page_plot(
         user_id: str = Path(..., description="")
 ):
     """
-    마이페이지에 출력한 sunburst 플롯을 요청합니다.
+    마이페이지에 출력할 plotly로 생성된 sunburst 플롯을 요청합니다.
     """
     import pandas as pd
     import plotly.express as px
