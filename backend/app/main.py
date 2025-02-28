@@ -422,7 +422,12 @@ async def my_page_plot(
             color_discrete_map={"Correct": "green", "Incorrect": "red"},
         )
 
-        fig.show()
+        fig.update_layout(
+            width=230,  # 차트 너비
+            height=230  # 차트 높이
+        )
+
+        fig.write_html("sunburst_chart.html")  # HTML 파일로 저장
         plot_json = fig.to_json()
 
         return {"plot": plot_json}
