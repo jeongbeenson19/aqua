@@ -21,7 +21,7 @@ jobs:
 
       # 2. Docker Buildx 설정 (다중 플랫폼 지원)
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
+        uses: docker/setup-buildx-action@v2
 
       # 3. Docker Hub 로그인
       - name: Log in to Docker Hub
@@ -35,7 +35,7 @@ jobs:
         run: |
           docker build -t aqua .  # Dockerfile이 있는 경로에서 Docker 이미지 빌드
 
-      # 5. 테스트 실행 (선택 사항)
+#      # 5. 테스트 실행 (선택 사항)
 #      - name: Run tests
 #        run: |
 #          docker run aqua pytest  # 도커 컨테이너 안에서 테스트 실행
@@ -45,3 +45,10 @@ jobs:
         run: |
           docker tag aqua jeongbeenson19/aqua:latest  # 이미지를 태깅
           docker push jeongbeenson19/aqua:latest  # Docker Hub에 푸시
+
+      # 7. Discord 알림
+      - name: Send Discord Notification
+        run: |
+          curl -X POST -H "Content-Type: application/json" \
+          -d '{"content": "Docker image has been pushed to Docker Hub!"}' \
+          ${{ secrets.DISCORD_WEBHOOK_URL }}
