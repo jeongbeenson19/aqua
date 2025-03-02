@@ -2,15 +2,18 @@ import os
 import requests
 from fastapi import FastAPI, HTTPException, Path, Depends
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.middleware.trustedhost import TrustedHostMiddleware
 from fastapi.responses import RedirectResponse
 from sqlalchemy.orm import Session
 from urllib.parse import urlencode
+from dotenv import load_dotenv
 from app.crud import get_last_set_id_from_mysql, update_user_progress
 from app.database import mongo_db, SessionLocal, engine
 from app.models import QuizSetResult, QuizResult, User
 from app.schemas import QuizResults
 from app.utils import is_collection_exists, validate_quiz_length, validate_quiz_result_length, get_or_create_user, get_db, create_jwt_token, decode_jwt
 
+load_dotenv()
 
 app = FastAPI()
 
@@ -22,9 +25,14 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-DISCORD_WEBHOOK_URL = os.environ["DISCORD_WEBHOOK_URL"]
-KAKAO_CLIENT_ID = os.environ["KAKAO_CLIENT_ID"]
-KAKAO_REDIRECT_URI = os.environ["KAKAO_REDIRECT_URI"]
+app.add_middleware(
+    TrustedHostMiddleware,
+    allowed_hosts=["*"]
+)
+
+DISCORD_WEBHOOK_URL = os.getenv("DISCORD_WEBHOOK_URL")
+KAKAO_CLIENT_ID = os.getenv("KAKAO_CLIENT_ID")
+KAKAO_REDIRECT_URI = os.getenv("KAKAO_REDIRECT_URI")
 LOGIN_REDIRECT_URI = "http://localhost:3000/redirection"
 
 # 로그인 요청 URL 생성
@@ -43,6 +51,7 @@ def kakao_login():
 @app.get("/auth/kakao/callback")
 def kakao_callback(code: str, db: Session = Depends(get_db)):
     # Access Token 요청
+    print(f"Received code: {code}")
     token_url = "https://kauth.kakao.com/oauth/token"
     token_data = {
         "grant_type": "authorization_code",
@@ -53,7 +62,9 @@ def kakao_callback(code: str, db: Session = Depends(get_db)):
     headers = {"Content-Type": "application/x-www-form-urlencoded"}
     token_response = requests.post(token_url, data=token_data, headers=headers)
     if not token_response.ok:
-        raise HTTPException(status_code=400, detail="Failed to get access token")
+        print(f"Token Response Status: {token_response.status_code}")
+        print(f"Token Response Body: {token_response.text}")
+        raise HTTPException(status_code=400, detail=f"Failed to get access token\n{token_data}")
 
     token_json = token_response.json()
     access_token = token_json["access_token"]
@@ -73,10 +84,20 @@ def kakao_callback(code: str, db: Session = Depends(get_db)):
     email = kakao_account.get("email")
     nickname = kakao_account.get("profile", {}).get("nickname")
 
-    user = get_or_create_user(db, kakao_id=kakao_id, email=email, nickname=nickname)
+    try:
+        user = get_or_create_user(db, kakao_id=kakao_id, email=email, nickname=nickname)
+        print(f"User Retrieved or Created: {user}")
+    except Exception as e:
+        print(f"Error in get_or_create_user: {str(e)}")
+        raise HTTPException(status_code=500, detail="Database error while processing user")
 
     # JWT 생성
-    jwt_token = create_jwt_token(user_id=user.id)
+    try:
+        jwt_token = create_jwt_token(user_id=user.id)
+        print(f"JWT Created: {jwt_token}")
+    except Exception as e:
+        print(f"Error in create_jwt_token: {str(e)}")
+        raise HTTPException(status_code=500, detail="Error generating JWT token")
 
     query_params = urlencode({
         "jwt_token": jwt_token,
@@ -84,7 +105,9 @@ def kakao_callback(code: str, db: Session = Depends(get_db)):
     })
 
     redirect_url = f"{LOGIN_REDIRECT_URI}?{query_params}"
-    return RedirectResponse(url=redirect_url)
+    return RedirectResponse(url=redirect_url, status_code=303)
+
+
 @app.get("/quiz/{quiz_type}/{user_id}")
 async def fetch_quiz_set(
     quiz_type: str = Path(
@@ -308,7 +331,7 @@ async def my_page_plot(
         user_id: str = Path(..., description="")
 ):
     """
-    마이페이지에 출력한 sunburst 플롯을 요청합니다.
+    마이페이지에 출력할 plotly로 생성된 sunburst 플롯을 요청합니다.
     """
     import pandas as pd
     import plotly.express as px
@@ -399,7 +422,55 @@ async def my_page_plot(
             color_discrete_map={"Correct": "green", "Incorrect": "red"},
         )
 
-        fig.show()
+        fig.update_layout(
+            width=230,  # 차트 너비
+            height=230  # 차트 높이
+        )
+
+        fig.write_html("sunburst_chart.html")  # HTML 파일로 저장
         plot_json = fig.to_json()
 
         return {"plot": plot_json}
+
+
+@app.get("/my_page/mean_score/{user_id}")
+async def get_mean_score(
+    user_id: str = Path(..., description="유저 ID")
+):
+    """
+    유저의 과목별 평균 점수 반환
+    """
+    import pandas as pd
+    with Session(engine) as session_quiz_set_result:
+        attempted_quiz_set_result = session_quiz_set_result.query(QuizSetResult).filter(
+            QuizSetResult.user_id == user_id
+        ).all()
+
+    quiz_set_result_dict = {
+        quiz_set.id: {
+            "quiz_set_id": quiz_set.quiz_set_id,
+            "quiz_type": quiz_set.quiz_type,
+            "score": quiz_set.score
+        }
+        for quiz_set in attempted_quiz_set_result
+    }
+
+    rows = []
+    for quiz_set_index, details in quiz_set_result_dict.items():
+        row = {
+            "quiz_set_index": quiz_set_index,
+            "quiz_set_id": details["quiz_set_id"],
+            "quiz_type": details["quiz_type"],
+            "score": details["score"]
+        }
+        rows.append(row)
+
+    df = pd.DataFrame(rows)
+
+    if df.empty:
+        return {"message": "No quiz results found for this user."}
+
+    mean_scores = df.groupby("quiz_type")["score"].mean().to_dict()
+
+    return {"user_id": user_id, "mean_scores": mean_scores}
+

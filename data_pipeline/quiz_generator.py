@@ -23,7 +23,7 @@ class QuizGenerator:
         subject = str(file_name).split(".")[0].split("_")[0]
         topic = self.topic[subject.lower()]
         quiz_set_counter = int(file_name.split(".")[0].split("_")[-1])
-        output_path = f'quiz_json/{subject}_quiz_set_{quiz_set_counter + 1}.json'
+        output_path = f'quiz_json/{subject}_quiz_set_{quiz_set_counter + 3}.json'
         os.makedirs(os.path.dirname(output_path), exist_ok=True)
 
         # OCR에서 추출된 텍스트 로드
@@ -42,7 +42,7 @@ class QuizGenerator:
                         "subject": "<subject>", // same as data
                         "topic": "<topic>", // {topic}, choose a topic according to question content,
                         "sub_topic": "<sub_topic>", // you can change with similar one,
-                        "question_text": "<question_text>", // generate the question text for this quiz following the subject, topic and sub_topic
+                        "question_text": "<question_text>", // generate the question text based the provided data for this quiz following the subject, topic and sub_topic
                         // Ensure that the generated content matches the tone, style, and structure of the provided data.
                         "example": [
                             <example_text>
@@ -83,4 +83,4 @@ class QuizGenerator:
 
 
 generator = QuizGenerator()
-generator.generating_quiz("PSY_quiz_set_3", 341)
+generator.generating_quiz("PSY_quiz_set_1", 61)

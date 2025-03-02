@@ -69,7 +69,7 @@ def detect_text(image_path, output_path):
 
 
 # PDF 슬라이싱 및 OCR 수행
-pdf_path = "quiz_pdf/2024B.pdf"
+pdf_path = "quiz_pdf/quiz_sum.pdf"
 doc_nm = str(pdf_path).split("/")[-1].split(".")[0]
 output_folder = f"quiz_image/{doc_nm}"
 
@@ -79,14 +79,17 @@ coordinates_r = (1550, 270, 3000, 4040)
 # 1. PDF를 이미지로 변환
 images = pdf_to_images(pdf_path, output_folder)
 
-# 2. 특정 영역 잘라내기 (슬라이싱)
 for idx, image in enumerate(images[1:]):
-    cropped_image_path_l = crop_image(image, coordinates_l,
-                                      f"quiz_image_cropped/{doc_nm}/crpd_image{idx + 1}_l.png")
+    detect_text(image, f"quiz_texts/{doc_nm}/crpd_image{idx + 1}.txt")
 
-    detect_text(cropped_image_path_l, f"quiz_texts/{doc_nm}/{doc_nm}_{idx + 1}.txt")
-
-    cropped_image_path_r = crop_image(image, coordinates_r,
-                                      f"quiz_image_cropped/{doc_nm}/crpd_image{idx + 1}_r.png")
-
-    detect_text(cropped_image_path_r, f"quiz_texts/{doc_nm}/{doc_nm}_{idx + 1}.txt")
+# # 2. 특정 영역 잘라내기 (슬라이싱)
+# for idx, image in enumerate(images[1:]):
+#     cropped_image_path_l = crop_image(image, coordinates_l,
+#                                       f"quiz_image_cropped/{doc_nm}/crpd_image{idx + 1}_l.png")
+#
+#     detect_text(cropped_image_path_l, f"quiz_texts/{doc_nm}/{doc_nm}_{idx + 1}.txt")
+#
+#     cropped_image_path_r = crop_image(image, coordinates_r,
+#                                       f"quiz_image_cropped/{doc_nm}/crpd_image{idx + 1}_r.png")
+#
+#     detect_text(cropped_image_path_r, f"quiz_texts/{doc_nm}/{doc_nm}_{idx + 1}.txt")

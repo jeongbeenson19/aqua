@@ -1,0 +1,32 @@
+services:
+  fastapi:
+    build: .
+    container_name: aqua
+    env_file:
+      - .env  # 🔥 .env 파일 명시적으로 추가
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: "${DATABASE_PY_URL}"
+      MONGO_PW: "${MONGO_PW}"  # MongoDB 패스워드 추가
+
+  db:
+    image: mysql:8.0
+    container_name: mysql-db
+    restart: always
+    env_file:
+      - .env  # 🔥 .env 파일 명시적으로 추가
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_PW}
+      MYSQL_USER: root
+      MYSQL_PASSWORD: ${MYSQL_PW}
+      MYSQL_DATABASE: ${RDS_DB_NAME}
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+volumes:
+  mysql_data:

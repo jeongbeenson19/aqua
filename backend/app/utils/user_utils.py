@@ -11,6 +11,10 @@ def get_db():
     db = SessionLocal()
     try:
         yield db
+        db.commit()  # ✅ 트랜잭션이 자동으로 `COMMIT`되도록 보장
+    except:
+        db.rollback()
+        raise
     finally:
         db.close()
 
