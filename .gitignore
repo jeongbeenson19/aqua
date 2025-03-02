@@ -196,8 +196,11 @@ fabric.properties
 
 # End of https://www.toptal.com/developers/gitignore/api/macos,pycharm+all,openframeworks
 
-data_pipeline
-
 *.pem
 
 json_to_mongo.py
+
+data_pipeline/dulcet-opus-443011-u1-dfe77b2064f0.json
+data_pipeline/quiz_image
+data_pipeline/quiz_image_cropped
+data_pipeline/quiz_pdf
