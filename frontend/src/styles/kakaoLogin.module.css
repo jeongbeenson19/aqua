@@ -1,4 +1,4 @@
-.container {
+.login {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -9,7 +9,6 @@
 .aquaImage {
   width: 50px;
   margin: 10px;
-  /* margin: 10px; */
 }
 
 .kakaoLoginImage {
@@ -18,5 +17,4 @@
   margin: 10px;
   margin-bottom: 100px;
   cursor: pointer;
-  /* transition: transform 0.3s ease-in-out; */
 }

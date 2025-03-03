@@ -176,7 +176,7 @@ function Quiz() {
   }
 
   return (
-    <div className="quiz">
+    <div className={styles.quiz}>
       {/* 헤더 */}
       <header className={styles.header}>
         <h2 className={styles.timer}>{formatTime(seconds)}</h2>

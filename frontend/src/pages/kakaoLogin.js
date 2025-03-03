@@ -10,7 +10,7 @@ const KakaoLogin = () => {
   };
 
   return (
-    <div className={styles.container}>
+    <div className={styles.login}>
       <img
         src='/images/aqua.png'
         alt="aqua"
