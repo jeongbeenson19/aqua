@@ -17,9 +17,11 @@ load_dotenv()
 
 app = FastAPI()
 
+AWS_PUBLIC_IP = os.getenv("AWS_PUBLIC_IP")
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
+    allow_origins=["http://localhost:3000",
+                   f"http://{AWS_PUBLIC_IP}:3000"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -33,7 +35,7 @@ app.add_middleware(
 DISCORD_WEBHOOK_URL = os.getenv("DISCORD_WEBHOOK_URL")
 KAKAO_CLIENT_ID = os.getenv("KAKAO_CLIENT_ID")
 KAKAO_REDIRECT_URI = os.getenv("KAKAO_REDIRECT_URI")
-LOGIN_REDIRECT_URI = "http://localhost:3000/redirection"
+LOGIN_REDIRECT_URI = os.getenv("LOGIN_REDIRECT_URI")
 
 # 로그인 요청 URL 생성
 @app.get("/auth/kakao/login")
