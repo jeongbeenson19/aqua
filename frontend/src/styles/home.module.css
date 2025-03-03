@@ -1,0 +1,263 @@
+body {
+  margin: 0;
+  min-width: 320px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.App {
+  background-color: #FAFAFA;
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+.home {
+  overflow-x: hidden;
+}
+
+.header {
+  display: flex;
+  padding: 0.3rem 1rem;
+  color: #1249B1;
+  justify-content: center;
+  align-items: center;
+}
+
+.aquaImage {
+  height: 35px;
+}
+
+.header h1 {
+  padding: 0 10px;
+  text-align: center;
+  /* font-family: 'DaughterMom', sans-serif; */
+  font-family: 'iLoveYouSon', sans-serif;
+  letter-spacing: 0.1em;
+  font-weight: bold;
+  font-size: 30px;
+}
+
+.tab_btns {
+  margin: 1rem 0;
+}
+
+.tab_btns button {
+  /* font-family: 'DaughterMom', sans-serif; */
+  font-family: 'iLoveYouSon', sans-serif;
+  letter-spacing: 0.1em;
+  font-weight: bold;
+  font-size: 25px;
+}
+
+button {
+  margin: 0 0.5rem;
+  padding: 0.3rem 0.5rem;
+  font-size: 16px;
+  border: none;
+  background-color: #FAFAFA;
+  color: #1249B1;
+  cursor: pointer;
+  font-family: 'NanumBarunGothic', sans-serif;
+  font-weight: normal;
+  width: 100px;
+}
+
+button.active {
+  border-bottom: 1.5px solid;
+}
+
+.tab_content {
+  border-radius: 15px 15px 0 0;
+  background-color: #1249B1;
+  color: #FAFAFA;
+}
+
+
+
+
+/* 과목 전체 컨테이너 */
+.subject_ctn {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 550px;
+  height: 80vh;
+}
+
+.subject_ctn button {
+  font-family: 'Black Han Sans', sans-serif;
+  width: 130px;
+  height: 41px;
+  padding: 10px 10px;
+  margin: 15px 0;
+  font-size: 16px;
+  border: 2px solid #FAFAFA;
+  border-radius: 30px;
+  background-color: #1249B1;
+  color: #FAFAFA;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.6));
+}
+
+.subject_ctn button:hover {
+  background-color: #FAFAFA;
+  color: #1249B1;
+}
+
+
+
+/* 마이페이지 전체 컨테이너 */
+.mypage_ctn {
+  min-height: 800px;
+  /* height: 81.5vh; */
+}
+
+/* 사용자 정보 스타일 */
+.user_info {
+  background-color: #EFF4FF;
+  opacity: 70%;
+  padding: 20px;
+  border-radius: 15px 15px 0 0;
+  margin-bottom: 20px;
+  box-shadow: inset 0px 4px 4px rgb(0 0 0 / 25%);
+  /* filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.7)); */
+}
+
+.user_name {
+  color: #000000;
+  margin: 0;
+  font-family: 'iLoveYouSon', sans-serif;
+  letter-spacing: 0.1em;
+  font-weight: bold;
+  font-size: 25px;
+}
+
+.user_email {
+  color: #3C434F;
+  margin: 5px 0 0 0;
+  font-family: 'iLoveYouSon', sans-serif;
+  letter-spacing: 0.1em;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.plot_container {
+  width: 90%;
+  height: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sunburstlayer {
+  width: 90%;
+}
+
+.loading_text {
+  text-align: center;
+  font-size: 18px;
+  color: white;
+  font-weight: bold;
+}
+
+/* 과목별 점수 리스트 */
+.scores {
+  text-align: left;
+  margin: 0 auto 50px auto;
+}
+
+.scores_title {
+  font-family: 'Black Han Sans', sans-serif;
+  font-size: 1.2rem;
+  font-weight: bold;
+  /* text-align: center; */
+  /* margin-bottom: 10px; */
+  padding: 0 40px;
+}
+
+.scores_list {
+  list-style-type: none;
+  padding: 0 40px;
+}
+
+.scores_list li {
+  display: flex;
+  justify-content: space-between;
+  /* 양 끝으로 정렬 */
+  font-size: 1rem;
+  line-height: 1.8;
+  margin: 5px 0;
+}
+
+
+/* 액션 버튼 (로그아웃, 계정 탈퇴) */
+.actions {
+  display: flex;
+  flex-direction: column;
+  padding: 0 0 20px 0;
+  align-items: center;
+}
+
+.logout_btn,
+.delete_account_btn {
+  background-color: transparent;
+  color: white;
+  border: none;
+  font-size: 1rem;
+  text-decoration: underline;
+  cursor: pointer;
+  margin: 0.2rem;
+  padding: 0.2rem 0.5rem;
+}
+
+.logout_btn:hover,
+.delete_account_btn:hover {
+  color: #000000;
+}
+
+
+
+/* 오답노트 전체 컨테이너 */
+.exam_history_ctn {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 80vh;
+}
+
+.noExamMessage {
+  line-height: 1.5;
+  padding: 10px;
+}
+
+.exam_history_list {
+  list-style-type: none;
+  padding: 0px;
+}
+
+.exam_history_ctn button {
+  font-family: 'Black Han Sans', sans-serif;
+  width: 250px;
+  height: 41px;
+  padding: 10px 10px;
+  margin: 12px 0;
+  font-size: 16px;
+  border: 2px solid #FAFAFA;
+  border-radius: 30px;
+  background-color: #1249B1;
+  color: #FAFAFA;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.6));
+}

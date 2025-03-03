@@ -1,0 +1,159 @@
+.waiting {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+  background-color: #1249B1;
+  color: white;
+}
+
+.header {
+  color: #1249B1;
+  /* justify-content: flex-start; */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  position: relative;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  position: relative;
+}
+
+.header h1 {
+  margin: 0;
+  padding: 0.3rem 0.5rem;
+  font-size: 25px;
+  white-space: nowrap;
+  width: 150px;
+  font-family: 'iLoveYouSon', sans-serif;
+  letter-spacing: 0.1em;
+  font-weight: bold;
+  /* font-style: italic; */
+}
+
+.header h2 {
+  margin: 0;
+  padding: 0.3rem 0.5rem;
+  font-size: 20px;
+  width: 60px;
+  font-family: 'iLoveYouSon', sans-serif;
+  letter-spacing: 0.1em;
+  font-weight: bold;
+}
+
+.header img {
+  width: 30px;
+  height: 25px;
+  cursor: pointer;
+  padding: 5px 10px;
+}
+
+
+.exam {
+  border-radius: 15px;
+  background-color: #1249B1;
+  color: #FAFAFA;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 650px;
+}
+
+.exam_ctn {
+  justify-content: space-between;
+  flex-grow: 1;
+}
+
+.quiz_ctn {
+  background-color: #F0F5FF;
+  color: #000000;
+  border-radius: 10px;
+  margin: 0 0 1rem;
+  padding: 0.3rem 1rem;
+}
+
+.question {
+  text-align: left;
+}
+
+.example_list {
+  padding-left: 15px;
+  text-align: left;
+}
+
+.example_item {
+  margin-bottom: 10px;
+}
+
+.options_ctn {
+  color: #FAFAFA;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.options_ctn button {
+  background-color: transparent;
+  border: none;
+  color: #FAFAFA;
+  padding: 7px 10px 7px 10px;
+  margin: 0px;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.options_ctn button:hover {
+  background-color: rgba(250, 250, 250, 0.3);
+  border-radius: 10px;
+}
+
+
+.selected_option {
+  background-color: rgba(250, 250, 250, 0.1) !important;
+  border: 1px solid #FAFAFA !important;
+  border-radius: 10px;
+}
+
+.nav_ctn {
+  display: flex;
+  justify-content: space-between;
+  margin-top: auto;
+  width: 100%;
+}
+
+/* 내비게이션 버튼 */
+.nav_ctn button {
+  background-color: #8FAFEC;
+  color: #000000;
+  height: 40px;
+  border-radius: 20px;
+  border: none;
+}
+
+.nav_btn:hover {
+  background-color: rgba(250, 250, 250, 0.5);
+  border-radius: 10px;
+}
+
+.nav_ctn.single_button .nav_btn {
+  width: 100%;
+}
+
+.nav_ctn.double_buttons .nav_btn {
+  width: 45%;
+}
+
+.nav_ctn.double_buttons .submit_btn {
+  width: 45%;
+}
