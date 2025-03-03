@@ -17,11 +17,11 @@ load_dotenv()
 
 app = FastAPI()
 
-AWS_PUBLIC_IP = os.getenv("AWS_PUBLIC_IP")
+DOMAIN = os.getenv("DOMAIN")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:3000",
-                   f"http://{AWS_PUBLIC_IP}:3000"],
+                   "https://main.d1c674zze8rxqi.amplifyapp.com"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
