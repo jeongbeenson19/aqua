@@ -1,0 +1,22 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+}
+
+.aquaImage {
+  width: 50px;
+  margin: 10px;
+  /* margin: 10px; */
+}
+
+.kakaoLoginImage {
+  width: 200px;
+  height: auto;
+  margin: 10px;
+  margin-bottom: 100px;
+  cursor: pointer;
+  /* transition: transform 0.3s ease-in-out; */
+}
