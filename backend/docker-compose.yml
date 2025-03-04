@@ -20,8 +20,6 @@ services:
       - .env  # 🔥 .env 파일 명시적으로 추가
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_PW}
-      MYSQL_USER: root
-      MYSQL_PASSWORD: ${MYSQL_PW}
       MYSQL_DATABASE: ${RDS_DB_NAME}
     ports:
       - "3306:3306"
