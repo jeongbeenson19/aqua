@@ -11,7 +11,8 @@ services:
     environment:
       DATABASE_URL: "${DATABASE_PY_URL}"
       MONGO_PW: "${MONGO_PW}"  # MongoDB 패스워드 추가
-
+      USE_PROXY_HEADERS: "True"  # ✅ 프록시 헤더 신뢰 설정
+      FASTAPI_FORWARDED_ALLOW_IPS: "*"  # ✅ 모든 프록시 IP 허용
   db:
     image: mysql:8.0
     container_name: mysql-db
