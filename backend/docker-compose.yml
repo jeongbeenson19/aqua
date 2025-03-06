@@ -1,22 +1,23 @@
 services:
-  # FastAPI 서비스
-  fastapi:
+  # FastAPI + Nginx를 supervisord로 관리
+  fastapi_nginx:
     build: .
-    container_name: fastapi
-    env_file:
-      - .env  # 🔥 .env 파일 명시적으로 추가
+    container_name: fastapi_nginx
     ports:
       - "8000:8000"
-    depends_on:
-      - db  # MySQL DB 의존성 추가
-    environment:
-      DATABASE_URL: "${DATABASE_PY_URL}"  # 환경변수 DATABASE_PY_URL
-      MONGO_PW: "${MONGO_PW}"  # MongoDB 패스워드 추가
-      USE_PROXY_HEADERS: "True"  # ✅ 프록시 헤더 신뢰 설정
-      FASTAPI_FORWARDED_ALLOW_IPS: "*"  # ✅ 모든 프록시 IP 허용
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./certs:/etc/letsencrypt
+      - ./data:/var/www/certbot
+      - ./supervisord.conf:/etc/supervisor/conf.d/supervisord.conf
     networks:
       - aqua_network
-
+    restart: unless-stopped
+    depends_on:
+      - db
+      - certbot
 
   # MySQL DB 서비스
   db:
@@ -32,21 +33,6 @@ services:
       - "3306:3306"  # DB 포트
     volumes:
       - mysql_data:/var/lib/mysql  # MySQL 데이터 볼륨
-
-  # Nginx 서비스 (Reverse Proxy 역할)
-  nginx:
-    image: nginx:latest
-    container_name: nginx
-    volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf  # Nginx 설정 파일
-      - ./certs:/etc/letsencrypt  # 인증서 저장소
-      - ./data:/var/www/certbot  # Certbot 웹 루트
-    ports:
-      - "80:80"  # HTTP 포트
-      - "443:443"  # HTTPS 포트
-    networks:
-      - aqua_network
-    restart: unless-stopped
 
   # Certbot 서비스 (SSL 인증서 관리)
   certbot:
