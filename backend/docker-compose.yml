@@ -14,6 +14,9 @@ services:
       MONGO_PW: "${MONGO_PW}"  # MongoDB 패스워드 추가
       USE_PROXY_HEADERS: "True"  # ✅ 프록시 헤더 신뢰 설정
       FASTAPI_FORWARDED_ALLOW_IPS: "*"  # ✅ 모든 프록시 IP 허용
+    networks:
+      - aqua_network
+
 
   # MySQL DB 서비스
   db:
@@ -41,6 +44,8 @@ services:
     ports:
       - "80:80"  # HTTP 포트
       - "443:443"  # HTTPS 포트
+    networks:
+      - aqua_network
     restart: unless-stopped
 
   # Certbot 서비스 (SSL 인증서 관리)
