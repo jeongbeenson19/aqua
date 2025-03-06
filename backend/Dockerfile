@@ -14,11 +14,13 @@ RUN apt-get update && \
 # 작업 디렉토리 설정
 WORKDIR /app
 
-# 애플리케이션 코드 복사
+# FastAPI 애플리케이션 코드 복사
 COPY ./app /app
 
+# requirements.txt 파일이 app 폴더에 존재한다고 가정
+COPY ./app/requirements.txt /app/requirements.txt
+
 # 필요한 Python 패키지 설치
-COPY ./requirements.txt /app/requirements.txt
 RUN pip install --no-cache-dir -r /app/requirements.txt
 
 # Nginx 설정 파일 복사
