@@ -60,3 +60,7 @@ services:
 # MySQL 데이터 영속성을 위한 볼륨
 volumes:
   mysql_data:
+
+networks:
+  aqua_network:
+    driver: bridge
