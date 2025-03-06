@@ -14,15 +14,19 @@ RUN apt-get update && \
 # 작업 디렉토리 설정
 WORKDIR /app
 
-# 필요한 Python 패키지 설치
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+# 애플리케이션 코드 복사
+COPY ./app /app
 
-# FastAPI 애플리케이션 코드 복사
-COPY ./backend /app
+# 필요한 Python 패키지 설치
+COPY ./requirements.txt /app/requirements.txt
+RUN pip install --no-cache-dir -r /app/requirements.txt
 
 # Nginx 설정 파일 복사
 COPY ./nginx.conf /etc/nginx/nginx.conf
 
-# Nginx 및 FastAPI 서버 실행
-CMD service nginx start && uvicorn main:app --host 0.0.0.0 --port 8000
+# 쉘 스크립트 복사 및 실행 권한 부여
+COPY ./start.sh /start.sh
+RUN chmod +x /start.sh  # 실행 권한 추가
+
+# FastAPI 및 Nginx 실행
+CMD ["/start.sh"]
