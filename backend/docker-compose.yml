@@ -2,7 +2,7 @@ services:
   # FastAPI 서비스
   fastapi:
     build: .
-    container_name: aqua
+    container_name: fastapi
     env_file:
       - .env  # 🔥 .env 파일 명시적으로 추가
     ports:

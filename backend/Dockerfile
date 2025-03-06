@@ -1,9 +1,4 @@
-FROM ubuntu:latest
-LABEL authors="mac_air"
-
-ENTRYPOINT ["top", "-b"]
-
-# 기본 이미지로 Python을 사용 (FastAPI 서버용)
+# 베이스 이미지를 Python으로 설정 (FastAPI 서버용)
 FROM python:3.10-slim
 
 # Nginx 설치
@@ -30,5 +25,5 @@ COPY ./nginx.conf /etc/nginx/nginx.conf
 COPY ./start.sh /start.sh
 RUN chmod +x /start.sh  # 실행 권한 추가
 
-# FastAPI 및 Nginx 실행
+# Nginx와 FastAPI 서버 실행
 CMD ["/start.sh"]
