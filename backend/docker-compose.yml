@@ -2,6 +2,8 @@ services:
   # FastAPI 서비스
   fastapi:
     build: .
+    ports:
+      - "8000:8000"
     container_name: fastapi
     env_file:
      - .env  # 🔥 .env 파일 명시적으로 추가
@@ -14,6 +16,7 @@ services:
       FASTAPI_FORWARDED_ALLOW_IPS: "*"  # ✅ 모든 프록시 IP 허용
     networks:
       - aqua_network
+
   # Nginx 서비스 (Reverse Proxy 역할)
   nginx:
     image: nginx:latest
@@ -28,6 +31,7 @@ services:
     networks:
       - aqua_network
     restart: unless-stopped
+
   # MySQL DB 서비스
   db:
     image: mysql:8.0
