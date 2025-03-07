@@ -21,7 +21,8 @@ DOMAIN = os.getenv("DOMAIN")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:3000",
-                   "https://aqua-sports-cert.com"],
+                   "https://aqua-sports-cert.com",
+                   "https://api.aqua-sports-cert.com"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
