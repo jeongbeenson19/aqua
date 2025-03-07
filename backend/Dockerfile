@@ -15,9 +15,6 @@ WORKDIR /app
 # 3. 필요한 파일 복사
 COPY /app/requirements.txt .
 
-RUN apt-get update && apt-get install -y supervisor
-
-
 # 4. 의존성 설치
 RUN pip install --no-cache-dir -r requirements.txt
 
@@ -31,9 +28,5 @@ COPY ./nginx.conf /etc/nginx/nginx.conf
 COPY ./start.sh /start.sh
 RUN chmod +x /start.sh  # 실행 권한 추가
 
-
-# Supervisord 설정 파일 복사
-COPY ./supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-
-# Supervisor로 시작
-CMD ["/usr/bin/supervisord"]
+# Nginx와 FastAPI 서버 실행
+CMD ["/start.sh"]
