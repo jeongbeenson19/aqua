@@ -34,6 +34,19 @@ def get_or_create_user(db: Session, kakao_id: str, email: str, nickname: str):
     return user
 
 
+def update_user_info(db: Session, kakao_id: str, email: str, nickname: str):
+    """카카오 ID를 기반으로 유저 정보를 업데이트"""
+    user = db.query(User).filter(User.kakao_id == kakao_id).first()
+    if not user:
+        return None  # 유저가 없으면 실패
+
+    user.email = email
+    user.nickname = nickname
+    db.commit()
+    db.refresh(user)
+    return user
+
+
 def generate_custom_id():
     timestamp = int(time.time())  # 현재 시간 (유닉스 타임스탬프)
     random_part = ''.join(random.choices(string.ascii_uppercase + string.digits, k=6))
