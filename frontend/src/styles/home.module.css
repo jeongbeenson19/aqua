@@ -38,7 +38,6 @@ code {
 .header h1 {
   padding: 0 10px;
   text-align: center;
-  /* font-family: 'DaughterMom', sans-serif; */
   font-family: 'iLoveYouSon', sans-serif;
   letter-spacing: 0.1em;
   font-weight: bold;
@@ -50,7 +49,6 @@ code {
 }
 
 .tab_btns button {
-  /* font-family: 'DaughterMom', sans-serif; */
   font-family: 'iLoveYouSon', sans-serif;
   letter-spacing: 0.1em;
   font-weight: bold;
@@ -167,7 +165,8 @@ button.active {
   text-align: center;
   font-size: 18px;
   color: white;
-  font-weight: bold;
+  font-family: 'Black Han Sans', sans-serif;
+  font-size: 1.2rem;
 }
 
 /* 과목별 점수 리스트 */
@@ -179,9 +178,8 @@ button.active {
 .scores_title {
   font-family: 'Black Han Sans', sans-serif;
   font-size: 1.2rem;
-  font-weight: bold;
-  /* text-align: center; */
-  /* margin-bottom: 10px; */
+  font-weight: normal;
+  font-size: 20px;
   padding: 0 40px;
 }
 
@@ -238,7 +236,11 @@ button.active {
 
 .noExamMessage {
   line-height: 1.5;
-  padding: 10px;
+  padding: 5px;
+  font-family: 'iLoveYouSon', sans-serif;
+  letter-spacing: 0.1em;
+  font-weight: bold;
+  font-size: 20px;
 }
 
 .exam_history_list {

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-// import { fetchPlotSunburst, fetchMeanScore } from "../pages/mypage";
 import { getItemWithExpiry } from '../pages/auth';
 import axios from 'axios';
 import styles from '../styles/home.module.css';
