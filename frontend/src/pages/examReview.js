@@ -114,7 +114,6 @@ function ExamReview() {
         quiz_type={quiz_type}
         quiz_set_id={quiz_set_id}
       />
-
     </div>
   );
 }

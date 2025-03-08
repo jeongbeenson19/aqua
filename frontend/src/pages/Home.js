@@ -29,6 +29,7 @@ function Home() {
     ETH: "스포츠 윤리",
   };
 
+
   // 탭 버튼 클릭 시 화면 전환
   const handleTabChange = (tabName) => {
     setActiveTab(tabName);
