@@ -27,7 +27,6 @@ function Quiz() {
     const fetchQuizData = async () => {
       try {
         const quizType = subjectId;
-
         const response = await axios.get(`${backendURL}/quiz/${quizType}/${userId}`, {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -35,10 +34,8 @@ function Quiz() {
         });
 
         if (response.status === 200) {
-          console.log(response.data);
-          console.log(response.data.quiz_set.quiz);
-          // setQuizData(response.data);
-          // setQuizData(response.data.quiz_set.quiz);
+          setQuizData(response.data);
+          setQuizData(response.data.quiz_set.quiz);
 
         } else {
           throw new Error("퀴즈 데이터를 불러오는 데 실패했습니다.");
