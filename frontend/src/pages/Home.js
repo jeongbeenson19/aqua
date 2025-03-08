@@ -34,6 +34,7 @@ function Home() {
     setActiveTab(tabName);
   };
 
+
   // 퀴즈 페이지 이동
   const handleSubjectClick = async (quizType) => {
     try {

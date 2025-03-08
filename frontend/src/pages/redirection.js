@@ -9,7 +9,14 @@ const Redirection = () => {
   const expiryTimeInMinutes = 60;
 
   useEffect(() => {
+<<<<<<< HEAD
     if (jwtToken && userId) {
+=======
+    console.log("useEffect 실행");
+
+    if (needInfo && kakaoId) {
+      navigate(`/signup`, { state: { kakaoId } });
+>>>>>>> 47479a4d (src-kakaologin.js,routes/AppRoutes.js)
 
       setItemWithExpiry('jwt_token', jwtToken, expiryTimeInMinutes * 60 * 1000);
       setItemWithExpiry('user_id', userId, expiryTimeInMinutes * 60 * 1000);

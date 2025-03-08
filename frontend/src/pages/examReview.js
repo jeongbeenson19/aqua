@@ -113,7 +113,6 @@ function ExamReview() {
         onClose={() => setReportModalOpen(false)}
         quiz_type={quiz_type}
         quiz_set_id={quiz_set_id}
-      // quiz_id={quiz_id}
       />
 
     </div>

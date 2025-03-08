@@ -1,3 +1,4 @@
+// 로컬에 저장
 export const setItemWithExpiry = (key, value, ttl) => {
   const now = new Date();
   const item = {
@@ -7,6 +8,7 @@ export const setItemWithExpiry = (key, value, ttl) => {
   localStorage.setItem(key, JSON.stringify(item));
 };
 
+// 로컬에서 꺼내기
 export const getItemWithExpiry = (key) => {
   const itemStr = localStorage.getItem(key);
   if (!itemStr) return null;

@@ -4,9 +4,15 @@ import styles from '../styles/signup.module.css';
 const backendURL = process.env.REACT_APP_URL
 
 const SingUp = () => {
-  const loginHandler = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  };
+  const kakaoId = location.state?.kakaoId || '';
+  const [nickname, setNickname] = useState('');
+  const [email, setEmail] = useState('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+
 
   return (
     <div className={styles.signup}>
