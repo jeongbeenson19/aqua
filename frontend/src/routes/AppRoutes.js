@@ -12,7 +12,6 @@ const AppRoutes = () => {
   return (
     <Routes>
       <Route path="/login" element={<KakaoLogin />} />
-      <Route path="/signup" element={<SingUp />} />
       <Route path="/redirection" element={<Redirection />} />
       <Route path="/signup" element={<Signup />} />
 
