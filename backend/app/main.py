@@ -85,8 +85,8 @@ def kakao_callback(code: str, db: Session = Depends(get_db)):
     # 사용자 정보 추출 및 회원가입/로그인 처리
     kakao_id = user_info.get("id")
     kakao_account = user_info.get("kakao_account", {})
-    email = kakao_account.get("email")
-    nickname = kakao_account.get("profile", {}).get("nickname")
+    email = kakao_account.get("email").strip()
+    nickname = kakao_account.get("profile", {}).get("nickname").strip()
 
     try:
         user = get_or_create_user(db, kakao_id=kakao_id, email=email, nickname=nickname)
@@ -95,7 +95,7 @@ def kakao_callback(code: str, db: Session = Depends(get_db)):
         print(f"Error in get_or_create_user: {str(e)}")
         raise HTTPException(status_code=500, detail="Database error while processing user")
 
-    if not user.email or not user.nickname:
+    if not user.email or user.email == "" or not user.nickname or user.nickname == "":
         query_params = urlencode({
             "needs_info": "true",
             "kakao_id": kakao_id
@@ -116,7 +116,7 @@ def kakao_callback(code: str, db: Session = Depends(get_db)):
     })
 
     redirect_url = f"{LOGIN_REDIRECT_URI}?{query_params}"
-    return RedirectResponse(url=redirect_url, status_code=303, headers={"Access-Control-Allow-Origin": ""})
+    return RedirectResponse(url=redirect_url, status_code=303, headers={"Access-Control-Allow-Origin": "*"})
 
 
 @app.post("/auth/kakao/complete/{kakao_id}/{email}/{nickname}")
