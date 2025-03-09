@@ -14,6 +14,7 @@ const Redirection = () => {
 
   useEffect(() => {
     console.log("useEffect 실행");
+    console.log("뭐냐 진짜")
     console.log("jwtToken", jwtToken, "userId", userId);
     console.log("needInfo:", needInfo, "kakaoId:", kakaoId);
 
