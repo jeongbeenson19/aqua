@@ -85,8 +85,10 @@ def kakao_callback(code: str, db: Session = Depends(get_db)):
     # 사용자 정보 추출 및 회원가입/로그인 처리
     kakao_id = user_info.get("id")
     kakao_account = user_info.get("kakao_account", {})
-    email = kakao_account.get("email").strip()
-    nickname = kakao_account.get("profile", {}).get("nickname").strip()
+    email = kakao_account.get("email")
+    email = email.strip() if email else ""
+    nickname = kakao_account.get("profile", {}).get("nickname")
+    nickname = nickname.strip() if nickname else ""
 
     try:
         user = get_or_create_user(db, kakao_id=kakao_id, email=email, nickname=nickname)
