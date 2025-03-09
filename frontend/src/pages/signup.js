@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import styles from '../styles/signup.module.css';
 import axios from 'axios';
+import { getItemWithExpiry } from '../pages/auth';
+import styles from '../styles/signup.module.css';
 
 const backendURL = process.env.REACT_APP_URL
 
@@ -9,7 +10,8 @@ const SingUp = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const kakaoId = location.state?.kakaoId || '';
+  // const kakaoId = location.state?.kakaoId || '';
+  const [kakaoId, setUserId] = useState(getItemWithExpiry('kakao_id'));
   const [nickname, setNickname] = useState('');
   const [email, setEmail] = useState('');
   const [error, setError] = useState('');
@@ -21,17 +23,18 @@ const SingUp = () => {
     setLoading(true);
 
     console.log("kakaoId", kakaoId);
-    console.log("email", email);
     console.log("nickname", nickname);
+    console.log("email", email);
 
     const url = `${backendURL}/auth/kakao/complete/${kakaoId}/${email}/${nickname}`;
 
     try {
       const response = await axios.post(url);
 
-      console.log('회원가입 성공', response.data);
-      navigate('/');
-
+      if (response.status === 200) {
+        console.log('회원가입 성공', response.data);
+        // navigate('/');
+      }
     } catch (error) {
       console.error('회원가입 실패:', error.response?.data || error.message);
       setError(error.response?.data?.message || '회원가입에 실패했습니다. 다시 시도해주세요.');
