@@ -7,15 +7,14 @@ const Redirection = () => {
   const jwtToken = new URLSearchParams(window.location.search).get('jwt_token');
   const userId = new URLSearchParams(window.location.search).get('user_id');
 
-  const needInfo = new URLSearchParams(window.location.search).get('need_info') === "true";
   // const needInfo = new URLSearchParams(window.location.search).get('need_info');
+  const needInfo = new URLSearchParams(window.location.search).get('need_info') === "true";
   const kakaoId = new URLSearchParams(window.location.search).get('kakao_id');
 
   const expiryTime = 60;
 
   useEffect(() => {
     console.log("useEffect 실행");
-    console.log("뭐냐 진짜")
     console.log("jwtToken", jwtToken, "userId", userId);
     console.log("needInfo:", needInfo, "kakaoId:", kakaoId);
 
