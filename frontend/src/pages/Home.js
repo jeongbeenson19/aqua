@@ -142,6 +142,7 @@ function Home() {
 
   // 로그아웃
   const handleLogout = () => {
+    localStorage.removeItem('kakaoId');
     localStorage.removeItem('jwt_token');
     localStorage.removeItem('user_id');
 

@@ -13,12 +13,11 @@ const Redirection = () => {
   const expiryTime = 60;
 
   useEffect(() => {
-    console.log("useEffect 실행");
-    console.log("jwtToken", jwtToken, "userId", userId);
-    console.log("needsInfo:", needsInfo, "kakaoId:", kakaoId);
 
     if (needsInfo && kakaoId) {
-      navigate(`/signup`, { state: { kakaoId } });
+      setItemWithExpiry('kakao_id', kakaoId, expiryTime * 60 * 1000);
+
+      navigate(`/signup`);
 
     } else if (jwtToken && userId) {
       setItemWithExpiry('jwt_token', jwtToken, expiryTime * 60 * 1000);

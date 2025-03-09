@@ -27,7 +27,6 @@ function ReportError({ isOpen, onClose, quiz_type, quiz_set_id }) {
       });
 
       if (response.status === 200) {
-        console.log(response)
         alert("문제 오류 신고가 제출되었습니다.");
         onClose();
         setSelectedQuizId(null);
