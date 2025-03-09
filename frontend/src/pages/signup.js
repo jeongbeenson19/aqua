@@ -4,7 +4,7 @@ import axios from 'axios';
 import { getItemWithExpiry } from '../pages/auth';
 import styles from '../styles/signup.module.css';
 
-const backendURL = process.env.REACT_APP_URL
+const backendURL = process.env.REACT_APP_BACKEND_URL;
 
 useEffect(() => {
   console.log("kakaoId", kakaoId);
@@ -25,9 +25,6 @@ const SingUp = () => {
     e.preventDefault();
     setError('');
     setLoading(true);
-
-    console.log("nickname", nickname);
-    console.log("email", email);
 
     const url = `${backendURL}/auth/kakao/complete/${kakaoId}/${email}/${nickname}`;
 
