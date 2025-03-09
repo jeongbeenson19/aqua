@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { getItemWithExpiry } from '../pages/auth';
 import styles from '../styles/signup.module.css';
 
 const backendURL = process.env.REACT_APP_URL
+
+useEffect(() => {
+  console.log("kakaoId", kakaoId);
+}, [kakaoId]);
 
 const SingUp = () => {
   const navigate = useNavigate();
@@ -22,7 +26,6 @@ const SingUp = () => {
     setError('');
     setLoading(true);
 
-    console.log("kakaoId", kakaoId);
     console.log("nickname", nickname);
     console.log("email", email);
 
