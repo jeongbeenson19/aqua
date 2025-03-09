@@ -119,8 +119,8 @@ def kakao_callback(code: str, db: Session = Depends(get_db)):
 
     redirect_url = f"{LOGIN_REDIRECT_URI}?{query_params}"
 
-    return JSONResponse(
-        content={"redirect_url": f"{redirect_url}"})
+    RedirectResponse(url=f"{redirect_url}", status_code=303,
+                     headers={"Access-Control-Allow-Origin": "*"})
 
 
 @app.post("/auth/kakao/complete/{kakao_id}/{email}/{nickname}")
@@ -146,8 +146,8 @@ def kakao_complete(
 
     redirect_url = f"{LOGIN_REDIRECT_URI}?{query_params}"
 
-    return JSONResponse(
-        content={"redirect_url": f"{redirect_url}"})
+    RedirectResponse(url=f"{redirect_url}", status_code=303,
+                     headers={"Access-Control-Allow-Origin": "*"})
 
 @app.get("/quiz/{quiz_type}/{user_id}")
 async def fetch_quiz_set(
