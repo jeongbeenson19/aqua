@@ -16,6 +16,12 @@
   font-size: 35px;
 }
 
+.error {
+  position: absolute;
+  top: 160px;
+  color: red;
+}
+
 .form {
   display: flex;
   flex-direction: column;

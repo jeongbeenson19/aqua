@@ -20,6 +20,10 @@ const SingUp = () => {
     setError('');
     setLoading(true);
 
+    console.log("kakaoId", kakaoId);
+    console.log("email", email);
+    console.log("nickname", nickname);
+
     const url = `${backendURL}/auth/kakao/complete/${kakaoId}/${email}/${nickname}`;
 
     try {

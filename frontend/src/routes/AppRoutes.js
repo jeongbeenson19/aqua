@@ -14,17 +14,9 @@ const AppRoutes = () => {
       <Route path="/login" element={<KakaoLogin />} />
       <Route path="/redirection" element={<Redirection />} />
       <Route path="/signup" element={<Signup />} />
-
-      {/* <Route element={<ProtectedRoute />}>
-        <Route path="/" element={<Home />} />
-        <Route path="/quiz/:subjectId" element={<Quiz />} />
-        <Route path="/examreview/:attempedId" element={<ExamReview />} />
-      </Route> */}
-
       <Route path="/" element={<Home />} />
       <Route path="/quiz/:subjectId" element={<Quiz />} />
       <Route path="/examreview/:attempedId" element={<ExamReview />} />
-
 
     </Routes>
   );
