@@ -7,7 +7,8 @@ const Redirection = () => {
   const jwtToken = new URLSearchParams(window.location.search).get('jwt_token');
   const userId = new URLSearchParams(window.location.search).get('user_id');
 
-  const needInfo = new URLSearchParams(window.location.search).get('need_info');
+  const needInfo = new URLSearchParams(window.location.search).get('need_info') === "true";
+  // const needInfo = new URLSearchParams(window.location.search).get('need_info');
   const kakaoId = new URLSearchParams(window.location.search).get('kakao_id');
 
   const expiryTime = 60;
