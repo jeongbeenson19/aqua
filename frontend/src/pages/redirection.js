@@ -14,8 +14,10 @@ const Redirection = () => {
 
   useEffect(() => {
     console.log("useEffect 실행");
+    console.log("jwtToken", jwtToken, "userId", userId);
+    console.log("needInfo:", needInfo, "kakaoId:", kakaoId);
 
-    if (needInfo && kakaoId) {
+    if (needInfo === "true" && kakaoId) {
       navigate(`/signup`, { state: { kakaoId } });
 
     } else if (jwtToken && userId) {
