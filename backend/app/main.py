@@ -3,7 +3,7 @@ import requests
 from fastapi import FastAPI, HTTPException, Path, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.trustedhost import TrustedHostMiddleware
-from fastapi.responses import RedirectResponse
+from fastapi.responses import RedirectResponse, JSONResponse
 from sqlalchemy.orm import Session
 from urllib.parse import urlencode
 from dotenv import load_dotenv
@@ -118,7 +118,9 @@ def kakao_callback(code: str, db: Session = Depends(get_db)):
     })
 
     redirect_url = f"{LOGIN_REDIRECT_URI}?{query_params}"
-    return RedirectResponse(url=redirect_url, status_code=303, headers={"Access-Control-Allow-Origin": "*"})
+
+    return JSONResponse(
+        content={"redirect_url": f"{redirect_url}"})
 
 
 @app.post("/auth/kakao/complete/{kakao_id}/{email}/{nickname}")
@@ -142,8 +144,10 @@ def kakao_complete(
         "user_id": user.user_id,
     })
 
-    return RedirectResponse(url=f"{LOGIN_REDIRECT_URI}?{query_params}", status_code=303, headers={"Access-Control-Allow-Origin": "*"})
+    redirect_url = f"{LOGIN_REDIRECT_URI}?{query_params}"
 
+    return JSONResponse(
+        content={"redirect_url": f"{redirect_url}"})
 
 @app.get("/quiz/{quiz_type}/{user_id}")
 async def fetch_quiz_set(
