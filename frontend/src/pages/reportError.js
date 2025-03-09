@@ -16,10 +16,10 @@ function ReportError({ isOpen, onClose, quiz_type, quiz_set_id }) {
       return;
     }
 
-    const reportUrl = `${backendURL}/report/${quiz_type}/${quiz_set_id}/${selectedQuizId}`;
+    const url = `${backendURL}/report/${quiz_type}/${quiz_set_id}/${selectedQuizId}`;
 
     try {
-      const response = await axios.post(reportUrl, null, {
+      const response = await axios.post(url, null, {
         params: {
           title: reportTitle,
           description: reportDescription

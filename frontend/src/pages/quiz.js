@@ -27,7 +27,6 @@ function Quiz() {
     const fetchQuizData = async () => {
       try {
         const quizType = subjectId;
-
         const response = await axios.get(`${backendURL}/quiz/${quizType}/${userId}`, {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -35,10 +34,8 @@ function Quiz() {
         });
 
         if (response.status === 200) {
-          console.log(response.data);
-          console.log(response.data.quiz_set.quiz);
-          // setQuizData(response.data);
-          // setQuizData(response.data.quiz_set.quiz);
+          setQuizData(response.data);
+          setQuizData(response.data.quiz_set.quiz);
 
         } else {
           throw new Error("퀴즈 데이터를 불러오는 데 실패했습니다.");
@@ -83,7 +80,6 @@ function Quiz() {
   };
 
   const quizTitle = quizTitles[quizData?.quiz_type] || "알 수 없는 유형";
-  // const correctOptions = quizData?.quiz.map(quiz => quiz.quiz_content.correct_option) || [];
 
 
   // 답변 선택
@@ -160,7 +156,6 @@ function Quiz() {
   const question = currentQuiz?.quiz_content?.question_text || "질문을 불러오는 중입니다. 잠시만 기다려 주세요.";
   const example = currentQuiz?.quiz_content?.example || [];
   const options = currentQuiz?.quiz_content?.options || {};
-  // const optionsArray = Object.values(options);
 
   if (!quizData) {
     return <div className={styles.waiting}>
@@ -185,12 +180,11 @@ function Quiz() {
           src="../images/issue.png"
           alt="문제 오류 신고"
           onClick={() => setReportModalOpen(true)}
-        // onClick={handleReportClick}
         />
       </header>
 
       {/* 메인 컨텐츠 */}
-      {/* <main className={styles.exam}>
+      <main className={styles.exam}>
         <div className={styles.exam_ctn}>
           <div className={styles.quiz_ctn}>
             <p className={styles.question}>{currentQuizIndex + 1}. {question}</p>
@@ -219,40 +213,39 @@ function Quiz() {
               </button>
             ))}
           </div>
-        </div> */}
+        </div>
 
-      {/* 내비게이션 버튼 */}
-      {/* <div className={styles.nav_ctn}> */}
-      {/* <div className={`${styles.nav_ctn} 
+        {/* 내비게이션 버튼 */}
+        {/* <div className={styles.nav_ctn}> */}
+        <div className={`${styles.nav_ctn} 
     ${currentQuizIndex === 0 || currentQuizIndex === quizData.quiz_set.quiz.length
-          ? styles.single_button : styles.double_buttons}`}>
+            ? styles.single_button : styles.double_buttons}`}>
 
-        {currentQuizIndex > 0 && (
-          <button onClick={handlePrev} className={styles.nav_btn}>
-            이전
-          </button>
-        )}
-        {currentQuizIndex < quizData.quiz_set.quiz.length - 1 && (
-          <button onClick={handleNext} className={styles.nav_btn}>
-            다음
-          </button>
-        )}
-        {currentQuizIndex === quizData.quiz_set.quiz.length - 1 && (
-          <button onClick={handleSubmit} className={styles.submit_btn}>
-            제출
-          </button>
-        )}
-      </div>
-    </main> */}
+          {currentQuizIndex > 0 && (
+            <button onClick={handlePrev} className={styles.nav_btn}>
+              이전
+            </button>
+          )}
+          {currentQuizIndex < quizData.quiz_set.quiz.length - 1 && (
+            <button onClick={handleNext} className={styles.nav_btn}>
+              다음
+            </button>
+          )}
+          {currentQuizIndex === quizData.quiz_set.quiz.length - 1 && (
+            <button onClick={handleSubmit} className={styles.submit_btn}>
+              제출
+            </button>
+          )}
+        </div>
+      </main>
 
       <ReportError
         isOpen={isReportModalOpen}
         onClose={() => setReportModalOpen(false)}
-      // quiz_type={quiz_type}
-      // quiz_set_id={quiz_set_id}
+        quiz_type={quizData.quiz_set.quiz_set_id}
+        quiz_set_id={quizData.quiz_type}
       // quiz_id={currentQuizIndex}
       />
-
     </div >
   );
 }
