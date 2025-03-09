@@ -100,7 +100,7 @@ def kakao_callback(code: str, db: Session = Depends(get_db)):
             "needs_info": "true",
             "kakao_id": kakao_id
         })
-        return RedirectResponse(url=f"{LOGIN_REDIRECT_URI}?{query_params}", status_code=303)
+        return RedirectResponse(url=f"{LOGIN_REDIRECT_URI}?{query_params}", status_code=303, headers={"Access-Control-Allow-Origin": "*"})
 
     # JWT 생성
     try:
@@ -116,7 +116,7 @@ def kakao_callback(code: str, db: Session = Depends(get_db)):
     })
 
     redirect_url = f"{LOGIN_REDIRECT_URI}?{query_params}"
-    return RedirectResponse(url=redirect_url, status_code=303)
+    return RedirectResponse(url=redirect_url, status_code=303, headers={"Access-Control-Allow-Origin": ""})
 
 
 @app.post("/auth/kakao/complete/{kakao_id}/{email}/{nickname}")
@@ -140,7 +140,7 @@ def kakao_complete(
         "user_id": user.user_id,
     })
 
-    return RedirectResponse(url=f"{LOGIN_REDIRECT_URI}?{query_params}", status_code=303)
+    return RedirectResponse(url=f"{LOGIN_REDIRECT_URI}?{query_params}", status_code=303, headers={"Access-Control-Allow-Origin": "*"})
 
 
 @app.get("/quiz/{quiz_type}/{user_id}")
