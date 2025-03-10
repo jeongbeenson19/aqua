@@ -10,7 +10,6 @@
 
 .header {
   color: #1249B1;
-  /* justify-content: flex-start; */
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -35,7 +34,6 @@
   font-family: 'iLoveYouSon', sans-serif;
   letter-spacing: 0.1em;
   font-weight: bold;
-  /* font-style: italic; */
 }
 
 .header h2 {

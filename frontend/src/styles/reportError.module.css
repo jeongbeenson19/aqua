@@ -6,12 +6,10 @@
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
-  /* 어두운 반투명 배경 */
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
-  /* 최상단 표시 */
 }
 
 /* 모달 콘텐츠 */
@@ -24,7 +22,6 @@
   z-index: 1001;
   display: flex;
   flex-direction: column;
-  /* gap: 10px; */
 }
 
 .modal_header {
@@ -65,7 +62,6 @@
 
 
 .modal_body {
-  /* margin: 20px; */
   padding: 18px 16px 15px 16px;
   background: #1249B1;
   border-radius: 15px;
