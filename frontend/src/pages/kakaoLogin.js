@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from '../styles/kakaoLogin.module.css';
 
-const backendURL = process.env.REACT_APP_URL
+const backendURL = process.env.REACT_APP_BACKEND_URL;
 
 const KakaoLogin = () => {
   const loginHandler = () => {
