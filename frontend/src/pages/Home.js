@@ -142,7 +142,6 @@ function Home() {
 
   // 로그아웃
   const handleLogout = () => {
-    localStorage.removeItem('kakaoId');
     localStorage.removeItem('jwt_token');
     localStorage.removeItem('user_id');
 
@@ -214,10 +213,10 @@ function Home() {
 
         {activeTab === "마이페이지" && (
           <div className={styles.mypage_ctn}>
-            <div className={styles.user_info}>
+            {/* <div className={styles.user_info}>
               <h2 className={styles.user_name}>이름 : </h2>
               <h3 className={styles.user_email}>이메일 : </h3>
-            </div>
+            </div> */}
 
             <div>
               {plotData ? (
