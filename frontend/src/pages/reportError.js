@@ -10,6 +10,21 @@ function ReportError({ isOpen, onClose, quiz_type, quiz_set_id }) {
 
   if (!isOpen) return null;
 
+  const handleQuizIdChange = (e) => {
+    let value = e.target.value;
+
+    if (value < 1 || value > 20) {
+      alert('1부터 20 사이의 숫자를 입력하세요!');
+      return;
+    }
+
+    if (!/^\d*$/.test(value)) {
+      return;
+    }
+
+    setSelectedQuizId(value);
+  };
+
   const handleReportSubmit = async () => {
     if (!selectedQuizId || !reportTitle || !reportDescription) {
       alert("모든 항목을 올바르게 입력해주세요.");
@@ -67,7 +82,7 @@ function ReportError({ isOpen, onClose, quiz_type, quiz_set_id }) {
             max="20"
             placeholder="번호 입력"
             value={selectedQuizId || ''}
-            onChange={(e) => setSelectedQuizId(e.target.value)}
+            onChange={handleQuizIdChange}
             className={styles.input_box}
           />
 
