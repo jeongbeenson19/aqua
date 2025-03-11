@@ -98,7 +98,7 @@ function Home() {
           alert("마이페이지를 가져오는 데 실패했습니다.");
         }
       } catch (error) {
-        console.error("마이페이지 요청 실패 : ", error.message);
+        console.error("마이페이지 평균 점수 요청 실패 : ", error.message);
       }
     };
 
