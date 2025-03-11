@@ -119,7 +119,7 @@ def kakao_callback(code: str, db: Session = Depends(get_db)):
 
     redirect_url = f"{LOGIN_REDIRECT_URI}?{query_params}"
 
-    RedirectResponse(url=f"{redirect_url}", status_code=303,
+    return RedirectResponse(url=f"{redirect_url}", status_code=303,
                      headers={"Access-Control-Allow-Origin": "*"})
 
 
