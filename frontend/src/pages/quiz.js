@@ -22,6 +22,7 @@ function Quiz() {
 
   const [isReportModalOpen, setReportModalOpen] = useState(false);
 
+
   // 퀴즈 데이터
   useEffect(() => {
     const fetchQuizData = async () => {
@@ -35,7 +36,8 @@ function Quiz() {
 
         if (response.status === 200) {
           setQuizData(response.data);
-          setQuizData(response.data.quiz_set.quiz);
+          // setQuizData(response.data.quiz_set.quiz);
+          console.log(quizData)
 
         } else {
           throw new Error("퀴즈 데이터를 불러오는 데 실패했습니다.");
@@ -52,7 +54,7 @@ function Quiz() {
 
     return () => clearInterval(timer);
 
-  }, [subjectId]);
+  }, []);
 
   // 현재 퀴즈 번호
   useEffect(() => {
