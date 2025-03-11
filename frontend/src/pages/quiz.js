@@ -22,9 +22,9 @@ function Quiz() {
 
   const [isReportModalOpen, setReportModalOpen] = useState(false);
 
-
   // 퀴즈 데이터
   useEffect(() => {
+    console.log('token', token)
     const fetchQuizData = async () => {
       try {
         const quizType = subjectId;
@@ -94,6 +94,11 @@ function Quiz() {
 
   // 다음 문제로 이동
   const handleNext = () => {
+    if (userAnswers[currentQuizIndex] === null) {
+      alert(`문제의 답을 선택해주세요!`);
+      return;
+    }
+
     if (currentQuizIndex < quizData.quiz_set.quiz.length - 1) {
       setCurrentQuizIndex((prev) => prev + 1);
     }

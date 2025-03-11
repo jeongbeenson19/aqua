@@ -15,14 +15,6 @@
   justify-content: space-between;
   padding: 0.5rem 1rem;
   position: relative;
-}
-
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.5rem 1rem;
-  position: relative;
   height: 6vh;
 }
 
@@ -40,7 +32,7 @@
 .header h2 {
   margin: 0;
   padding: 0.3rem 0.5rem;
-  font-size: 20px;
+  font-size: 28px;
   width: 60px;
   font-family: 'iLoveYouSon', sans-serif;
   letter-spacing: 0.1em;
@@ -62,9 +54,8 @@
   color: #fafafa;
   display: flex;
   flex-direction: column;
-  min-height: 581px;
+  min-height: 87vh;
   padding: 1rem 1rem 3rem 1rem;
-  height: 87vh;
 }
 
 .exam_ctn {
@@ -78,6 +69,7 @@
   border-radius: 10px;
   margin: 0 0 1rem;
   padding: 0.3rem 1rem;
+  min-width: 38vh;
 }
 
 .question {
