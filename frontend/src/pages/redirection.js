@@ -13,19 +13,14 @@ const Redirection = () => {
   const expiryTime = 60;
 
   useEffect(() => {
-
-    if (needsInfo && kakaoId) {
-      setItemWithExpiry('kakao_id', kakaoId, expiryTime * 60 * 1000);
-
-      navigate(`/signup`);
-
-    } else if (jwtToken && userId) {
+    if (jwtToken && userId) {
       setItemWithExpiry('jwt_token', jwtToken, expiryTime * 60 * 1000);
       setItemWithExpiry('user_id', userId, expiryTime * 60 * 1000);
 
       navigate('/');
     } else {
-      console.error('토큰 또는 사용자 ID가 없습니다!');
+      alert("오류가 발생하였습니다. 다시 로그인해주세요!");
+      navigate('/login');
     }
   }, []);
 
