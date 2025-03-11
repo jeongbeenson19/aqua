@@ -54,9 +54,8 @@
   color: #fafafa;
   display: flex;
   flex-direction: column;
-  min-height: 581px;
+  min-height: 87vh;
   padding: 1rem 1rem 3rem 1rem;
-  height: 87vh;
 }
 
 .exam_ctn {
