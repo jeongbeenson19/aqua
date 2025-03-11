@@ -97,12 +97,12 @@ def kakao_callback(code: str, db: Session = Depends(get_db)):
         print(f"Error in get_or_create_user: {str(e)}")
         raise HTTPException(status_code=500, detail="Database error while processing user")
 
-    if not user.email or user.email == "" or not user.nickname or user.nickname == "":
-        query_params = urlencode({
-            "needs_info": "true",
-            "kakao_id": kakao_id
-        })
-        return RedirectResponse(url=f"{LOGIN_REDIRECT_URI}?{query_params}", status_code=303, headers={"Access-Control-Allow-Origin": "*"})
+    # if not user.email or user.email == "" or not user.nickname or user.nickname == "":
+    #     query_params = urlencode({
+    #         "needs_info": "true",
+    #         "kakao_id": kakao_id
+    #     })
+    #     return RedirectResponse(url=f"{LOGIN_REDIRECT_URI}?{query_params}", status_code=303, headers={"Access-Control-Allow-Origin": "*"})
 
     # JWT 생성
     try:
@@ -123,31 +123,31 @@ def kakao_callback(code: str, db: Session = Depends(get_db)):
                      headers={"Access-Control-Allow-Origin": "*"})
 
 
-@app.post("/auth/kakao/complete/{kakao_id}/{email}/{nickname}")
-def kakao_complete(
-    kakao_id: str = Path(..., description="Kakao"),
-    email: str = Path(..., description="email address"),
-    nickname: str = Path(..., description="name"),
-    db: Session = Depends(get_db)
-):
-    """사용자가 추가 정보를 입력한 후 DB에 저장하는 엔드포인트"""
-
-    # 유저 정보 업데이트
-    user = update_user_info(db, kakao_id, email, nickname)
-    if not user:
-        raise HTTPException(status_code=400, detail="User not found or update failed")
-
-    # JWT 생성 후 로그인 처리
-    jwt_token = create_jwt_token(user_id=user.id)
-    query_params = urlencode({
-        "jwt_token": jwt_token,
-        "user_id": user.user_id,
-    })
-
-    redirect_url = f"{LOGIN_REDIRECT_URI}?{query_params}"
-
-    RedirectResponse(url=f"{redirect_url}", status_code=303,
-                     headers={"Access-Control-Allow-Origin": "*"})
+# @app.post("/auth/kakao/complete/{kakao_id}/{email}/{nickname}")
+# def kakao_complete(
+#     kakao_id: str = Path(..., description="Kakao"),
+#     email: str = Path(..., description="email address"),
+#     nickname: str = Path(..., description="name"),
+#     db: Session = Depends(get_db)
+# ):
+#     """사용자가 추가 정보를 입력한 후 DB에 저장하는 엔드포인트"""
+#
+#     # 유저 정보 업데이트
+#     user = update_user_info(db, kakao_id, email, nickname)
+#     if not user:
+#         raise HTTPException(status_code=400, detail="User not found or update failed")
+#
+#     # JWT 생성 후 로그인 처리
+#     jwt_token = create_jwt_token(user_id=user.id)
+#     query_params = urlencode({
+#         "jwt_token": jwt_token,
+#         "user_id": user.user_id,
+#     })
+#
+#     redirect_url = f"{LOGIN_REDIRECT_URI}?{query_params}"
+#
+#     RedirectResponse(url=f"{redirect_url}", status_code=303,
+#                      headers={"Access-Control-Allow-Origin": "*"})
 
 @app.get("/quiz/{quiz_type}/{user_id}")
 async def fetch_quiz_set(
