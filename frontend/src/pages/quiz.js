@@ -94,6 +94,9 @@ function Quiz() {
 
   // 다음 문제로 이동
   const handleNext = () => {
+    console.log("userAnswers : ", userAnswers);
+    console.log("currentQuizIndex : ", currentQuizIndex);
+    console.log(userAnswers[currentQuizIndex]);
     if (userAnswers[currentQuizIndex] === null) {
       alert(`문제의 답을 선택해주세요!`);
       return;
