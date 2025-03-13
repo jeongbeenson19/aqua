@@ -1,5 +1,6 @@
 import os
 import requests
+import numpy as np
 from fastapi import FastAPI, HTTPException, Path, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.trustedhost import TrustedHostMiddleware
@@ -448,24 +449,33 @@ async def my_page_plot(
                 "quiz_id": quiz_id,
                 "subject": details["quiz"]["quiz_content"]["subject"],
                 "topic": details["quiz"]["quiz_content"]["topic"],
-                "is_correct": "Correct" if details["is_correct"] else "Incorrect"
+                "is_correct": "정답" if details["is_correct"] else "오답"
             }
             rows.append(row)
 
         df = pd.DataFrame(rows)
 
-        # Sunburst 차트를 그리기 위한 데이터 구조
+        # Sunburst 차트 생성
         fig = px.sunburst(
             df,
             path=["subject", "topic", "is_correct"],  # 계층적 경로
-            values=None,  # 비율 기반이 아닌 개수를 사용
-            color="is_correct",  # 정답/오답을 색상으로 표현
-            color_discrete_map={"Correct": "green", "Incorrect": "red"},
+            values=None,  # 개수를 기준으로 크기 설정
+        )
+
+        fig.update_traces(
+            marker=dict(colors=[
+                "#005871",  # 과목(Subject) 계층 색상
+            ])
         )
 
         fig.update_layout(
             width=230,  # 차트 너비
-            height=230  # 차트 높이
+            height=230,  # 차트 높이
+            font=dict(
+                family="Black Han Sans, sans-serif",  # 원하는 폰트 (예: "Times New Roman", "Courier New" 등)
+                size=3,  # 기본 폰트 크기
+                color="white"  # 폰트 색상
+            )
         )
 
         fig.write_html("sunburst_chart.html")  # HTML 파일로 저장
