@@ -1,9 +1,19 @@
-/* 기본 스타일 (400px 이상 화면에 적용) */
+/* 기본 스타일 (420px 이상 화면에 적용) */
 .main-svg {
   background-color: transparent !important;
   position: absolute !important;
   top: -9vh !important;
-  left: -3vh !important;
+  left: -2vh !important;
+}
+
+/* 화면 크기가 420px 이하일 때 */
+@media (max-width: 420px) {
+  .main-svg {
+    background-color: transparent !important;
+    position: absolute !important;
+    top: -9vh !important;
+    left: -3vh !important;
+  }
 }
 
 /* 화면 크기가 390px 이하일 때 */
@@ -24,4 +34,8 @@
     top: -12vh !important;
     left: -7vh !important;
   }
+}
+
+.modebar {
+  display: none !important;
 }

@@ -217,7 +217,8 @@ function Home() {
               <h3 className={styles.user_email}>이메일 : </h3>
             </div> */}
 
-            <div>
+            <div className={styles.chart}>
+              <h2 className={styles.chart_title}>시험 결과 분석</h2>
               {plotData ? (
                 <Plot
                   data={plotData.data}
