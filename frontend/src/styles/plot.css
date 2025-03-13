@@ -1,6 +1,27 @@
+/* 기본 스타일 (400px 이상 화면에 적용) */
 .main-svg {
   background-color: transparent !important;
   position: absolute !important;
-  top: -85px !important;
-  left: -25px !important;
+  top: -9vh !important;
+  left: -3vh !important;
+}
+
+/* 화면 크기가 390px 이하일 때 */
+@media (max-width: 390px) {
+  .main-svg {
+    background-color: transparent !important;
+    position: absolute !important;
+    top: -10vh !important;
+    left: -4vh !important;
+  }
+}
+
+/* 화면 크기가 375px 이하일 때 */
+@media (max-width: 375px) {
+  .main-svg {
+    background-color: transparent !important;
+    position: absolute !important;
+    top: -12vh !important;
+    left: -7vh !important;
+  }
 }
