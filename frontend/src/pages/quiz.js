@@ -24,7 +24,6 @@ function Quiz() {
 
   // 퀴즈 데이터
   useEffect(() => {
-    console.log('token', token)
     const fetchQuizData = async () => {
       try {
         const quizType = subjectId;
@@ -38,6 +37,7 @@ function Quiz() {
           setQuizData(response.data);
           // setQuizData(response.data.quiz_set.quiz);
           console.log(quizData)
+          console.log(response.data)
 
         } else {
           throw new Error("퀴즈 데이터를 불러오는 데 실패했습니다.");
@@ -97,7 +97,7 @@ function Quiz() {
     console.log("userAnswers : ", userAnswers);
     console.log("currentQuizIndex : ", currentQuizIndex);
     console.log(userAnswers[currentQuizIndex]);
-    if (userAnswers[currentQuizIndex] === null) {
+    if (userAnswers[currentQuizIndex] == null) {
       alert(`문제의 답을 선택해주세요!`);
       return;
     }
