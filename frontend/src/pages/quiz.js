@@ -34,9 +34,8 @@ function Quiz() {
         });
 
         if (response.status === 200) {
-          setQuizData(response.data);
-          // setQuizData(response.data.quiz_set.quiz);
-          console.log(quizData)
+          // setQuizData(response.data);
+          setQuizData(response.data.quiz_set);
           console.log(response.data)
 
         } else {
@@ -58,8 +57,8 @@ function Quiz() {
 
   // 현재 퀴즈 번호
   useEffect(() => {
-    if (quizData && quizData.quiz_set?.quiz.length > 0) {
-      setCurrentQuiz(quizData.quiz_set.quiz[currentQuizIndex]);
+    if (quizData && quizData.quiz.length > 0) {
+      setCurrentQuiz(quizData.quiz[currentQuizIndex]);
     }
   }, [quizData, currentQuizIndex]);
 
@@ -95,14 +94,13 @@ function Quiz() {
   // 다음 문제로 이동
   const handleNext = () => {
     console.log("userAnswers : ", userAnswers);
-    console.log("currentQuizIndex : ", currentQuizIndex);
     console.log(userAnswers[currentQuizIndex]);
     if (userAnswers[currentQuizIndex] == null) {
       alert(`문제의 답을 선택해주세요!`);
       return;
     }
 
-    if (currentQuizIndex < quizData.quiz_set.quiz.length - 1) {
+    if (currentQuizIndex < quizData.quiz.length - 1) {
       setCurrentQuizIndex((prev) => prev + 1);
     }
   };
@@ -122,7 +120,7 @@ function Quiz() {
 
     try {
       // 결과 배열 생성
-      const quizResults = quizData.quiz_set.quiz.map((quiz, index) => {
+      const quizResults = quizData.quiz.map((quiz, index) => {
         const correctOption = quiz.quiz_content.correct_option;
         const userAnswer = userAnswers[index];
         const isCorrect = Number(userAnswer) === correctOption ? 1 : 0;
@@ -136,17 +134,19 @@ function Quiz() {
 
       // 최종 서버로 전송할 request 객체 생성
       const request = {
-        quiz_set_id: quizData.quiz_set.quiz_set_id,
+        quiz_set_id: quizData.quiz_set_id,
         quiz_type: quizData.quiz_type,
         score: quizResults.filter((result) => result.is_correct === 1).length * 5,
         quiz_results: quizResults,
       };
 
+      console.log("quizResults : ", quizResults);
+      console.log("request : ", request);
+
       alert("점수 : " + request.score);
 
-      const API_URL = `${process.env.REACT_APP_BACKEND_URL}/quiz/submit/${userId}`;
+      const API_URL = `${backendURL}/quiz/submit/${userId}`;
 
-      console.log("request : ", request)
       const response = await axios.post(API_URL, request, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -174,7 +174,7 @@ function Quiz() {
     </div>;
   }
 
-  if (!quizData.quiz_set || !quizData.quiz_set.quiz) {
+  if (!quizData.quiz || !quizData.quiz_set_id || !quizData.type) {
     return <div className={styles.waiting}>
       <h2>존재하지 않거나 잘못된 데이터입니다.<br />
         다시 시도해주세요.</h2>
@@ -229,7 +229,7 @@ function Quiz() {
         {/* 내비게이션 버튼 */}
         {/* <div className={styles.nav_ctn}> */}
         <div className={`${styles.nav_ctn} 
-    ${currentQuizIndex === 0 || currentQuizIndex === quizData.quiz_set.quiz.length
+    ${currentQuizIndex === 0 || currentQuizIndex === quizData.quiz.length
             ? styles.single_button : styles.double_buttons}`}>
 
           {currentQuizIndex > 0 && (
@@ -237,12 +237,12 @@ function Quiz() {
               이전
             </button>
           )}
-          {currentQuizIndex < quizData.quiz_set.quiz.length - 1 && (
+          {currentQuizIndex < quizData.quiz.length - 1 && (
             <button onClick={handleNext} className={styles.nav_btn}>
               다음
             </button>
           )}
-          {currentQuizIndex === quizData.quiz_set.quiz.length - 1 && (
+          {currentQuizIndex === quizData.quiz.length - 1 && (
             <button onClick={handleSubmit} className={styles.submit_btn}>
               제출
             </button>
@@ -253,9 +253,8 @@ function Quiz() {
       <ReportError
         isOpen={isReportModalOpen}
         onClose={() => setReportModalOpen(false)}
-        quiz_type={quizData.quiz_set.quiz_set_id}
+        quiz_type={quizData.quiz_set_id}
         quiz_set_id={quizData.quiz_type}
-      // quiz_id={currentQuizIndex}
       />
     </div >
   );
