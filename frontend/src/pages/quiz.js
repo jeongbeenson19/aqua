@@ -146,6 +146,7 @@ function Quiz() {
 
       const API_URL = `${process.env.REACT_APP_BACKEND_URL}/quiz/submit/${userId}`;
 
+      console.log("request : ", request)
       const response = await axios.post(API_URL, request, {
         headers: {
           Authorization: `Bearer ${token}`,
