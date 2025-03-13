@@ -34,7 +34,6 @@ function Quiz() {
         });
 
         if (response.status === 200) {
-          // setQuizData(response.data);
           setQuizData(response.data.quiz_set);
           console.log(response.data)
 
@@ -93,8 +92,6 @@ function Quiz() {
 
   // 다음 문제로 이동
   const handleNext = () => {
-    console.log("userAnswers : ", userAnswers);
-    console.log(userAnswers[currentQuizIndex]);
     if (userAnswers[currentQuizIndex] == null) {
       alert(`문제의 답을 선택해주세요!`);
       return;
@@ -114,6 +111,11 @@ function Quiz() {
 
   // 제출 버튼 클릭 시
   const handleSubmit = async () => {
+    if (userAnswers[currentQuizIndex] == null) {
+      alert(`문제의 답을 선택해주세요!`);
+      return;
+    }
+
     const userConfirmed = window.confirm("제출하시겠습니까?");
 
     if (!userConfirmed) return;
@@ -140,7 +142,6 @@ function Quiz() {
         quiz_results: quizResults,
       };
 
-      console.log("quizResults : ", quizResults);
       console.log("request : ", request);
 
       alert("점수 : " + request.score);

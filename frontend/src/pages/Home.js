@@ -67,7 +67,6 @@ function Home() {
             newLayout.height = 400;
             return newLayout;
           });
-          console.log(parsedData.layout)
         }
         else {
           alert("마이페이지를 가져오는 데 실패했습니다.");
