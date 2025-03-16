@@ -46,7 +46,7 @@ code {
 }
 
 .tab_btns {
-  margin: 1rem 0;
+  margin: 1rem 0 1.2rem 0;
 }
 
 .tab_btns button {
@@ -150,6 +150,19 @@ button.active {
   font-size: 20px;
 }
 
+/* 차트 */
+.chart {
+  text-align: left;
+  margin: 0 auto 50px auto;
+}
+
+.chart_title {
+  font-family: 'Black Han Sans', sans-serif;
+  font-weight: normal;
+  font-size: 20px;
+  padding: 0 25px;
+}
+
 .plot_container {
   width: 90%;
   height: 250px;
@@ -179,7 +192,6 @@ button.active {
 
 .scores_title {
   font-family: 'Black Han Sans', sans-serif;
-  font-size: 1.2rem;
   font-weight: normal;
   font-size: 20px;
   padding: 0 25px;
@@ -187,15 +199,14 @@ button.active {
 
 .scores_list {
   list-style-type: none;
-  padding: 0 24px;
+  padding: 0 25px;
 }
 
 .scores_list li {
   display: flex;
   justify-content: space-between;
-  /* 양 끝으로 정렬 */
-  font-size: 1rem;
-  line-height: 1.8;
+  font-weight: bold;
+  line-height: 1.7;
   margin: 5px 0;
 }
 
@@ -218,6 +229,8 @@ button.active {
   cursor: pointer;
   margin: 0.2rem;
   padding: 0.2rem 0.5rem;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 5px;
 }
 
 .logout_btn:hover,
@@ -248,14 +261,15 @@ button.active {
 .exam_history_list {
   list-style-type: none;
   padding: 0px;
+  margin: 0;
 }
 
 .exam_history_ctn button {
   font-family: 'Black Han Sans', sans-serif;
   width: 250px;
   height: 41px;
-  padding: 10px 10px;
-  margin: 12px 0;
+  padding: 10px;
+  margin: 15px 0;
   font-size: 16px;
   border: 2px solid #FAFAFA;
   border-radius: 30px;
