@@ -1,10 +1,9 @@
 import os
 import requests
-import numpy as np
 from fastapi import FastAPI, HTTPException, Path, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.trustedhost import TrustedHostMiddleware
-from fastapi.responses import RedirectResponse, JSONResponse
+from fastapi.responses import RedirectResponse
 from sqlalchemy.orm import Session
 from urllib.parse import urlencode
 from dotenv import load_dotenv
@@ -87,9 +86,7 @@ def kakao_callback(code: str, db: Session = Depends(get_db)):
     kakao_id = user_info.get("id")
     kakao_account = user_info.get("kakao_account", {})
     email = kakao_account.get("email")
-    email = email.strip() if email else ""
     nickname = kakao_account.get("profile", {}).get("nickname")
-    nickname = nickname.strip() if nickname else ""
 
     try:
         user = get_or_create_user(db, kakao_id=kakao_id, email=email, nickname=nickname)
@@ -98,12 +95,12 @@ def kakao_callback(code: str, db: Session = Depends(get_db)):
         print(f"Error in get_or_create_user: {str(e)}")
         raise HTTPException(status_code=500, detail="Database error while processing user")
 
-    # if not user.email or user.email == "" or not user.nickname or user.nickname == "":
-    #     query_params = urlencode({
-    #         "needs_info": "true",
-    #         "kakao_id": kakao_id
-    #     })
-    #     return RedirectResponse(url=f"{LOGIN_REDIRECT_URI}?{query_params}", status_code=303, headers={"Access-Control-Allow-Origin": "*"})
+    if not user.email or not user.nickname:
+        query_params = urlencode({
+            "needs_info": "true",
+            "kakao_id": kakao_id
+        })
+        return RedirectResponse(url=f"{LOGIN_REDIRECT_URI}?{query_params}", status_code=303)
 
     # JWT 생성
     try:
@@ -119,36 +116,32 @@ def kakao_callback(code: str, db: Session = Depends(get_db)):
     })
 
     redirect_url = f"{LOGIN_REDIRECT_URI}?{query_params}"
-
-    return RedirectResponse(url=f"{redirect_url}", status_code=303,
-                     headers={"Access-Control-Allow-Origin": "*"})
+    return RedirectResponse(url=redirect_url, status_code=303)
 
 
-# @app.post("/auth/kakao/complete/{kakao_id}/{email}/{nickname}")
-# def kakao_complete(
-#     kakao_id: str = Path(..., description="Kakao"),
-#     email: str = Path(..., description="email address"),
-#     nickname: str = Path(..., description="name"),
-#     db: Session = Depends(get_db)
-# ):
-#     """사용자가 추가 정보를 입력한 후 DB에 저장하는 엔드포인트"""
-#
-#     # 유저 정보 업데이트
-#     user = update_user_info(db, kakao_id, email, nickname)
-#     if not user:
-#         raise HTTPException(status_code=400, detail="User not found or update failed")
-#
-#     # JWT 생성 후 로그인 처리
-#     jwt_token = create_jwt_token(user_id=user.id)
-#     query_params = urlencode({
-#         "jwt_token": jwt_token,
-#         "user_id": user.user_id,
-#     })
-#
-#     redirect_url = f"{LOGIN_REDIRECT_URI}?{query_params}"
-#
-#     RedirectResponse(url=f"{redirect_url}", status_code=303,
-#                      headers={"Access-Control-Allow-Origin": "*"})
+@app.post("/auth/kakao/complete/{kakao_id}/{email}/{nickname}")
+def kakao_complete(
+    kakao_id: str = Path(..., description="Kakao"),
+    email: str = Path(..., description="email address"),
+    nickname: str = Path(..., description="name"),
+    db: Session = Depends(get_db)
+):
+    """사용자가 추가 정보를 입력한 후 DB에 저장하는 엔드포인트"""
+
+    # 유저 정보 업데이트
+    user = update_user_info(db, kakao_id, email, nickname)
+    if not user:
+        raise HTTPException(status_code=400, detail="User not found or update failed")
+
+    # JWT 생성 후 로그인 처리
+    jwt_token = create_jwt_token(user_id=user.id)
+    query_params = urlencode({
+        "jwt_token": jwt_token,
+        "user_id": user.user_id,
+    })
+
+    return RedirectResponse(url=f"{LOGIN_REDIRECT_URI}?{query_params}", status_code=303)
+
 
 @app.get("/quiz/{quiz_type}/{user_id}")
 async def fetch_quiz_set(
@@ -370,13 +363,13 @@ async def create_quiz_report(
 
 @app.get("/my_page/plot/sunburst/{user_id}")
 async def my_page_plot(
-        user_id: str = Path(..., description="")
+        user_id: str = Path(..., description="User ID for fetching quiz results")
 ):
     """
     마이페이지에 출력할 plotly로 생성된 sunburst 플롯을 요청합니다.
     """
     import pandas as pd
-    import plotly.express as px
+    import plotly.graph_objects as go
 
     with Session(engine) as session_quiz_set_result:
         attempted_quiz_set_result = session_quiz_set_result.query(QuizSetResult).filter(
@@ -390,6 +383,8 @@ async def my_page_plot(
         }
         for quiz_set in attempted_quiz_set_result
     }
+
+    rows = []  # 모든 퀴즈셋 데이터를 저장할 리스트
 
     for result_id, quiz_set_result in quiz_set_result_dict.items():
         with Session(engine) as session_quiz_result:
@@ -410,7 +405,6 @@ async def my_page_plot(
         if not is_collection_exists(mongo_db, collection_name):
             raise Exception(f"Collection '{collection_name}' does not exist.")
 
-            # MongoDB에서 해당 set_id에 해당하는 퀴즈셋 조회
         collection = mongo_db[collection_name]
         quiz_set = collection.find_one({"quiz_set_id": quiz_set_result['quiz_set_id']}, {"_id": 0})
 
@@ -418,12 +412,9 @@ async def my_page_plot(
             raise HTTPException(status_code=404,
                                 detail=f"No quiz set found for set_id_{quiz_set_result['quiz_set_id']} in subject '{quiz_set_result['quiz_type']}'.")
 
-        combined_data = {}
         for quiz_id, result in quiz_result_dict.items():
-            # MongoDB에서 해당 quiz_id의 데이터를 찾기
             quiz_data = next((quiz for quiz in quiz_set["quiz"] if quiz["quiz_id"] == quiz_id), None)
             if quiz_data:
-                # Remove the unwanted fields (quiz_id, subject, topic, sub_topic)
                 quiz_content = quiz_data["quiz_content"]
                 quiz_content.pop("sub_topic", None)
                 quiz_content.pop("question_text", None)
@@ -432,56 +423,50 @@ async def my_page_plot(
                 quiz_content.pop("correct_option", None)
                 quiz_content.pop("description", None)
 
-                combined_data[quiz_id] = {
-                    "quiz": quiz_data,
-                    "is_correct": result["is_correct"]
-                }
+                rows.append({
+                    "quiz_id": quiz_id,
+                    "subject": quiz_content["subject"],
+                    "topic": quiz_content["topic"],
+                    "is_correct": 1 if result["is_correct"] else 0
+                })
             else:
-                combined_data[quiz_id] = {
-                    "quiz": None,  # MongoDB에 퀴즈 데이터가 없을 경우
-                    "is_correct": result["is_correct"]
-                }
+                rows.append({
+                    "quiz_id": quiz_id,
+                    "subject": "Unknown",
+                    "topic": "Unknown",
+                    "is_correct": 1 if result["is_correct"] else 0
+                })
 
-        # JSON 데이터를 DataFrame으로 변환
-        rows = []
-        for quiz_id, details in combined_data.items():
-            row = {
-                "quiz_id": quiz_id,
-                "subject": details["quiz"]["quiz_content"]["subject"],
-                "topic": details["quiz"]["quiz_content"]["topic"],
-                "is_correct": "정답" if details["is_correct"] else "오답"
-            }
-            rows.append(row)
+    if not rows:
+        raise HTTPException(status_code=404, detail="No quiz results found.")
 
-        df = pd.DataFrame(rows)
+    df = pd.DataFrame(rows)
 
-        # Sunburst 차트 생성
-        fig = px.sunburst(
-            df,
-            path=["subject", "topic", "is_correct"],  # 계층적 경로
-            values=None,  # 개수를 기준으로 크기 설정
-        )
+    # 정답률 계산
+    avg_score = df["is_correct"].mean()
 
-        fig.update_traces(
-            marker=dict(colors=[
-                "#005871",  # 과목(Subject) 계층 색상
-            ])
-        )
+    # Sunburst 차트 (오른쪽 차트만 출력, maxdepth=2 적용)
+    fig = go.Figure(go.Sunburst(
+        labels=df["subject"] + " - " + df["topic"],
+        parents=df["subject"],
+        values=df["is_correct"],
+        branchvalues='total',
+        marker=dict(
+            colors=df["is_correct"],
+            colorscale='RdBu',
+            cmid=avg_score
+        ),
+        hovertemplate='<b>%{label}</b><br>Accuracy: %{value:.2f}',
+        maxdepth=2
+    ))
 
-        fig.update_layout(
-            width=230,  # 차트 너비
-            height=230,  # 차트 높이
-            font=dict(
-                family="Black Han Sans, sans-serif",  # 원하는 폰트 (예: "Times New Roman", "Courier New" 등)
-                size=3,  # 기본 폰트 크기
-                color="white"  # 폰트 색상
-            )
-        )
+    fig.update_layout(
+        margin=dict(t=10, b=10, r=10, l=10),
+        width=400,
+        height=400
+    )
 
-        fig.write_html("sunburst_chart.html")  # HTML 파일로 저장
-        plot_json = fig.to_json()
-
-        return {"plot": plot_json}
+    return {"plot": fig.to_json()}
 
 
 @app.get("/my_page/mean_score/{user_id}")
