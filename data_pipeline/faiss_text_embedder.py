@@ -9,8 +9,8 @@ OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY')
 openai.api_key = OPENAI_API_KEY
 
 # 원본 및 저장 디렉토리 설정
-BASE_DIR = "quiz_texts/quiz_sum"  # 원본 텍스트 파일이 위치한 디렉토리
-OUTPUT_DIR = "quiz_texts/quiz_sum_preprocessed"  # 수정된 텍스트 저장 디렉토리
+BASE_DIR = "quiz_texts/2025_psy_summary"  # 원본 텍스트 파일이 위치한 디렉토리
+OUTPUT_DIR = "quiz_texts/2025_psy_summary/preprocessed"  # 수정된 텍스트 저장 디렉토리
 os.makedirs(OUTPUT_DIR, exist_ok=True)  # 디렉토리가 없으면 생성
 
 # FAISS index 생성
@@ -39,7 +39,7 @@ def refine_text_with_chatgpt(text):
     client = openai.OpenAI()  # 새로운 클라이언트 객체 생성
 
     response = client.chat.completions.create(  # 최신 방식
-        model="gpt-4",
+        model="gpt-4o",
         messages=[
             {"role": "system", "content": "다음 텍스트를 자연스럽게 수정해주세요."},
             {"role": "user", "content": text}
@@ -69,15 +69,15 @@ def process_and_store():
     for file in text_files:
         raw_text = read_file(file)
         refined_text = refine_text_with_chatgpt(raw_text)  # ChatGPT API로 수정
-        embedding = text_to_embedding(refined_text)  # 임베딩 변환
-
-        index.add(np.array([embedding], dtype=np.float32))  # FAISS 저장
+        # embedding = text_to_embedding(refined_text)  # 임베딩 변환
+        #
+        # index.add(np.array([embedding], dtype=np.float32))  # FAISS 저장
         saved_file_path = save_processed_text(file, refined_text)  # 수정된 텍스트 저장
         print(f"Processed and saved: {saved_file_path}")
 
-    # FAISS 인덱스 저장
-    faiss.write_index(index, "faiss_index.bin")
-    print("FAISS index saved as faiss_index.bin")
+    # # FAISS 인덱스 저장
+    # faiss.write_index(index, "faiss_index.bin")
+    # print("FAISS index saved as faiss_index.bin")
 
 
 if __name__ == "__main__":

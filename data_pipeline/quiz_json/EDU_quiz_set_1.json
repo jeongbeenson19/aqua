@@ -6,7 +6,7 @@
             "quiz_id": "EDU_1",
             "quiz_content": {
                 "subject": "스포츠교육학",
-                "topic": "스포츠 지도",
+                "topic": "지도방법론",
                 "sub_topic": "스포츠 관리 및 수업 진행",
                 "question_text": "<보기>에서 설명하는 박 코치의 ‘스포츠 지도 활동'에 해당하는 용어는?",
                 "example": [
@@ -26,8 +26,8 @@
             "quiz_id": "EDU_2",
             "quiz_content": {
                 "subject": "스포츠교육학",
-                "topic": "동료 평가",
-                "sub_topic": "평가 방법론",
+                "topic": "평가론",
+                "sub_topic": "동료 평가",
                 "question_text": "동료 평가(peer assessment)에 관한 설명으로 적절하지 않은 것은?",
                 "example": null,
                 "options": {
@@ -44,8 +44,8 @@
             "quiz_id": "EDU_3",
             "quiz_content": {
                 "subject": "스포츠교육학",
-                "topic": "교사 지식 유형",
-                "sub_topic": "내용 지식",
+                "topic": "교육자의 전문적 성장",
+                "sub_topic": "교사 지식 유형",
                 "question_text": "슐만(L. Shulman)의 '교사 지식 유형' 중 가르칠 교과목 내용에 관한 지식에 해당하는 것은?",
                 "example": null,
                 "options": {
@@ -62,8 +62,8 @@
             "quiz_id": "EDU_4",
             "quiz_content": {
                 "subject": "스포츠교육학",
-                "topic": "수업 모형",
-                "sub_topic": "협동학습 및 책임감 지도",
+                "topic": "프로그램론",
+                "sub_topic": "수업 모형",
                 "question_text": "글로버(D. Glover)와 앤더슨(L. Anderson)이 인성을 강조한 수업 모형 중 <보기>의 ㉠, ㉡에 해당하는 것을 바르게 제시한 것은?",
                 "example": [
                     "㉠ '서로를 위해 서로 함께 배우기’를 통해 팀원 간 긍정적 상호의존, 개인의 책임감 수준 증가, 인간관계 기술 및 팀 반성 등을 강조한 수업 ㉡ '통합, 전이, 권한 위임, 교사와 학생의 관계'를 통해 타인의 권리와 감정 존중, 자기 목표 설정 가능, 훌륭한 역할 본보기 되기 등을 강조한 수업"
@@ -82,7 +82,7 @@
             "quiz_id": "EDU_5",
             "quiz_content": {
                 "subject": "스포츠교육학",
-                "topic": "교사 행동",
+                "topic": "지도방법론",
                 "sub_topic": "교사 행동의 종류",
                 "question_text": "보기의 ㉠~㉢에 들어갈 교사 행동에 관한 용어가 바르게 제시된 것은?",
                 "example": "㉠은 안전한 학습 환경, 피드백 제공 • ㉡은 학습 지도 중에 소방 연습과 전달 방송 실시 • ㉢은 학생의 부상, 용변과 물 마시는 활동의 관리",

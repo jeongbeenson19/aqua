@@ -69,7 +69,7 @@ def detect_text(image_path, output_path):
 
 
 # PDF 슬라이싱 및 OCR 수행
-pdf_path = "quiz_pdf/quiz_sum.pdf"
+pdf_path = "quiz_pdf/2025_his_summary.pdf"
 doc_nm = str(pdf_path).split("/")[-1].split(".")[0]
 output_folder = f"quiz_image/{doc_nm}"
 
@@ -80,7 +80,7 @@ coordinates_r = (1550, 270, 3000, 4040)
 images = pdf_to_images(pdf_path, output_folder)
 
 for idx, image in enumerate(images[1:]):
-    detect_text(image, f"quiz_texts/{doc_nm}/crpd_image{idx + 1}.txt")
+    detect_text(image, f"quiz_texts/{doc_nm}/{doc_nm}_{idx + 1}.txt")
 
 # # 2. 특정 영역 잘라내기 (슬라이싱)
 # for idx, image in enumerate(images[1:]):
