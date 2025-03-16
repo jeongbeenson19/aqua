@@ -459,33 +459,32 @@ async def my_page_plot(
         if is_correct:
             subject_topic_dict[subject][topic]["correct"] += 1
 
-    # Sunburst 차트에 사용할 데이터 리스트
-    labels = []
-    parents = []
-    values = []
-    colors = []
+    labels = ["Total"]
+    parents = [""]
+    values = [df.shape[0]]  # 전체 문제 개수
+    colors = [df["is_correct"].mean()]  # 전체 평균 정답률
 
     for subject, topics in subject_topic_dict.items():
-        # 부모 노드의 데이터를 먼저 추가
         labels.append(subject)
-        parents.append('')
-        values.append(sum(result["total"] for result in topics.values()))  # 총 문제 개수
-        parent_correct = sum(result["correct"] for result in topics.values())  # 맞힌 문제 개수
-        parent_total = sum(result["total"] for result in topics.values())  # 전체 문제 개수
-
-        # 부모의 정답률을 올바르게 설정
-        parent_accuracy = parent_correct / parent_total if parent_total > 0 else 0
-        colors.append(parent_accuracy)  # 부모 노드 색상 = 전체 정답률
+        parents.append("Total")  # 과목(subject)의 부모는 "Total"
+        values.append(sum(topic["total"] for topic in topics.values()))
+        colors.append(sum(topic["correct"] for topic in topics.values()) / values[-1])
 
         for topic, result in topics.items():
             labels.append(topic)
-            parents.append(subject)
+            parents.append(subject)  # ⬅️ topic의 부모를 subject로 설정!
             values.append(result["total"])
-            colors.append(result["correct"] / result["total"] if result["total"] > 0 else 0.5)
+            colors.append(result["correct"] / result["total"] if result["total"] > 0 else 0)
 
     # 평균 점수
     avg_score = df["is_correct"].mean()
     # Sunburst 차트 생성
+
+    labels = list(labels)  # labels를 list로 변환
+    parents = list(parents)  # parents를 list로 변환
+    values = list(values)  # values를 list로 변환
+    colors = list(colors)  # colors를 list로 변환
+
     fig = go.Figure(go.Sunburst(
         labels=labels,
         parents=parents,
@@ -505,7 +504,6 @@ async def my_page_plot(
         width=400,
         height=400
     )
-
     return {"plot": fig.to_json()}
 
 
