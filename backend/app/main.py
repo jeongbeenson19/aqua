@@ -441,22 +441,62 @@ async def my_page_plot(
         raise HTTPException(status_code=404, detail="No quiz results found.")
 
     df = pd.DataFrame(rows)
+    # Sunburst 차트를 위한 데이터 처리
+    subject_topic_dict = {}  # 주제별 데이터를 저장할 딕셔너리
 
-    # 정답률 계산
+    for _, row in df.iterrows():
+        subject = row['subject']
+        topic = row['topic'].strip()  # 공백 제거
+        is_correct = row['is_correct']
+
+        if subject not in subject_topic_dict:
+            subject_topic_dict[subject] = {}
+
+        if topic not in subject_topic_dict[subject]:
+            subject_topic_dict[subject][topic] = {"correct": 0, "total": 0}
+
+        subject_topic_dict[subject][topic]["total"] += 1
+        if is_correct:
+            subject_topic_dict[subject][topic]["correct"] += 1
+
+    # Sunburst 차트에 사용할 데이터 리스트
+    labels = []
+    parents = []
+    values = []
+    colors = []
+
+    for subject, topics in subject_topic_dict.items():
+        # 부모 노드의 데이터를 먼저 추가
+        labels.append(subject)
+        parents.append('')
+        values.append(sum(result["total"] for result in topics.values()))  # 총 문제 개수
+        parent_correct = sum(result["correct"] for result in topics.values())  # 맞힌 문제 개수
+        parent_total = sum(result["total"] for result in topics.values())  # 전체 문제 개수
+
+        # 부모의 정답률을 올바르게 설정
+        parent_accuracy = parent_correct / parent_total if parent_total > 0 else 0
+        colors.append(parent_accuracy)  # 부모 노드 색상 = 전체 정답률
+
+        for topic, result in topics.items():
+            labels.append(topic)
+            parents.append(subject)
+            values.append(result["total"])
+            colors.append(result["correct"] / result["total"] if result["total"] > 0 else 0.5)
+
+    # 평균 점수
     avg_score = df["is_correct"].mean()
-
-    # Sunburst 차트 (오른쪽 차트만 출력, maxdepth=2 적용)
+    # Sunburst 차트 생성
     fig = go.Figure(go.Sunburst(
-        labels=df["subject"] + " - " + df["topic"],
-        parents=df["subject"],
-        values=df["is_correct"],
+        labels=labels,
+        parents=parents,
+        values=values,
         branchvalues='total',
         marker=dict(
-            colors=df["is_correct"],
+            colors=colors,
             colorscale='RdBu',
             cmid=avg_score
         ),
-        hovertemplate='<b>%{label}</b><br>Accuracy: %{value:.2f}',
+        hovertemplate='<b>%{label}</b><br>푼 문제 수: %{value}<br>정답률: %{color:.2f}',
         maxdepth=2
     ))
 
