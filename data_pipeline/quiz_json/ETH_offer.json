@@ -1,0 +1,144 @@
+{
+    "quiz": [
+        {
+            "quiz_content": {
+                "subject": "스포츠윤리",
+                "topic": "스포츠와 윤리",
+                "question_text": "레스트의 도덕성 4구성 요소"
+            }
+        },
+        {
+            "quiz_content": {
+                "subject": "스포츠윤리",
+                "topic": "스포츠와 윤리",
+                "question_text": "목적론적 윤리와 의무론적 윤리"
+            }
+        },
+        {
+            "quiz_content": {
+                "subject": "스포츠윤리",
+                "topic": "스포츠와 윤리",
+                "question_text": "칸트의 의무론적 윤리"
+            }
+        },
+        {
+            "quiz_content": {
+                "subject": "스포츠윤리",
+                "topic": "스포츠와 윤리",
+                "question_text": "동양의 사상가와 윤리"
+            }
+        },
+        {
+            "quiz_content": {
+                "subject": "스포츠윤리",
+                "topic": "스포츠와 윤리",
+                "question_text": "스포츠윤리의 독자성"
+            }
+        },
+        {
+            "quiz_content": {
+                "subject": "스포츠윤리",
+                "topic": "스포츠와 윤리",
+                "question_text": "덕론적 윤리의 특징"
+            }
+        },
+        {
+            "quiz_content": {
+                "subject": "스포츠윤리",
+                "topic": "스포츠와 윤리",
+                "question_text": "종교사상에서의 윤리"
+            }
+        },
+        {
+            "quiz_content": {
+                "subject": "스포츠윤리",
+                "topic": "스포츠와 윤리",
+                "question_text": "스포츠 윤리의 목적과 필요성"
+            }
+        },
+        {
+            "quiz_content": {
+                "subject": "스포츠윤리",
+                "topic": "스포츠와 윤리",
+                "question_text": "사실 판단과 가치 판단"
+            }
+        },
+        {
+            "quiz_content": {
+                "subject": "스포츠윤리",
+                "topic": "경쟁과 페어플레이",
+                "question_text": "스포츠 윤리와 관련된 스포츠 규칙의 구분"
+            }
+        },
+        {
+            "quiz_content": {
+                "subject": "스포츠윤리",
+                "topic": "경쟁과 페어플레이",
+                "question_text": "아곤과 아레테"
+            }
+        },
+        {
+            "quiz_content": {
+                "subject": "스포츠윤리",
+                "topic": "경쟁과 페어플레이",
+                "question_text": "스포츠 맨십"
+            }
+        },
+        {
+            "quiz_content": {
+                "subject": "스포츠윤리",
+                "topic": "스포츠와 불평등",
+                "question_text": "성차별의 원인"
+            }
+        },
+        {
+            "quiz_content": {
+                "subject": "스포츠윤리",
+                "topic": "스포츠와 불평등",
+                "question_text": "아파르트헤이트"
+            }
+        },
+        {
+            "quiz_content": {
+                "subject": "스포츠윤리",
+                "topic": "환경과 동물 윤리",
+                "question_text": "반종 차별주의"
+            }
+        },
+        {
+            "quiz_content": {
+                "subject": "스포츠윤리",
+                "topic": "환경과 동물 윤리",
+                "question_text": "생태 중심주의와 알도 레오폴드"
+            }
+        },
+        {
+            "quiz_content": {
+                "subject": "스포츠윤리",
+                "topic": "스포츠와 폭력",
+                "question_text": "선수 폭력이 근절되지 못하는 이유"
+            }
+        },
+        {
+            "quiz_content": {
+                "subject": "스포츠윤리",
+                "topic": "경기력 향상과 공정성",
+                "question_text": "브레인 도핑과 약물 도핑"
+            }
+        },
+        {
+            "quiz_content": {
+                "subject": "스포츠윤리",
+                "topic": "스포츠와 인권",
+                "question_text": "최저 학력 제도"
+            }
+        },
+        {
+            "quiz_content": {
+                "subject": "스포츠윤리",
+                "topic": "스포츠 조직과 윤리",
+                "question_text": "정치가 스포츠에 개입하는 이유"
+            }
+        }
+    ]
+}
