@@ -21,7 +21,7 @@
             }
         },
         {
-            "quiz_id": "PSY_41",
+            "quiz_id": "PSY_27",
             "quiz_content": {
                 "subject": "스포츠심리학",
                 "topic": "스포츠 심리 상담",
@@ -57,7 +57,7 @@
             }
         },
         {
-            "quiz_id": "PSY_35",
+            "quiz_id": "PSY_25",
             "quiz_content": {
                 "subject": "스포츠심리학",
                 "topic": "운동 발달의 이해",
@@ -327,7 +327,7 @@
             }
         },
         {
-            "quiz_id": "PSY_45",
+            "quiz_id": "PSY_33",
             "quiz_content": {
                 "subject": "스포츠심리학",
                 "topic": "스포츠 수행의 심리적 요인",
@@ -342,24 +342,6 @@
                 },
                 "correct_option": 2,
                 "description": "모건의 정신 건강 모형에서는 우수한 선수는 활력이 평균보다 높으며, 긴장, 우울, 불안, 피로, 혼동 등의 부정적 요인은 평균보다 낮은 프로파일을 보인다."
-            }
-        },
-        {
-            "quiz_id": "DEV_01",
-            "quiz_content": {
-                "subject": "운동 발달",
-                "topic": "운동 발달의 원리 및 특징",
-                "sub_topic": "운동 발달의 원리",
-                "question_text": "게셀(A. Gesell)과 에임스(I. Ames)가 제시한 운동 발달의 원리 중 '머리에서 발 방향으로 발달하는 원리'는 무엇이라고 불리나요?",
-                "example": null,
-                "options": {
-                    "1": "머리-꼬리 원리",
-                    "2": "중앙-말초 원리",
-                    "3": "양측-동측-교차 원리",
-                    "4": "기능적 분화 원리"
-                },
-                "correct_option": 1,
-                "description": "운동 발달은 일정한 순서와 체계를 따르며, '머리-꼬리 원리'는 머리에서 발 방향으로 발달하는 것을 의미합니다."
             }
         },
         {

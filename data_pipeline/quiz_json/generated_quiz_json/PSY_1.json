@@ -3,7 +3,7 @@
     "quiz_set_id": "quiz_set_1",
     "quiz": [
         {
-            "quiz_id": "PSY_21",
+            "quiz_id": "PSY_2",
             "quiz_content": {
                 "subject": "스포츠심리학",
                 "topic": "스포츠 심리 상담",
@@ -21,7 +21,7 @@
             }
         },
         {
-            "quiz_id": "PSY_3",
+            "quiz_id": "PSY_5",
             "quiz_content": {
                 "subject": "스포츠심리학",
                 "topic": "인간 운동 행동의 이해",
@@ -326,7 +326,7 @@
             }
         },
         {
-            "quiz_id": "MOTOR_CONTROL_1",
+            "quiz_id": "PSY_3",
             "quiz_content": {
                 "subject": "운동 제어",
                 "topic": "운동 제어 이론",
@@ -341,24 +341,6 @@
                 },
                 "correct_option": 2,
                 "description": "폐쇄 회로 이론은 피드백을 통해 동작의 오류를 수정하고 조절하는 과정이 포함된 이론입니다."
-            }
-        },
-        {
-            "quiz_id": "DEV_1",
-            "quiz_content": {
-                "subject": "운동 발달학",
-                "topic": "운동 발달의 원리와 특징",
-                "sub_topic": "운동 발달의 기본 원리",
-                "question_text": "다음 중 운동 발달의 원리에 해당하지 않는 것은 무엇입니까?",
-                "example": null,
-                "options": {
-                    "1": "운동 발달은 일정한 순서와 체계를 따른다.",
-                    "2": "운동 발달은 무작위적이며 비순차적이다.",
-                    "3": "운동 발달은 머리에서 발 방향으로 발달한다.",
-                    "4": "운동 발달은 중앙에서 말초로 발달한다."
-                },
-                "correct_option": 2,
-                "description": "운동 발달은 일정한 순서와 체계를 따르며, 머리에서 발 방향으로, 중앙에서 말초로 발달하는 원리를 가지고 있습니다."
             }
         },
         {

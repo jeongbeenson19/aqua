@@ -72,13 +72,6 @@
         {
             "quiz_content": {
                 "subject": "스포츠심리학",
-                "topic": "인간 운동 행동의 이해",
-                "sub_topic": "210"
-            }
-        },
-        {
-            "quiz_content": {
-                "subject": "스포츠심리학",
                 "topic": "스포츠 수행의 심리적 요인",
                 "sub_topic": "31"
             }
