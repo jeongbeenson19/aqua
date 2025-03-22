@@ -189,7 +189,7 @@ async def fetch_quiz_set(
 
     validate_quiz_length(quiz_set)
 
-    return {"quiz_type": quiz_type, "set_id": set_id, "quiz_set": quiz_set}
+    return {"quiz_type": quiz_type, "set_id": str(set_id), "quiz_set": quiz_set}
 
 
 @app.post("/quiz/submit/{user_id}")
