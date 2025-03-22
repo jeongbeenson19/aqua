@@ -95,13 +95,6 @@ def kakao_callback(code: str, db: Session = Depends(get_db)):
         print(f"Error in get_or_create_user: {str(e)}")
         raise HTTPException(status_code=500, detail="Database error while processing user")
 
-    if not user.email or not user.nickname:
-        query_params = urlencode({
-            "needs_info": "true",
-            "kakao_id": kakao_id
-        })
-        return RedirectResponse(url=f"{LOGIN_REDIRECT_URI}?{query_params}", status_code=303)
-
     # JWT 생성
     try:
         jwt_token = create_jwt_token(user_id=user.id)
