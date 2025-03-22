@@ -75,24 +75,6 @@
             }
         },
         {
-            "quiz_id": "HIS_45",
-            "quiz_content": {
-                "subject": "한국체육사",
-                "topic": "일제 강점기의 체육",
-                "sub_topic": "YMCA의 체육 활동과 그 영향",
-                "question_text": "YMCA에 의해 한국에 도입된 서양 스포츠가 아닌 것은 무엇인가?",
-                "example": null,
-                "options": {
-                    "1": "야구",
-                    "2": "농구",
-                    "3": "축구",
-                    "4": "배구"
-                },
-                "correct_option": 3,
-                "description": "YMCA는 일제 강점기 동안 한국에 야구, 농구, 배구 등의 서양 스포츠를 도입했으며, 축구는 이에 포함되지 않습니다."
-            }
-        },
-        {
             "quiz_id": "HIS_26",
             "quiz_content": {
                 "subject": "한국교육사",
