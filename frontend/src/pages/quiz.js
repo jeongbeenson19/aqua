@@ -175,7 +175,7 @@ function Quiz() {
     </div>;
   }
 
-  if (!quizData.quiz || !quizData.quiz_set_id || !quizData.type) {
+  if (!quizData.quiz || !quizData.quiz_set_id || !quizData.quiz_type) {
     return <div className={styles.waiting}>
       <h2>존재하지 않거나 잘못된 데이터입니다.<br />
         다시 시도해주세요.</h2>
