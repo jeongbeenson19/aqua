@@ -68,9 +68,16 @@ async def generate_quiz_from_mongodb(subject, new_quiz_set_number, new_quiz_id):
                 "temperature": 0.7,
                 "response_format": {'type': 'json_object'}
             }, headers={"Authorization": f"Bearer {client.api_key}"}) as response:
-                response_data = await response.json()
-                new_quiz = json.loads(response_data["choices"][0]["message"]["content"])
-                new_quiz_set["quiz"].append(new_quiz)
+                try:
+                    response_data = await response.json()
+                    new_quiz = json.loads(response_data["choices"][0]["message"]["content"])
+                    new_quiz_set["quiz"].append(new_quiz)
+
+                except KeyError as e:
+                    print(f"❌ KeyError 발생: {e}")
+                    print("🔍 응답 데이터 전체 출력:")
+                    print(json.dumps(response_data, indent=4, ensure_ascii=False))  # JSON을 보기 좋게 출력
+                    raise  # 예외 다시 발생 (디버깅용)
 
     # 비동기적으로 퀴즈 생성
     tasks = []
@@ -90,4 +97,4 @@ async def generate_quiz_from_mongodb(subject, new_quiz_set_number, new_quiz_id):
 
 
 # 비동기 함수 실행
-asyncio.run(generate_quiz_from_mongodb(subject="KIN", new_quiz_set_number=1, new_quiz_id=0))
+asyncio.run(generate_quiz_from_mongodb(subject="SCT", new_quiz_set_number=2, new_quiz_id=20))
