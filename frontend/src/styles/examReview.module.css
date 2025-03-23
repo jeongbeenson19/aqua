@@ -1,5 +1,6 @@
 .waiting h3 {
   font-family: 'Black Han Sans', sans-serif;
+  font-weight: normal;
 }
 
 .header {
@@ -71,7 +72,7 @@
 }
 
 .exam_review_score {
-  font-size: 20px;
+  font-size: 23px;
   color: #3C434F;
   margin: 5px 0 0 0;
   font-family: 'iLoveYouSon', sans-serif;
@@ -93,6 +94,7 @@
 
 .question {
   text-align: left;
+  font-weight: bold;
 }
 
 .example_list {
@@ -117,6 +119,13 @@
 
 .correct {
   color: red;
+}
+
+.user_answer,
+.correct_answer {
+  text-align: left;
+  margin: 5px 0;
+  font-weight: bold;
 }
 
 .description {

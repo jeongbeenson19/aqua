@@ -35,7 +35,6 @@ function Quiz() {
 
         if (response.status === 200) {
           setQuizData(response.data.quiz_set);
-          console.log(response.data)
 
         } else {
           throw new Error("퀴즈 데이터를 불러오는 데 실패했습니다.");
@@ -142,8 +141,6 @@ function Quiz() {
         quiz_results: quizResults,
       };
 
-      console.log("request : ", request);
-
       alert("점수 : " + request.score);
 
       const API_URL = `${backendURL}/quiz/submit/${userId}`;
@@ -189,7 +186,7 @@ function Quiz() {
         <h2 className={styles.timer}>{formatTime(seconds)}</h2>
         <h1>{quizTitle}</h1>
         <img
-          src="../images/issue.png"
+          src="/images/issue.png"
           alt="문제 오류 신고"
           onClick={() => setReportModalOpen(true)}
         />
