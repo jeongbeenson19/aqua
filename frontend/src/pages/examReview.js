@@ -36,6 +36,7 @@ function ExamReview() {
 
         if (response.status === 200) {
           setQuizData(response.data);
+          console.log(result_id, quiz_type, quiz_set_id);
         } else {
           throw new Error("퀴즈 데이터를 불러오는 데 실패했습니다.");
         }
@@ -43,14 +44,16 @@ function ExamReview() {
         console.error("오류 발생:", error.message);
       }
     };
+
     fetchData();
-  }, [result_id, quiz_type, quiz_set_id]);
+  }, []);
 
   // 점수
   useEffect(() => {
     if (quizData) {
       const correctAnswers = Object.values(quizData).filter(quizItem => quizItem.is_correct).length;
       setCorrectCount(correctAnswers);
+      console.log(quizData)
     } else {
       setCorrectCount(0);
     }
@@ -100,7 +103,8 @@ function ExamReview() {
                     </li>
                   ))}
                 </ul>
-                <p className={styles.question}>정답 : {correct_option}</p>
+                <p className={styles.user_answer}>유저 정답 : {correct_option}</p>
+                <p className={styles.correct_answer}>정답 : {correct_option}</p>
                 <p className={styles.description}>해설 : {description}</p>
               </div>
             );

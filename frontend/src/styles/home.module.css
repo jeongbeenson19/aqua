@@ -54,22 +54,16 @@ code {
   letter-spacing: 0.1em;
   font-weight: bold;
   font-size: 25px;
-}
-
-button {
-  margin: 0 0.5rem;
-  padding: 0.3rem 0.5rem;
-  font-size: 16px;
+  margin: 0 0.3rem;
+  padding: 0.3rem;
+  width: 105px;
   border: none;
   background-color: #FAFAFA;
   color: #1249B1;
   cursor: pointer;
-  font-family: 'NanumBarunGothic', sans-serif;
-  font-weight: normal;
-  width: 100px;
 }
 
-button.active {
+.button.active {
   border-bottom: 1.5px solid;
 }
 
