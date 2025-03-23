@@ -5,6 +5,7 @@ import axios from 'axios';
 import styles from '../styles/home.module.css';
 import Plot from "react-plotly.js";
 import '../styles/plot.css';
+import { setItemWithExpiry } from '../pages/auth';
 
 const backendURL = process.env.REACT_APP_BACKEND_URL;
 
@@ -33,6 +34,15 @@ function Home() {
   // 탭 버튼 클릭 시 화면 전환
   const handleTabChange = (tabName) => {
     setActiveTab(tabName);
+
+    // 탭 클릭 시 세션 타이머 연장
+    const storedJwtToken = localStorage.getItem('jwt_token');
+    const storedUserId = localStorage.getItem('user_id');
+
+    if (storedJwtToken && storedUserId) {
+      setItemWithExpiry('jwt_token', storedJwtToken, expiryTime * 60 * 1000);
+      setItemWithExpiry('user_id', storedUserId, expiryTime * 60 * 1000);
+    }
   };
 
 
@@ -179,7 +189,6 @@ function Home() {
         >
           마이페이지
         </button>
-
       </nav>
 
       {/* 탭에 따라 화면 변경 */}
