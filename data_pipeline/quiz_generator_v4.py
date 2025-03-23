@@ -62,7 +62,8 @@ async def generate_quiz_from_mongodb(subject, new_quiz_set_number, new_quiz_id):
                 "model": "gpt-4o",
                 "messages": [
                     {"role": "system",
-                     "content": "You are a member of the question-setting committee for a written exam that selects outstanding coaches. Generate the quiz based provieded knowledge_text. Prioritize the reliability and validity of the questions. Generate the questions in JSON format."},
+                     "content": "You are a member of the question-setting committee for a written exam that selects outstanding coaches. Generate the quiz based on the provided knowledge_text. Ensure that the questions prioritize the reliability and validity of the content. Please generate the questions in JSON format, using a formal tone."
+                     },
                     {"role": "user", "content": prompt}
                 ],
                 "temperature": 0.7,
@@ -97,4 +98,4 @@ async def generate_quiz_from_mongodb(subject, new_quiz_set_number, new_quiz_id):
 
 
 # 비동기 함수 실행
-asyncio.run(generate_quiz_from_mongodb(subject="SCT", new_quiz_set_number=2, new_quiz_id=20))
+asyncio.run(generate_quiz_from_mongodb(subject="HIS", new_quiz_set_number=3, new_quiz_id=40))

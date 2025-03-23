@@ -11,14 +11,14 @@
             "quiz_content": {
                 "subject": "한국체육사",
                 "topic": "체육사의 의미",
-                "sub_topic": "18"
+                "sub_topic": "17"
             }
         },
         {
             "quiz_content": {
                 "subject": "한국체육사",
                 "topic": "선사·삼국시대의 체육",
-                "sub_topic": "22"
+                "sub_topic": "23"
             }
         },
         {
@@ -32,7 +32,14 @@
             "quiz_content": {
                 "subject": "한국체육사",
                 "topic": "선사·삼국시대의 체육",
-                "sub_topic": "23"
+                "sub_topic": "22"
+            }
+        },
+        {
+            "quiz_content": {
+                "subject": "한국체육사",
+                "topic": "고려시대의 체육",
+                "sub_topic": "31"
             }
         },
         {
@@ -45,8 +52,15 @@
         {
             "quiz_content": {
                 "subject": "한국체육사",
-                "topic": "고려시대의 체육",
-                "sub_topic": "35"
+                "topic": "조선시대의 체육",
+                "sub_topic": "47"
+            }
+        },
+        {
+            "quiz_content": {
+                "subject": "한국체육사",
+                "topic": "조선시대의 체육",
+                "sub_topic": "43"
             }
         },
         {
@@ -59,43 +73,29 @@
         {
             "quiz_content": {
                 "subject": "한국체육사",
-                "topic": "조선시대의 체육",
-                "sub_topic": "45"
-            }
-        },
-        {
-            "quiz_content": {
-                "subject": "한국체육사",
-                "topic": "조선시대의 체육",
-                "sub_topic": "42"
+                "topic": "개화기의 체육",
+                "sub_topic": "55"
             }
         },
         {
             "quiz_content": {
                 "subject": "한국체육사",
                 "topic": "개화기의 체육",
-                "sub_topic": "52"
-            }
-        },
-        {
-            "quiz_content": {
-                "subject": "한국체육사",
-                "topic": "개화기의 체육",
-                "sub_topic": "56"
+                "sub_topic": "57"
             }
         },
         {
             "quiz_content": {
                 "subject": "한국체육사",
                 "topic": "일제 강점기의 체육",
-                "sub_topic": "64"
+                "sub_topic": "61"
             }
         },
         {
             "quiz_content": {
                 "subject": "한국체육사",
                 "topic": "일제 강점기의 체육",
-                "sub_topic": "66"
+                "sub_topic": "67"
             }
         },
         {
@@ -110,13 +110,6 @@
                 "subject": "한국체육사",
                 "topic": "일제 강점기의 체육",
                 "sub_topic": "65"
-            }
-        },
-                {
-            "quiz_content": {
-                "subject": "한국체육사",
-                "topic": "일제 강점기의 체육",
-                "sub_topic": "68"
             }
         },
         {
