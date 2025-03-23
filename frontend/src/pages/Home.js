@@ -162,19 +162,19 @@ function Home() {
       {/* 버튼 네비게이션 */}
       <nav className={styles.tab_btns}>
         <button
-          className={`${styles.button} ${activeTab === "오답노트" ? styles.active : ""}`}
+          className={`${activeTab === "오답노트" ? styles.active : ""}`}
           onClick={() => handleTabChange("오답노트")}
         >
           오답노트
         </button>
         <button
-          className={`${styles.button} ${activeTab === "과목" ? styles.active : ""}`}
+          className={`${activeTab === "과목" ? styles.active : ""}`}
           onClick={() => handleTabChange("과목")}
         >
           과목
         </button>
         <button
-          className={`${styles.button} ${activeTab === "마이페이지" ? styles.active : ""}`}
+          className={`${activeTab === "마이페이지" ? styles.active : ""}`}
           onClick={() => handleTabChange("마이페이지")}
         >
           마이페이지

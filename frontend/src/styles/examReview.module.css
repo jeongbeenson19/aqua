@@ -119,6 +119,12 @@
   color: red;
 }
 
+.user-answer,
+.correct_answer {
+  text-align: left;
+  margin: 5px 0;
+}
+
 .description {
   text-align: left;
 }
