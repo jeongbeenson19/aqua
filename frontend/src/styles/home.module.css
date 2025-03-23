@@ -63,7 +63,7 @@ code {
   cursor: pointer;
 }
 
-.button.active {
+.tab_btns button.active {
   border-bottom: 1.5px solid;
 }
 
