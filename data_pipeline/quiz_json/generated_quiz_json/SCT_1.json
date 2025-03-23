@@ -42,7 +42,7 @@
             "quiz_id": "SCT_20",
             "quiz_content": {
                 "subject": "스포츠사회학",
-                "topic": "스포츠 세계화",
+                "topic": "미래 사회의 스포츠",
                 "sub_topic": "스포츠 세계화의 의미와 영향",
                 "question_text": "스포츠 세계화로 인해 전 세계적으로 스포츠 문화가 확산되고 있는 현상을 설명하는 용어는 무엇입니까?",
                 "example": null,
@@ -330,7 +330,7 @@
             "quiz_id": "SCT_6",
             "quiz_content": {
                 "subject": "스포츠사회학",
-                "topic": "프로 스포츠 제도",
+                "topic": "스포츠와 경제",
                 "sub_topic": "프로 스포츠의 다양한 제도",
                 "question_text": "다음 중 프로 스포츠에서 '선수대리인'의 역할에 대한 설명으로 옳은 것은 무엇입니까?",
                 "example": null,
@@ -348,7 +348,7 @@
             "quiz_id": "SCT_12",
             "quiz_content": {
                 "subject": "스포츠사회학",
-                "topic": "스포츠와 사회 이동",
+                "topic": "스포츠와 사회 계급/계층",
                 "sub_topic": "사회 이동의 유형",
                 "question_text": "기든스(Giddens)에 따르면 사회 이동의 유형은 이동 방향, 시간적 거리, 그리고 사회 이동의 주체에 따라 구분됩니다. 다음 중 수평 이동에 대한 설명으로 올바른 것은 무엇입니까?",
                 "example": null,

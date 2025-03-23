@@ -3,10 +3,10 @@
     "quiz_set_id": "quiz_set_1",
     "quiz": [
         {
-            "quiz_id": "PHIL_1",
+            "quiz_id": "ETH_9",
             "quiz_content": {
-                "subject": "동양 사상과 윤리",
-                "topic": "동양 사상가와 윤리",
+                "subject": "스포츠윤리",
+                "topic": "스포츠와 윤리",
                 "sub_topic": "동양 사상과 본성",
                 "question_text": "다음 중 '인간의 본성은 악하다'고 주장한 사상가는 누구인가?",
                 "example": null,
@@ -24,7 +24,7 @@
             "quiz_id": "ETH_1",
             "quiz_content": {
                 "subject": "스포츠윤리",
-                "topic": "도덕과 윤리의 이해",
+                "topic": "스포츠와 윤리",
                 "sub_topic": "도덕적 구성 요소",
                 "question_text": "다음 중 레스트(J. Rest)의 도덕성 4구성 요소에 해당하지 않는 것은 무엇인가?",
                 "example": null,
@@ -57,10 +57,10 @@
             }
         },
         {
-            "quiz_id": "PE_21",
+            "quiz_id": "ETH_19",
             "quiz_content": {
-                "subject": "학교 체육",
-                "topic": "인성 교육",
+                "subject": "스포츠윤리",
+                "topic": "스포츠와 인권",
                 "sub_topic": "인성 교육적 가치",
                 "question_text": "학교 체육을 통한 인성 교육의 목적은 무엇인가요?",
                 "example": null,
@@ -78,7 +78,7 @@
             "quiz_id": "ETH_5",
             "quiz_content": {
                 "subject": "스포츠윤리",
-                "topic": "스포츠와 가치 충돌",
+                "topic": "스포츠와 윤리",
                 "sub_topic": "가치 판단과 윤리적 충돌",
                 "question_text": "스포츠 상황에서 도덕적 의사결정 시 일시적인 가치보다 우선시 되어야 하는 것은 무엇인가?",
                 "example": null,
@@ -150,7 +150,7 @@
             "quiz_id": "ETH_11",
             "quiz_content": {
                 "subject": "스포츠윤리",
-                "topic": "놀이의 도덕",
+                "topic": "경쟁과 페어플레이",
                 "sub_topic": "규칙 준수와 게임 존중",
                 "question_text": "놀이에서 규칙을 준수하는 것이 중요한 이유는 무엇인가요?",
                 "example": null,
@@ -186,7 +186,7 @@
             "quiz_id": "ETH_8",
             "quiz_content": {
                 "subject": "스포츠윤리",
-                "topic": "윤리적 이론과 스포츠",
+                "topic": "스포츠와 윤리",
                 "sub_topic": "목적론적 윤리와 의무론적 윤리 비교",
                 "question_text": "다음 중 의무론적 윤리의 특징이 아닌 것은 무엇입니까?",
                 "example": null,
@@ -239,8 +239,8 @@
         {
             "quiz_id": "ETH_4",
             "quiz_content": {
-                "subject": "윤리학",
-                "topic": "덕론적 윤리",
+                "subject": "스포츠윤리",
+                "topic": "스포츠와 윤리",
                 "sub_topic": "덕론적 윤리의 특징과 장단점",
                 "question_text": "다음 중 덕론적 윤리의 장점으로 올바르게 설명된 것은 무엇인가?",
                 "example": null,
@@ -258,7 +258,7 @@
             "quiz_id": "ETH_14",
             "quiz_content": {
                 "subject": "스포츠윤리",
-                "topic": "스포츠와 다문화 사회",
+                "topic": "스포츠와 불평등",
                 "sub_topic": "다문화 사회에서의 스포츠 정책",
                 "question_text": "다문화 사회에서 스포츠 정책의 중요성을 강조하는 이유 중 올바르지 않은 것은 무엇인가요?",
                 "example": null,
@@ -276,7 +276,7 @@
             "quiz_id": "ETH_16",
             "quiz_content": {
                 "subject": "스포츠윤리",
-                "topic": "지속 가능한 스포츠 발달",
+                "topic": "환경과 동물 윤리",
                 "sub_topic": "환경 보호 및 윤리적 건설",
                 "question_text": "지속 가능한 스포츠 발달을 위해 어떤 윤리적 전제가 필요한가요?",
                 "example": null,
@@ -327,7 +327,7 @@
             }
         },
         {
-            "quiz_id": "ETH_23",
+            "quiz_id": "ETH_17",
             "quiz_content": {
                 "subject": "스포츠윤리",
                 "topic": "스포츠와 폭력",
@@ -348,7 +348,7 @@
             "quiz_id": "ETH_18",
             "quiz_content": {
                 "subject": "스포츠윤리",
-                "topic": "기술과 윤리",
+                "topic": "경기력 향상과 공정성",
                 "sub_topic": "첨단 기술의 도입과 그 영향",
                 "question_text": "스포츠에서 첨단 기술의 도입이 경기의 공정성에 미치는 영향에 대한 설명 중 가장 적절한 것은 무엇입니까?",
                 "example": null,

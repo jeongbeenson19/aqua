@@ -24,7 +24,7 @@
             "quiz_id": "HIS_1",
             "quiz_content": {
                 "subject": "한국체육사",
-                "topic": "체육사의 연구 방법",
+                "topic": "체육사의 의미",
                 "sub_topic": "연구 방법의 단계",
                 "question_text": "체육사의 연구 방법에서 자료 수집 및 분류, 비판 단계의 주요 활동은 무엇인가?",
                 "example": null,
@@ -96,7 +96,7 @@
             "quiz_id": "HIS_17",
             "quiz_content": {
                 "subject": "한국체육사",
-                "topic": "일제 강점기의 체육",
+                "topic": "광복 이후의 체육",
                 "sub_topic": "주요 체육인 및 체육 시설",
                 "question_text": "일제 강점기 시기의 주요 체육인 중 1936년 베를린 올림픽에서 마라톤 금메달을 획득한 인물은 누구입니까?",
                 "example": null,
@@ -114,7 +114,7 @@
             "quiz_id": "HIS_5",
             "quiz_content": {
                 "subject": "한국체육사",
-                "topic": "삼국 시대의 사회와 교육",
+                "topic": "선사·삼국시대의 체육",
                 "sub_topic": "삼국 시대의 교육 기관",
                 "question_text": "다음 중 삼국 시대의 교육 기관에 대한 설명으로 옳지 않은 것은?",
                 "example": null,
@@ -132,7 +132,7 @@
             "quiz_id": "HIS_4",
             "quiz_content": {
                 "subject": "한국체육사",
-                "topic": "삼국시대의 체육",
+                "topic": "선사·삼국시대의 체육",
                 "sub_topic": "삼국시대의 무예",
                 "question_text": "다음 중 삼국시대에 활 쏘기를 가르치는 교육 기관으로 알려진 곳은 어디인가?",
                 "example": null,
@@ -167,8 +167,8 @@
         {
             "quiz_id": "HIS_6",
             "quiz_content": {
-                "subject": "한국 교육사",
-                "topic": "고려시대의 교육제도",
+                "subject": "한국체육사",
+                "topic": "고려시대의 체육",
                 "sub_topic": "7재와 교육기관",
                 "question_text": "고려 시대 국자감에 설치된 7재 중에서 무학을 가르친 강좌의 이름은 무엇인가?",
                 "example": null,
@@ -240,7 +240,7 @@
             "quiz_id": "HIS_2",
             "quiz_content": {
                 "subject": "한국체육사",
-                "topic": "체육사의 시대 구분",
+                "topic": "체육사의 의미",
                 "sub_topic": "제2차 세계 대전 기간의 체육",
                 "question_text": "다음 중 '암흑기'로 불리는 한국 체육사의 시대는 어느 기간을 의미하는가?",
                 "example": null,
@@ -348,7 +348,7 @@
             "quiz_id": "HIS_10",
             "quiz_content": {
                 "subject": "한국체육사",
-                "topic": "조선시대의 교육 및 체육",
+                "topic": "조선시대의 체육",
                 "sub_topic": "관학과 사학의 차이점",
                 "question_text": "조선 시대의 교육 기관 중, 성균관과 관련된 특징은 무엇입니까?",
                 "example": null,

@@ -6,7 +6,7 @@
             "quiz_id": "PHY_30",
             "quiz_content": {
                 "subject": "운동생리학",
-                "topic": "근육의 분류",
+                "topic": "골격근과 운동",
                 "sub_topic": "근육의 종류와 기능",
                 "question_text": "다음 중 가로무늬근에 해당하지 않는 것은 무엇인가요?",
                 "example": null,
@@ -24,7 +24,7 @@
             "quiz_id": "PHY_22",
             "quiz_content": {
                 "subject": "운동생리학",
-                "topic": "에너지 대사와 ATP 재합성",
+                "topic": "에너지 대사와 활동",
                 "sub_topic": "ATP 재합성 경로",
                 "question_text": "다음 중 유산소성 과정에서 ATP가 합성되는 장소는 어디인가?",
                 "example": null,
@@ -78,7 +78,7 @@
             "quiz_id": "PHY_38",
             "quiz_content": {
                 "subject": "운동생리학",
-                "topic": "심장 생리학",
+                "topic": "호흡·순환계와 운동",
                 "sub_topic": "심장의 전기적 활동",
                 "question_text": "심방의 탈분극을 나타내는 파형은 무엇인가?",
                 "example": null,
@@ -186,7 +186,7 @@
             "quiz_id": "PHY_21",
             "quiz_content": {
                 "subject": "운동생리학",
-                "topic": "트레이닝의 원리",
+                "topic": "운동생리학의 개관",
                 "sub_topic": "트레이닝 원리의 이해",
                 "question_text": "다음 중 과부하의 원리에 대한 설명으로 가장 적절한 것은 무엇입니까?",
                 "example": null,
@@ -294,7 +294,7 @@
             "quiz_id": "PHY_28",
             "quiz_content": {
                 "subject": "운동생리학",
-                "topic": "근수축과정",
+                "topic": "골격근과 운동",
                 "sub_topic": "근수축 단계별 메커니즘",
                 "question_text": "근수축 단계 중 '자극 및 결합 단계'에서 발생하는 주요 생리적 변화로 올바른 것은 무엇인가?",
                 "example": null,

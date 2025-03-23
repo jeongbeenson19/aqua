@@ -6,7 +6,7 @@
             "quiz_id": "KIN_14",
             "quiz_content": {
                 "subject": "운동역학",
-                "topic": "토크의 개념과 계산",
+                "topic": "운동역학의 스포츠 적용",
                 "sub_topic": "토크의 분류와 생성 원인",
                 "question_text": "다음 중 '외적 토크'에 해당하는 예로 올바른 것을 고르시오.",
                 "example": null,
@@ -60,7 +60,7 @@
             "quiz_id": "KIN_15",
             "quiz_content": {
                 "subject": "운동역학",
-                "topic": "회전 운동의 기본 개념",
+                "topic": "운동역학의 스포츠 적용",
                 "sub_topic": "관성 모멘트와 회전 운동",
                 "question_text": "다이빙 동작에서 몸을 굽히면 회전 반경이 작아지는 이유는 무엇입니까?",
                 "example": null,
@@ -114,7 +114,7 @@
             "quiz_id": "KIN_1",
             "quiz_content": {
                 "subject": "운동역학",
-                "topic": "운동역학의 학문 영역",
+                "topic": "운동역학 개요",
                 "sub_topic": "운동학(kinematics)",
                 "question_text": "운동학(kinematics)은 무엇을 연구하는 학문인가?",
                 "example": null,
@@ -204,7 +204,7 @@
             "quiz_id": "KIN_13",
             "quiz_content": {
                 "subject": "운동역학",
-                "topic": "충돌의 이해와 형태",
+                "topic": "운동역학의 스포츠 적용",
                 "sub_topic": "충돌과 반발 계수",
                 "question_text": "다음 중 완전 탄성 충돌에 해당하는 현상은 무엇입니까?",
                 "example": null,
@@ -240,7 +240,7 @@
             "quiz_id": "KIN_18",
             "quiz_content": {
                 "subject": "운동역학",
-                "topic": "역학적 에너지 보존의 법칙",
+                "topic": "일과 에너지",
                 "sub_topic": "에너지 변환과 보존",
                 "question_text": "다음 중 역학적 에너지 보존의 법칙에 대한 설명으로 옳지 않은 것은 무엇입니까?",
                 "example": null,
@@ -258,7 +258,7 @@
             "quiz_id": "KIN_11",
             "quiz_content": {
                 "subject": "운동역학",
-                "topic": "운동량과 충격량의 이해",
+                "topic": "운동역학의 스포츠 적용",
                 "sub_topic": "운동량의 증가 방법",
                 "question_text": "운동량을 증가시키기 위한 방법으로 옳지 않은 것을 고르시오.",
                 "example": null,
@@ -294,7 +294,7 @@
             "quiz_id": "KIN_10",
             "quiz_content": {
                 "subject": "운동역학",
-                "topic": "뉴턴의 운동 법칙",
+                "topic": "운동역학의 스포츠 적용",
                 "sub_topic": "법칙의 실생활 적용",
                 "question_text": "뉴턴의 작용 반작용의 법칙을 일상생활에서 쉽게 관찰할 수 있는 상황은 무엇인가요?",
                 "example": null,
@@ -311,8 +311,8 @@
         {
             "quiz_id": "KIN_20",
             "quiz_content": {
-                "subject": "운동생리학",
-                "topic": "근전도 분석",
+                "subject": "운동역학",
+                "topic": "운동 기술의 분석",
                 "sub_topic": "근전도의 응용",
                 "question_text": "근전도를 사용하여 골격근의 활동을 분석할 수 있는 방법에 대한 설명으로 옳지 않은 것은 무엇입니까?",
                 "example": null,
@@ -330,7 +330,7 @@
             "quiz_id": "KIN_16",
             "quiz_content": {
                 "subject": "운동역학",
-                "topic": "뉴턴의 각운동 법칙",
+                "topic": "운동역학의 스포츠 적용",
                 "sub_topic": "각운동량의 보존",
                 "question_text": "다음 중 뉴턴의 각운동 법칙에 해당하는 설명으로 옳지 않은 것은?",
                 "example": null,

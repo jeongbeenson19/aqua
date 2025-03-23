@@ -6,7 +6,7 @@
             "quiz_id": "HIS_25",
             "quiz_content": {
                 "subject": "한국체육사",
-                "topic": "삼국 시대의 사회와 교육",
+                "topic": "선사·삼국시대의 체육",
                 "sub_topic": "삼국 시대의 교육 기관",
                 "question_text": "다음 중 삼국 시대에 평민 자제를 위한 교육 기관으로 알맞은 것은 무엇인가?",
                 "example": null,
@@ -60,7 +60,7 @@
             "quiz_id": "HIS_24",
             "quiz_content": {
                 "subject": "한국체육사",
-                "topic": "삼국시대의 체육",
+                "topic": "선사·삼국시대의 체육",
                 "sub_topic": "삼국 시대의 민속 스포츠와 오락",
                 "question_text": "다음 중 삼국시대의 민속 스포츠가 아닌 것은?",
                 "example": null,
@@ -77,8 +77,8 @@
         {
             "quiz_id": "HIS_26",
             "quiz_content": {
-                "subject": "한국교육사",
-                "topic": "고려시대의 교육 기관",
+                "subject": "한국체육사",
+                "topic": "고려시대의 체육",
                 "sub_topic": "국자감의 전문 강좌",
                 "question_text": "고려 시대 국자감에 설치된 7개의 전문 강좌 중 '여택재'에서 공부하는 과목은 무엇인가?",
                 "example": null,
@@ -114,7 +114,7 @@
             "quiz_id": "HIS_38",
             "quiz_content": {
                 "subject": "한국체육사",
-                "topic": "국가주의와 엘리트주의",
+                "topic": "광복 이후의 체육",
                 "sub_topic": "엘리트 체육 정책",
                 "question_text": "국가주의에 기반한 엘리트 체육 정책의 주된 목적은 무엇인가?",
                 "example": null,
@@ -150,7 +150,7 @@
             "quiz_id": "HIS_21",
             "quiz_content": {
                 "subject": "한국체육사",
-                "topic": "체육사의 연구 방법",
+                "topic": "체육사의 의미",
                 "sub_topic": "일반 역사 연구 방법과의 유사성",
                 "question_text": "체육사의 연구 방법에서 역사적 문제를 탐구하기 위한 첫 번째 단계는 무엇입니까?",
                 "example": null,
@@ -183,10 +183,10 @@
             }
         },
         {
-            "quiz_id": "HIS_41",
+            "quiz_id": "HIS_33",
             "quiz_content": {
                 "subject": "한국체육사",
-                "topic": "광복 이후의 체육",
+                "topic": "일제 강점기의 체육",
                 "sub_topic": "대한체육회의 역사와 역할",
                 "question_text": "대한체육회가 처음 창립된 연도와 해방 후 부활한 연도는 각각 언제인가?",
                 "example": null,
@@ -240,7 +240,7 @@
             "quiz_id": "HIS_29",
             "quiz_content": {
                 "subject": "한국체육사",
-                "topic": "조선시대의 건강법",
+                "topic": "조선시대의 체육",
                 "sub_topic": "도인 체조와 활인심방",
                 "question_text": "조선 시대의 도인 체조와 관련하여 안마 체조로도 불리는 이 건강법은 무엇입니까?",
                 "example": null,
@@ -276,7 +276,7 @@
             "quiz_id": "HIS_37",
             "quiz_content": {
                 "subject": "한국체육사",
-                "topic": "일제 강점기의 체육",
+                "topic": "광복 이후의 체육",
                 "sub_topic": "주요 체육 인물",
                 "question_text": "다음 중 1936년 베를린 올림픽에서 마라톤 금메달을 획득한 인물은 누구인가?",
                 "example": null,
@@ -330,7 +330,7 @@
             "quiz_id": "HIS_22",
             "quiz_content": {
                 "subject": "한국체육사",
-                "topic": "암흑기",
+                "topic": "체육사의 의미",
                 "sub_topic": "체육 통제 시대",
                 "question_text": "다음 중 '암흑기'로 불리는 시기에 대해 올바른 설명은 무엇입니까?",
                 "example": null,

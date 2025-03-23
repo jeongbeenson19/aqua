@@ -114,7 +114,7 @@
             "quiz_id": "EDU_24",
             "quiz_content": {
                 "subject": "스포츠교육학",
-                "topic": "건강운동관리",
+                "topic": "정책과 제도",
                 "sub_topic": "운동 처방 및 관리",
                 "question_text": "건강운동관리사가 개인의 체력적 특성에 맞추어 운동을 지도할 때 고려해야 할 요소가 아닌 것은 무엇입니까?",
                 "example": null,
@@ -150,7 +150,7 @@
             "quiz_id": "EDU_21",
             "quiz_content": {
                 "subject": "스포츠교육학",
-                "topic": "발전 과정과 철학",
+                "topic": "배경과 개념",
                 "sub_topic": "신체육과 교육 이론",
                 "question_text": "19세기 후반과 20세기 초반에 아마추어리즘과 페어플레이 정신을 명확하게 보여준 중요한 국제 스포츠 대회는 무엇입니까?",
                 "example": null,
@@ -165,10 +165,10 @@
             }
         },
         {
-            "quiz_id": "EDU_45",
+            "quiz_id": "EDU_30",
             "quiz_content": {
                 "subject": "스포츠교육학",
-                "topic": "스포츠 교육 모형",
+                "topic": "지도 방법론",
                 "sub_topic": "스포츠인의 목표와 역할",
                 "question_text": "스포츠 교육 모형에서 '유능한 스포츠인'이 되기 위해 필요한 기술은 무엇인가요?",
                 "example": null,
@@ -186,7 +186,7 @@
             "quiz_id": "EDU_34",
             "quiz_content": {
                 "subject": "스포츠교육학",
-                "topic": "효과적인 관리 운영",
+                "topic": "지도 방법론",
                 "sub_topic": "상규적 활동",
                 "question_text": "상규적 활동을 효과적으로 관리하여 수업 중 학습 과제 시간을 어떻게 증가시킬 수 있습니까?",
                 "example": null,
@@ -201,10 +201,10 @@
             }
         },
         {
-            "quiz_id": "COACH_01",
+            "quiz_id": "EDU_40",
             "quiz_content": {
-                "subject": "체육전문가 역량 개발",
-                "topic": "전문적 자질 영역",
+                "subject": "스포츠교육학",
+                "topic": "교육자의 전문적 성장",
                 "sub_topic": "철학 및 윤리",
                 "question_text": "체육전문가가 지도 철학을 개발할 때 가장 중요하게 고려해야 할 요소는 무엇인가요?",
                 "example": null,

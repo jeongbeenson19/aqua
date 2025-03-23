@@ -24,7 +24,7 @@
             "quiz_id": "PSY_27",
             "quiz_content": {
                 "subject": "스포츠심리학",
-                "topic": "스포츠 심리 상담",
+                "topic": "인간 운동 행동의 이해",
                 "sub_topic": "인지 재구성 모형",
                 "question_text": "어떤 모델은 선수가 비합리적인 생각이나 신념으로 인해 경기력이 저하될 때 사용되며, 이를 개선하기 위한 심리 상담 방법을 제공합니까?",
                 "example": null,
@@ -60,7 +60,7 @@
             "quiz_id": "PSY_25",
             "quiz_content": {
                 "subject": "스포츠심리학",
-                "topic": "운동 발달의 이해",
+                "topic": "인간 운동 행동의 이해",
                 "sub_topic": "갤러휴의 운동 발달 단계",
                 "question_text": "갤러휴의 운동 발달 단계 중 '최고 수행 단계'에 해당하는 나이는 무엇입니까?",
                 "example": null,
@@ -96,7 +96,7 @@
             "quiz_id": "PSY_37",
             "quiz_content": {
                 "subject": "스포츠심리학",
-                "topic": "목표 설정의 중요성 및 전략",
+                "topic": "스포츠 수행의 사회 심리적 요인",
                 "sub_topic": "효과적인 목표 설정 가이드라인",
                 "question_text": "다음 중 효과적인 목표 설정의 기본 원칙에 해당하지 않는 것은 무엇인가요?",
                 "example": null,
@@ -132,7 +132,7 @@
             "quiz_id": "PSY_39",
             "quiz_content": {
                 "subject": "스포츠심리학",
-                "topic": "스포츠 수행의 사회 심리적 요인",
+                "topic": "건강 운동 심리학",
                 "sub_topic": "주의 집중의 개념과 특성",
                 "question_text": "다음 중 주의 집중의 특성으로 틀린 것은 무엇인가?",
                 "example": null,
@@ -150,7 +150,7 @@
             "quiz_id": "PSY_38",
             "quiz_content": {
                 "subject": "스포츠심리학",
-                "topic": "심상의 개념과 효과",
+                "topic": "스포츠 수행의 사회 심리적 요인",
                 "sub_topic": "심상의 유형과 효과",
                 "question_text": "다음 중 내적 심상에 대한 설명으로 가장 적절한 것은 무엇입니까?",
                 "example": null,
@@ -168,7 +168,7 @@
             "quiz_id": "PSY_21",
             "quiz_content": {
                 "subject": "스포츠심리학",
-                "topic": "스포츠심리학자의 역할",
+                "topic": "스포츠심리학의 개관",
                 "sub_topic": "스포츠심리학자의 주요 연구 및 교육",
                 "question_text": "다음 중 스포츠심리학자의 역할에 해당하지 않는 것은 무엇입니까?",
                 "example": null,
@@ -186,7 +186,7 @@
             "quiz_id": "PSY_29",
             "quiz_content": {
                 "subject": "스포츠심리학",
-                "topic": "운동 학습 이론",
+                "topic": "인간 운동 행동의 이해",
                 "sub_topic": "운동 학습의 단계",
                 "question_text": "다음 중 피츠(Fitts)와 포스너(Posner)의 학습 단계 이론에 해당하는 설명으로 올바른 것은 무엇입니까?",
                 "example": null,
@@ -204,7 +204,7 @@
             "quiz_id": "PSY_40",
             "quiz_content": {
                 "subject": "스포츠심리학",
-                "topic": "사회적 태만",
+                "topic": "스포츠 심리 상담",
                 "sub_topic": "사회적 태만의 원인과 방지",
                 "question_text": "다음 중 사회적 태만의 방지 방법으로 적절하지 않은 것은?",
                 "example": null,
@@ -240,7 +240,7 @@
             "quiz_id": "PSY_36",
             "quiz_content": {
                 "subject": "스포츠심리학",
-                "topic": "목표 설정과 동기부여",
+                "topic": "스포츠 수행의 심리적 요인",
                 "sub_topic": "목표의 유형과 효과",
                 "question_text": "다음 중 '과정 목표'의 주요 특성이 아닌 것은 무엇인가?",
                 "example": null,
@@ -312,7 +312,7 @@
             "quiz_id": "PSY_31",
             "quiz_content": {
                 "subject": "스포츠심리학",
-                "topic": "인간 운동 행동의 이해",
+                "topic": "스포츠 수행의 심리적 요인",
                 "sub_topic": "운동 기술의 정의와 구성 요소",
                 "question_text": "구스리(Guthrie)에 따르면, 운동 기술이란 최소한의 시간과 에너지를 소비하여 무엇을 달성하는 능력으로 정의됩니까?",
                 "example": null,
@@ -348,7 +348,7 @@
             "quiz_id": "PSY_32",
             "quiz_content": {
                 "subject": "스포츠심리학",
-                "topic": "성격 이론",
+                "topic": "스포츠 수행의 심리적 요인",
                 "sub_topic": "프로이트의 정신역동 이론",
                 "question_text": "프로이트의 정신역동 이론에 따르면, 성격을 구성하는 세 가지 자아 중 본능적 욕구에 대한 무의식적인 반응을 담당하는 것은 무엇인가?",
                 "example": null,

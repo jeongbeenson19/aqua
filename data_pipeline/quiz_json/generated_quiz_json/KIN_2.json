@@ -132,7 +132,7 @@
             "quiz_id": "KIN_22",
             "quiz_content": {
                 "subject": "운동역학",
-                "topic": "운동역학의 목적 및 필요성",
+                "topic": "운동역학의 이해",
                 "sub_topic": "운동역학의 필요성",
                 "question_text": "운동역학 지식이 스포츠 지도자에게 중요한 이유는 무엇인가요?",
                 "example": null,
@@ -168,7 +168,7 @@
             "quiz_id": "KIN_36",
             "quiz_content": {
                 "subject": "운동역학",
-                "topic": "뉴턴의 각운동 법칙",
+                "topic": "운동역학의 스포츠 적용",
                 "sub_topic": "각가속도의 법칙",
                 "question_text": "어떤 물체가 일정한 토크(회전력)를 받으면 그 물체의 각가속도는 어떻게 변하는가?",
                 "example": null,
@@ -204,7 +204,7 @@
             "quiz_id": "KIN_40",
             "quiz_content": {
                 "subject": "운동역학",
-                "topic": "근전도의 원리",
+                "topic": "운동 기술의 분석",
                 "sub_topic": "근전도 분석",
                 "question_text": "근전도를 통해 알 수 있는 운동 신경계의 활동 상황은 무엇인가요?",
                 "example": null,
@@ -240,7 +240,7 @@
             "quiz_id": "KIN_38",
             "quiz_content": {
                 "subject": "운동역학",
-                "topic": "역학적 에너지 보존의 법칙",
+                "topic": "일과 에너지",
                 "sub_topic": "에너지 변환",
                 "question_text": "다음 중 역학적 에너지 보존의 법칙을 설명하는 사례로 적절한 것은?",
                 "example": null,
@@ -294,7 +294,7 @@
             "quiz_id": "KIN_30",
             "quiz_content": {
                 "subject": "운동역학",
-                "topic": "뉴턴의 운동 법칙",
+                "topic": "운동역학의 스포츠 적용",
                 "sub_topic": "작용 반작용의 스포츠 적용",
                 "question_text": "농구 선수들이 점프를 할 때, 그들이 바닥을 강하게 누르는 이유는 무엇인가요?",
                 "example": null,

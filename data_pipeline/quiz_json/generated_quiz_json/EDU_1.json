@@ -60,7 +60,7 @@
             "quiz_id": "EDU_20",
             "quiz_content": {
                 "subject": "스포츠교육학",
-                "topic": "전문 체육전문가의 핵심 역량 개발",
+                "topic": "교육자의 전문적 성장",
                 "sub_topic": "철학 및 윤리",
                 "question_text": "전문 체육전문가로서 윤리적 결정을 내릴 때 고려해야 할 가장 중요한 요소는 무엇인가?",
                 "example": null,
@@ -75,7 +75,7 @@
             }
         },
         {
-            "quiz_id": "EDU_6A",
+            "quiz_id": "EDU_6",
             "quiz_content": {
                 "subject": "스포츠교육학",
                 "topic": "지도 방법론",
@@ -96,7 +96,7 @@
             "quiz_id": "EDU_16",
             "quiz_content": {
                 "subject": "스포츠교육학",
-                "topic": "IT의 효과적 사용",
+                "topic": "지도 방법론",
                 "sub_topic": "피드백과 동기 부여",
                 "question_text": "IT를 활용한 피드백의 주요 이점은 무엇인가요?",
                 "example": null,
@@ -114,7 +114,7 @@
             "quiz_id": "EDU_4",
             "quiz_content": {
                 "subject": "스포츠교육학",
-                "topic": "운동 관리 및 지도",
+                "topic": "정책과 제도",
                 "sub_topic": "건강운동관리사의 역할",
                 "question_text": "건강운동관리사가 개인의 체력적 특성에 따라 조절해야 하는 요소가 아닌 것은 무엇입니까?",
                 "example": null,
@@ -240,7 +240,7 @@
             "quiz_id": "EDU_10",
             "quiz_content": {
                 "subject": "스포츠교육학",
-                "topic": "스포츠 교육 모형",
+                "topic": "지도 방법론",
                 "sub_topic": "스포츠 교육 모형의 목표",
                 "question_text": "스포츠 교육 모형에서 '박식한 스포츠인'의 특징으로 올바른 것을 고르시오.",
                 "example": null,
@@ -276,7 +276,7 @@
             "quiz_id": "EDU_6",
             "quiz_content": {
                 "subject": "스포츠교육학",
-                "topic": "스포츠교육 학습자",
+                "topic": "프로그램론",
                 "sub_topic": "발달 단계에 따른 학습자 특징 및 스포츠 활동",
                 "question_text": "다음 중 아동기의 학습자 특징과 스포츠 활동으로 옳지 않은 것은 무엇인가?",
                 "example": null,

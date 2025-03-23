@@ -6,7 +6,7 @@
             "quiz_id": "ETH_40",
             "quiz_content": {
                 "subject": "스포츠윤리",
-                "topic": "스포츠 경영자의 윤리적 리더십",
+                "topic": "스포츠 조직과 윤리",
                 "sub_topic": "경영자가 가져야 할 윤리적 덕목",
                 "question_text": "다음 중 스포츠 경영자가 반드시 지켜야 할 윤리적 행위로 옳지 않은 것은 무엇입니까?",
                 "example": null,
@@ -41,8 +41,8 @@
         {
             "quiz_id": "ETH_29",
             "quiz_content": {
-                "subject": "동양 사상과 윤리",
-                "topic": "동양 사상가와 윤리 체계",
+                "subject": "스포츠윤리",
+                "topic": "스포츠와 윤리",
                 "sub_topic": "인간 본성에 대한 동양 사상가들의 견해",
                 "question_text": "다음 중 '인간의 본성은 선하지도 악하지도 않다'라는 성무선악설을 주장한 사상가는 누구인가?",
                 "options": {
@@ -58,8 +58,8 @@
         {
             "quiz_id": "ETH_24",
             "quiz_content": {
-                "subject": "윤리학",
-                "topic": "덕론적 윤리와 배려 윤리",
+                "subject": "스포츠윤리",
+                "topic": "스포츠와 윤리",
                 "sub_topic": "덕론적 윤리의 장단점",
                 "question_text": "덕론적 윤리의 장점 중 하나로 맞는 것은 무엇입니까?",
                 "example": null,
@@ -149,7 +149,7 @@
             "quiz_id": "ETH_33",
             "quiz_content": {
                 "subject": "스포츠윤리",
-                "topic": "장애인의 스포츠 참여",
+                "topic": "스포츠와 불평등",
                 "sub_topic": "장애인 스포츠의 조건 및 개선 방안",
                 "question_text": "다음 중 장애인의 스포츠 참여를 향상시키기 위한 방안으로 옳지 않은 것은 무엇입니까?",
                 "example": null,
@@ -185,7 +185,7 @@
             "quiz_id": "ETH_26",
             "quiz_content": {
                 "subject": "스포츠윤리",
-                "topic": "사실 판단과 가치 판단",
+                "topic": "스포츠와 윤리",
                 "sub_topic": "판단의 종류",
                 "question_text": "다음 중 사실 판단에 해당하는 것은 무엇인가?",
                 "example": null,
@@ -203,7 +203,7 @@
             "quiz_id": "ETH_31",
             "quiz_content": {
                 "subject": "스포츠윤리",
-                "topic": "놀이의 도덕: 규칙 준수와 게임 자체의 존중",
+                "topic": "경쟁과 페어플레이",
                 "sub_topic": "게임에서의 규칙 준수와 도덕성",
                 "question_text": "놀이와 게임에서 규칙을 준수하는 것이 왜 중요한가?",
                 "example": null,
@@ -239,7 +239,7 @@
             "quiz_id": "ETH_34",
             "quiz_content": {
                 "subject": "스포츠윤리",
-                "topic": "다문화 사회와 스포츠",
+                "topic": "스포츠와 불평등",
                 "sub_topic": "다문화 사회에서의 스포츠 정책",
                 "question_text": "다문화 사회에서 발생할 수 있는 갈등 해결을 위한 스포츠 정책으로 적절하지 않은 것은 무엇인가?",
                 "example": null,
@@ -257,7 +257,7 @@
             "quiz_id": "ETH_21",
             "quiz_content": {
                 "subject": "스포츠윤리",
-                "topic": "스포츠와 도덕성",
+                "topic": "스포츠와 윤리",
                 "sub_topic": "도덕과 윤리의 의미",
                 "question_text": "도덕과 윤리의 차이점에 대한 설명으로 옳은 것을 고르시오.",
                 "example": null,
@@ -293,7 +293,7 @@
             "quiz_id": "ETH_39",
             "quiz_content": {
                 "subject": "스포츠윤리",
-                "topic": "스포츠와 교육",
+                "topic": "스포츠와 인권",
                 "sub_topic": "학생 선수 최저 학력 제도",
                 "question_text": "학생 선수 최저 학력 제도의 주된 목적은 무엇인가?",
                 "example": null,
@@ -311,7 +311,7 @@
             "quiz_id": "ETH_38",
             "quiz_content": {
                 "subject": "스포츠윤리",
-                "topic": "기술 발전과 스포츠의 가치",
+                "topic": "경기력 향상과 공정성",
                 "sub_topic": "첨단 기술의 사용이 스포츠에 미치는 영향",
                 "question_text": "첨단 기술의 사용이 스포츠 경기에서 공정성 문제를 야기할 수 있는 이유는 무엇입니까?",
                 "example": null,
@@ -347,7 +347,7 @@
             "quiz_id": "ETH_25",
             "quiz_content": {
                 "subject": "스포츠윤리",
-                "topic": "가치 충돌",
+                "topic": "스포츠와 윤리",
                 "sub_topic": "스포츠 상황에서 가치 판단의 대안",
                 "question_text": "스포츠 상황에서 발생하는 가치 충돌을 해결하기 위한 적절한 방법은 무엇입니까?",
                 "example": null,

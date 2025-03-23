@@ -60,7 +60,7 @@
             "quiz_id": "PHY_7",
             "quiz_content": {
                 "subject": "운동생리학",
-                "topic": "자율신경계와 생리적 조절",
+                "topic": "신경 조절과 운동",
                 "sub_topic": "자율신경계의 기능",
                 "question_text": "다음 중 교감 신경계의 작용에 해당하지 않는 것은 무엇입니까?",
                 "example": null,
@@ -78,7 +78,7 @@
             "quiz_id": "PHY_1",
             "quiz_content": {
                 "subject": "운동생리학",
-                "topic": "트레이닝의 원리",
+                "topic": "운동생리학의 개관",
                 "sub_topic": "트레이닝 원리의 이해",
                 "question_text": "트레이닝의 원리 중 운동을 하지 않거나 과부하를 주지 않을 경우 운동 적응 상태가 감소하여 운동 전 상태로 돌아가는 것을 설명하는 원리는 무엇인가?",
                 "example": null,
@@ -183,10 +183,10 @@
             }
         },
         {
-            "quiz_id": "PHY_18",
+            "quiz_id": "PHY_15",
             "quiz_content": {
                 "subject": "운동생리학",
-                "topic": "심장 기능과 운동",
+                "topic": "호흡·순환계와 운동",
                 "sub_topic": "심장의 전기적 활동과 심전도",
                 "question_text": "심장의 전기적 활동에서 심방의 탈분극을 나타내는 파형은 무엇입니까?",
                 "example": null,
@@ -201,7 +201,7 @@
             }
         },
         {
-            "quiz_id": "PHY_5",
+            "quiz_id": "PHY_6",
             "quiz_content": {
                 "subject": "운동생리학",
                 "topic": "신경 조절과 운동",
@@ -330,7 +330,7 @@
             "quiz_id": "PHY_8",
             "quiz_content": {
                 "subject": "운동생리학",
-                "topic": "근수축 단계",
+                "topic": "골격근과 운동",
                 "sub_topic": "근수축의 메커니즘",
                 "question_text": "근수축 과정에서 액틴과 마이오신이 결합하여 액토마이오신을 형성하는 단계는 무엇인가요?",
                 "example": null,
@@ -348,7 +348,7 @@
             "quiz_id": "PHY_10",
             "quiz_content": {
                 "subject": "운동생리학",
-                "topic": "근육의 종류",
+                "topic": "골격근과 운동",
                 "sub_topic": "근육의 분류",
                 "question_text": "다음 중 민무늬근(평활근)의 특징으로 옳은 것은 무엇입니까?",
                 "example": null,

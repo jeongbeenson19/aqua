@@ -114,7 +114,7 @@
             "quiz_id": "SCT_22",
             "quiz_content": {
                 "subject": "스포츠사회학",
-                "topic": "근대 스포츠의 특성",
+                "topic": "스포츠사회학의 이해",
                 "sub_topic": "거트만의 근대 스포츠 특징 분석",
                 "question_text": "근대 스포츠의 특징 중 하나로, 스포츠에서의 공정한 경쟁과 참여 기회를 목적으로 하는 개념은 무엇입니까?",
                 "example": null,
@@ -258,7 +258,7 @@
             "quiz_id": "SCT_40",
             "quiz_content": {
                 "subject": "스포츠사회학",
-                "topic": "스포츠 세계화의 원인",
+                "topic": "미래 사회의 스포츠",
                 "sub_topic": "스포츠와 기술의 발전",
                 "question_text": "다음 중 기술의 발전이 스포츠 세계화에 미친 영향을 가장 잘 설명한 것은 무엇입니까?",
                 "example": null,
@@ -312,7 +312,7 @@
             "quiz_id": "SCT_32",
             "quiz_content": {
                 "subject": "스포츠사회학",
-                "topic": "스포츠와 사회 이동",
+                "topic": "스포츠와 사회 계급/계층",
                 "sub_topic": "스포츠의 사회 이동 기제로서의 역할",
                 "question_text": "다음 중 스포츠가 사회 이동의 기제로 작용하지 않는다는 주장을 지지하는 이유는 무엇인가?",
                 "example": null,
