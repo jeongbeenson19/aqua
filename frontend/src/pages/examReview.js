@@ -7,12 +7,31 @@ import ReportError from '../pages/reportError';
 function ExamReview() {
   const backendURL = process.env.REACT_APP_BACKEND_URL;
   const location = useLocation();
-  const { result_id, quiz_type, quiz_set_id } = location.state || {};
+
+  const locationState = location.state || {};
+
+  const [resultId, setResultId] = useState(
+    locationState.result_id || localStorage.getItem('result_id')
+  );
+  const [quizType, setQuizType] = useState(
+    locationState.quiz_type || localStorage.getItem('quiz_type')
+  );
+  const [quizSetId, setQuizSetId] = useState(
+    locationState.quiz_set_id || localStorage.getItem('quiz_set_id')
+  );
 
   const [quizData, setQuizData] = useState(null);
   const [correctCount, setCorrectCount] = useState(0);
 
   const [isReportModalOpen, setReportModalOpen] = useState(false);
+
+  useEffect(() => {
+    if (resultId && quizType && quizSetId) {
+      localStorage.setItem('result_id', resultId);
+      localStorage.setItem('quiz_type', quizType);
+      localStorage.setItem('quiz_set_id', quizSetId);
+    }
+  }, [resultId, quizType, quizSetId]);
 
   // 퀴즈 과목
   const quizTitles = {
@@ -25,18 +44,18 @@ function ExamReview() {
     ETH: "스포츠 윤리",
   };
 
-  const quizTitle = quizTitles[quiz_type] || "알 수 없는 퀴즈";
+  const quizTitle = quizTitles[quizType] || "알 수 없는 퀴즈";
 
   // 퀴즈 데이터
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const url = `${backendURL}/attempted/${result_id}/${quiz_type}/${quiz_set_id}`;
+        const url = `${backendURL}/attempted/${resultId}/${quizType}/${quizSetId}`;
         const response = await axios.get(url);
 
         if (response.status === 200) {
           setQuizData(response.data);
-          console.log(result_id, quiz_type, quiz_set_id);
+          console.log(resultId, quizType, quizSetId);
         } else {
           throw new Error("퀴즈 데이터를 불러오는 데 실패했습니다.");
         }
@@ -53,7 +72,6 @@ function ExamReview() {
     if (quizData) {
       const correctAnswers = Object.values(quizData).filter(quizItem => quizItem.is_correct).length;
       setCorrectCount(correctAnswers);
-      console.log(quizData)
     } else {
       setCorrectCount(0);
     }
@@ -86,6 +104,7 @@ function ExamReview() {
         <div className={styles.quiz_ctn}>
           {Object.entries(quizData).map(([quizKey, quizItem], index) => {
             const { question_text, example, options, correct_option, description } = quizItem.quiz.quiz_content;
+            const user_answer = quizItem.user_answer;
             return (
               <div className={styles.quiz_item} key={quizItem.quiz_id}>
                 <p className={styles.question}>{index + 1}. {question_text}</p>
@@ -103,7 +122,7 @@ function ExamReview() {
                     </li>
                   ))}
                 </ul>
-                <p className={styles.user_answer}>유저 정답 : {correct_option}</p>
+                <p className={styles.user_answer}>내가 고른 답 : {user_answer}</p>
                 <p className={styles.correct_answer}>정답 : {correct_option}</p>
                 <p className={styles.description}>해설 : {description}</p>
               </div>
@@ -115,8 +134,8 @@ function ExamReview() {
       <ReportError
         isOpen={isReportModalOpen}
         onClose={() => setReportModalOpen(false)}
-        quiz_type={quiz_type}
-        quiz_set_id={quiz_set_id}
+        quiz_type={quizType}
+        quiz_set_id={quizSetId}
       />
     </div>
   );

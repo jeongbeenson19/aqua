@@ -35,7 +35,6 @@ function Quiz() {
 
         if (response.status === 200) {
           setQuizData(response.data.quiz_set);
-          console.log(response.data)
 
         } else {
           throw new Error("퀴즈 데이터를 불러오는 데 실패했습니다.");
@@ -141,8 +140,6 @@ function Quiz() {
         score: quizResults.filter((result) => result.is_correct === 1).length * 5,
         quiz_results: quizResults,
       };
-
-      console.log("request : ", request);
 
       alert("점수 : " + request.score);
 
