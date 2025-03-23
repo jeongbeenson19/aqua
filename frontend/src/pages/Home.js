@@ -179,7 +179,6 @@ function Home() {
         >
           마이페이지
         </button>
-
       </nav>
 
       {/* 탭에 따라 화면 변경 */}

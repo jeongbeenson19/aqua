@@ -90,7 +90,7 @@ function ExamReview() {
       <header className={styles.header}>
         <h1>오답노트</h1>
         <img
-          src="../images/issue.png"
+          src="/images/issue.png"
           alt="문제 오류 신고"
           onClick={() => setReportModalOpen(true)}
         />
