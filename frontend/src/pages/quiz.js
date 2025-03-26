@@ -174,8 +174,8 @@ function Quiz() {
 
   if (!quizData.quiz || !quizData.quiz_set_id || !quizData.type) {
     return <div className={styles.waiting}>
-      <h2>존재하지 않거나 잘못된 데이터입니다.<br />
-        다시 시도해주세요.</h2>
+      <h2>내일 새로운 퀴즈가 업데이트됩니다!<br />
+        내일 다시 도전해 보세요.</h2>
     </div>;
   }
 
