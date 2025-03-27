@@ -54,6 +54,15 @@ function Home() {
         navigate('/login');
         return;
       }
+      // 탭 클릭 시 세션 타이머 연장
+      const storedJwtToken = localStorage.getItem('jwt_token');
+      const storedUserId = localStorage.getItem('user_id');
+
+      if (storedJwtToken && storedUserId) {
+        setItemWithExpiry('jwt_token', storedJwtToken, expiryTime * 60 * 1000);
+        setItemWithExpiry('user_id', storedUserId, expiryTime * 60 * 1000);
+      }
+
       navigate(`/quiz/${quizType}`);
     } catch (error) {
       console.error("오류 발생:", error.message);

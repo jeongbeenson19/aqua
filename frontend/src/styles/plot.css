@@ -3,7 +3,7 @@
   background-color: transparent !important;
   position: absolute !important;
   top: -9vh !important;
-  left: -1vh !important;
+  left: 0vh !important;
 }
 
 /* 화면 크기가 420px 이하일 때 */
@@ -32,7 +32,7 @@
     background-color: transparent !important;
     position: absolute !important;
     top: -12vh !important;
-    left: -5vh !important;
+    left: -4vh !important;
   }
 }
 
