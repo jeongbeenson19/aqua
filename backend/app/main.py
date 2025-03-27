@@ -178,7 +178,7 @@ async def fetch_quiz_set(
     quiz_set = collection.find_one({"quiz_set_id": quiz_set_id}, {"_id": 0})
 
     if not quiz_set:
-        raise HTTPException(status_code=404, detail=f"No quiz set found for set_id_{quiz_set_id} in subject '{quiz_type}'.")
+        quiz_set = None  # 예외를 던지는 대신 None을 반환
 
     validate_quiz_length(quiz_set)
 
