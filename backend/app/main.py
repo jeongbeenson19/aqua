@@ -177,8 +177,14 @@ async def fetch_quiz_set(
     quiz_set_id = f"quiz_set_{int(set_id) + 1}"
     quiz_set = collection.find_one({"quiz_set_id": quiz_set_id}, {"_id": 0})
 
+    # 퀴즈셋이 없을 경우 None을 반환
     if not quiz_set:
-        quiz_set = None  # 예외를 던지는 대신 None을 반환
+        return {
+            "quiz_type": quiz_type,
+            "set_id": str(set_id),
+            "quiz_set": None,  # quiz_set이 없으면 None 명시
+            "quiz_set_id": None  # 프론트에서 체크할 수 있도록 추가
+        }
 
     if quiz_set:
         validate_quiz_length(quiz_set)
