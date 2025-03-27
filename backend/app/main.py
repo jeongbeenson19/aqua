@@ -180,7 +180,8 @@ async def fetch_quiz_set(
     if not quiz_set:
         quiz_set = None  # 예외를 던지는 대신 None을 반환
 
-    validate_quiz_length(quiz_set)
+    if quiz_set:
+        validate_quiz_length(quiz_set)
 
     return {"quiz_type": quiz_type, "set_id": str(set_id), "quiz_set": quiz_set}
 
