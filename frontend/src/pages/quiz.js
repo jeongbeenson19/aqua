@@ -172,7 +172,7 @@ function Quiz() {
     </div>;
   }
 
-  if (!quizData.quiz_set || !quizData.quiz_set_id || !quizData.quiz_type) {
+  if (!quizData.quiz || !quizData.quiz_set_id || !quizData.quiz_type) {
     return <div className={styles.waiting}>
       <h2>내일 새로운 퀴즈가 업데이트됩니다!<br />
         내일 다시 도전해 보세요.</h2>
