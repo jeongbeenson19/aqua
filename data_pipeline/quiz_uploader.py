@@ -6,16 +6,18 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# # MongoDB 설정
-# password = quote_plus(os.getenv('MONGO_PW'))
-# MONGO_URI = f"mongodb+srv://jeongbeenson19:{password}@aqua.wchta.mongodb.net/?retryWrites=true&w=majority&appName=aqua"
-# mongo_client = MongoClient(
-#     MONGO_URI,
-#     tls=True,
-#     tlsAllowInvalidCertificates=True
-# )
-#
-# mongo_db = mongo_client['quiz_db']
+# MongoDB 설정
+password = os.environ.get('MONGO_PW')
+password = quote_plus(password)
+
+MONGO_URI = f"mongodb+srv://jeongbeenson19:{password}@aqua.wchta.mongodb.net/?retryWrites=true&w=majority&appName=aqua"
+mongo_client = MongoClient(
+    MONGO_URI,
+    tls=True,
+    tlsAllowInvalidCertificates=True
+)
+
+mongo_db = mongo_client['quiz_db']
 
 subject = {
     "EDU": "스포츠교육학",
@@ -96,4 +98,23 @@ def check_quiz_set(quiz_set):
         json.dump(quiz_json, f, ensure_ascii=False, indent=4)
 
 
-check_quiz_set("SCT_2")
+def upload_quiz(quiz_set):
+    """
+    quiz_type에 해당하는 컬렉션에 quiz_data를 업로드하는 함수
+    """
+    check_quiz_set(quiz_set)
+    quiz_type = quiz_set.split(".")[0].split("_")[0]
+    collection_name = quiz_type.lower()  # 컬렉션 이름을 소문자로 변환
+    collection = mongo_db[collection_name]  # 해당하는 컬렉션 선택
+
+    # JSON 파일을 읽어와야 함
+    file_path = f"quiz_json/generated_quiz_json/{quiz_set}.json"
+    with open(file_path, "r", encoding="utf-8") as f:
+        quiz_data = json.load(f)  # 파일 내용 읽기
+
+    # MongoDB에 삽입
+    result = collection.insert_one(quiz_data)
+    print(result.inserted_id)  # 삽입된 문서의 ID 반환
+
+
+upload_quiz("SCT_4")

@@ -56,7 +56,7 @@ async def generate_quiz_from_mongodb(subject, new_quiz_set_number, new_quiz_id):
             async with session.post("https://api.openai.com/v1/chat/completions", json={
                 "model": "gpt-4o",
                 "messages": [
-                    {"role": "system", "content": "You are a member of the question-setting committee for a written exam that selects outstanding coaches. Generate the quiz based on the provided knowledge_text. Ensure that the questions prioritize the reliability and validity of the content. Please generate the questions in JSON format, using a formal tone."},
+                    {"role": "system", "content": "You are a member of the question-setting committee for a written exam that selects outstanding coaches. Generate the quiz based on the provided knowledge_text by Korean. Ensure that the questions prioritize the reliability and validity of the content. Please generate the questions in JSON format, using a formal tone."},
                     {"role": "user", "content": prompt}
                 ],
                 "temperature": 0.7,
@@ -93,4 +93,4 @@ async def generate_quiz_from_mongodb(subject, new_quiz_set_number, new_quiz_id):
 
     print(f"새로운 퀴즈셋이 {output_path}에 저장되었습니다! 🎉")
 
-asyncio.run(generate_quiz_from_mongodb(subject="HIS", new_quiz_set_number=3, new_quiz_id=40))
+asyncio.run(generate_quiz_from_mongodb(subject="SCT", new_quiz_set_number=4, new_quiz_id=60))

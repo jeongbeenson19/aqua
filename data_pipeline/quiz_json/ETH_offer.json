@@ -67,14 +67,14 @@
             "quiz_content": {
                 "subject": "스포츠윤리",
                 "topic": "경쟁과 페어플레이",
-                "sub_topic": "27"
+                "sub_topic": "23"
             }
         },
         {
             "quiz_content": {
                 "subject": "스포츠윤리",
                 "topic": "경쟁과 페어플레이",
-                "sub_topic": "24"
+                "sub_topic": "22"
             }
         },
         {
@@ -102,42 +102,42 @@
             "quiz_content": {
                 "subject": "스포츠윤리",
                 "topic": "환경과 동물 윤리",
-                "sub_topic": "44"
+                "sub_topic": "46"
             }
         },
         {
             "quiz_content": {
                 "subject": "스포츠윤리",
                 "topic": "환경과 동물 윤리",
-                "sub_topic": "43"
+                "sub_topic": "42"
             }
         },
         {
             "quiz_content": {
                 "subject": "스포츠윤리",
                 "topic": "스포츠와 폭력",
-                "sub_topic": "52"
+                "sub_topic": "53"
             }
         },
         {
             "quiz_content": {
                 "subject": "스포츠윤리",
                 "topic": "경기력 향상과 공정성",
-                "sub_topic": "611"
+                "sub_topic": "69"
             }
         },
         {
             "quiz_content": {
                 "subject": "스포츠윤리",
                 "topic": "스포츠와 인권",
-                "sub_topic": "73"
+                "sub_topic": "79"
             }
         },
         {
             "quiz_content": {
                 "subject": "스포츠윤리",
                 "topic": "스포츠 조직과 윤리",
-                "sub_topic": "87"
+                "sub_topic": "86"
             }
         }
     ]

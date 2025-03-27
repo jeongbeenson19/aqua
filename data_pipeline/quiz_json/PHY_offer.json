@@ -4,14 +4,14 @@
             "quiz_content": {
                 "subject": "운동생리학",
                 "topic": "운동생리학의 개관",
-                "sub_topic": "12"
+                "sub_topic": "13"
             }
         },
         {
             "quiz_content": {
                 "subject": "운동생리학",
                 "topic": "에너지 대사와 활동",
-                "sub_topic": "24"
+                "sub_topic": "25"
             }
         },
         {
@@ -25,7 +25,7 @@
             "quiz_content": {
                 "subject": "운동생리학",
                 "topic": "에너지 대사와 활동",
-                "sub_topic": "28"
+                "sub_topic": "29"
             }
         },
         {
@@ -39,21 +39,14 @@
             "quiz_content": {
                 "subject": "운동생리학",
                 "topic": "신경 조절과 운동",
-                "sub_topic": "32"
+                "sub_topic": "34"
             }
         },
         {
             "quiz_content": {
                 "subject": "운동생리학",
                 "topic": "신경 조절과 운동",
-                "sub_topic": "38"
-            }
-        },
-        {
-            "quiz_content": {
-                "subject": "운동생리학",
-                "topic": "골격근과 운동",
-                "sub_topic": "41"
+                "sub_topic": "37"
             }
         },
         {
@@ -67,14 +60,14 @@
             "quiz_content": {
                 "subject": "운동생리학",
                 "topic": "골격근과 운동",
-                "sub_topic": "42"
+                "sub_topic": "44"
             }
         },
         {
             "quiz_content": {
                 "subject": "운동생리학",
                 "topic": "골격근과 운동",
-                "sub_topic": "43"
+                "sub_topic": "48"
             }
         },
         {
@@ -87,15 +80,22 @@
         {
             "quiz_content": {
                 "subject": "운동생리학",
-                "topic": "내분비계와 운동",
-                "sub_topic": "52"
+                "topic": "골격근과 운동",
+                "sub_topic": "412"
             }
         },
         {
             "quiz_content": {
                 "subject": "운동생리학",
                 "topic": "내분비계와 운동",
-                "sub_topic": "53"
+                "sub_topic": "59"
+            }
+        },
+        {
+            "quiz_content": {
+                "subject": "운동생리학",
+                "topic": "내분비계와 운동",
+                "sub_topic": "56"
             }
         },
         {
@@ -137,7 +137,7 @@
             "quiz_content": {
                 "subject": "운동생리학",
                 "topic": "환경과 운동",
-                "sub_topic": "75"
+                "sub_topic": "72"
             }
         }
     ]
