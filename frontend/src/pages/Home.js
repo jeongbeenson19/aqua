@@ -54,7 +54,7 @@ function Home() {
         navigate('/login');
         return;
       }
-      // 탭 클릭 시 세션 타이머 연장
+      // 퀴즈 클릭 시 세션 타이머 연장
       const storedJwtToken = localStorage.getItem('jwt_token');
       const storedUserId = localStorage.getItem('user_id');
 
