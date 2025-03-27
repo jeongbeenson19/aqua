@@ -80,7 +80,7 @@ function ExamReview() {
   // 퀴즈 데이터가 없을 경우
   if (!quizData) {
     return <div className={styles.waiting}>
-      <h3>퀴즈 데이터를 불러오는 중...</h3>
+      <h3>오답 노트를 불러오는 중...</h3>
     </div>;
   }
 
@@ -91,6 +91,11 @@ function ExamReview() {
         <h1>오답노트</h1>
         <img
           src="/images/issue.png"
+          alt="문제 오류 신고"
+          onClick={() => setReportModalOpen(true)}
+        />
+        <img
+          src={`${process.env.PUBLIC_URL}/images/issue.png`}
           alt="문제 오류 신고"
           onClick={() => setReportModalOpen(true)}
         />
