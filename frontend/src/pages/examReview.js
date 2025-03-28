@@ -89,11 +89,6 @@ function ExamReview() {
       {/* 헤더 */}
       <header className={styles.header}>
         <h1>오답노트</h1>
-        {/* <img
-          src="/images/issue.png"
-          alt="문제 오류 신고"
-          onClick={() => setReportModalOpen(true)}
-        /> */}
         <img
           src={`${process.env.PUBLIC_URL}/images/issue.png`}
           alt="문제 오류 신고"

@@ -186,7 +186,7 @@ function Quiz() {
         <h2 className={styles.timer}>{formatTime(seconds)}</h2>
         <h1>{quizTitle}</h1>
         <img
-          src="/images/issue.png"
+          src={`${process.env.PUBLIC_URL}/images/issue.png`}
           alt="문제 오류 신고"
           onClick={() => setReportModalOpen(true)}
         />
