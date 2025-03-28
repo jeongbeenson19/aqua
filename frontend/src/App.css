@@ -1,23 +1,23 @@
 /* Black Han Sans 폰트 */
 /* @import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap'); */
 
-/* @font-face {
+@font-face {
   font-family: 'hmfmmuex';
-  src: url('/fonts/hmfmmuex.ttc') format('truetype');
+  src: url('/public/fonts/hmfmmuex.ttc') format('truetype');
   font-weight: normal;
   font-style: normal;
-} */
+}
 
 @font-face {
   font-family: 'DaughterMom';
-  src: url('/fonts/NanumSungulssiDaughterMom.ttf') format('truetype');
+  src: url('/public/fonts/NanumSungulssiDaughterMom.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'iLoveYouSon';
-  src: url('/fonts/NanumSungulssiLoveYouSon.ttf') format('truetype');
+  src: url('/public/fonts/NanumSungulssiLoveYouSon.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
