@@ -38,8 +38,8 @@ code {
 .header h1 {
   padding: 0 10px;
   text-align: center;
-  font-family: 'Do Hyeon', sans-serif;
-  /* font-family: 'hmfmmuex'; */
+  /* font-family: 'Do Hyeon', sans-serif; */
+  font-family: 'hmfmmuex';
   letter-spacing: 0.1em;
   font-weight: bold;
   font-size: 24px;
