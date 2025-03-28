@@ -60,8 +60,17 @@ function Home() {
         return;
       }
       // 퀴즈 클릭 시 세션 타이머 연장
-      // const storedJwtToken = localStorage.getItem('jwt_token');
-      // const storedUserId = localStorage.getItem('user_id');
+      const storedJwtToken = localStorage.getItem('jwt_token');
+      const storedUserId = localStorage.getItem('user_id');
+
+      console.log("storedJwtToken : ", storedJwtToken);
+      console.log("storedUserId : ", storedUserId);
+
+      const parsedJwtToken = JSON.parse(storedJwtToken);
+      const parsedUserId = JSON.parse(storedUserId);
+
+      console.log("parsedJwtToken : ", parsedJwtToken);
+      console.log("parsedUserId : ", parsedUserId)
 
       // if (storedJwtToken && storedUserId) {
       //   const parsedJwtToken = JSON.parse(storedJwtToken);
