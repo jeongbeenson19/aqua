@@ -41,22 +41,16 @@ function Home() {
     const storedJwtToken = localStorage.getItem('jwt_token');
     const storedUserId = localStorage.getItem('user_id');
 
-    console.log("storedJwtToken : ", storedJwtToken);
-    console.log("storedUserId : ", storedUserId);
+    if (storedJwtToken && storedUserId) {
+      const parsedJwtToken = JSON.parse(storedJwtToken);
+      const parsedUserId = JSON.parse(storedUserId);
 
-    const parsedJwtToken = JSON.parse(storedJwtToken);
-    const parsedUserId = JSON.parse(storedUserId);
+      console.log("parsedJwtToken.value : ", parsedJwtToken.value)
+      console.log("parsedUserId.value : ", parsedUserId.value)
 
-    console.log("parsedJwtToken : ", parsedJwtToken);
-    console.log("parsedUserId : ", parsedUserId)
-
-    // if (storedJwtToken && storedUserId) {
-    //   const parsedJwtToken = JSON.parse(storedJwtToken);
-    //   const parsedUserId = JSON.parse(storedUserId);
-
-    //   setItemWithExpiry('jwt_token', parsedJwtToken, expiryTime * 60 * 1000);
-    //   setItemWithExpiry('user_id', parsedUserId, expiryTime * 60 * 1000);
-    // }
+      setItemWithExpiry('jwt_token', parsedJwtToken.value, expiryTime * 60 * 1000);
+      setItemWithExpiry('user_id', parsedUserId.value, expiryTime * 60 * 1000);
+    }
   };
 
 
@@ -72,22 +66,13 @@ function Home() {
       const storedJwtToken = localStorage.getItem('jwt_token');
       const storedUserId = localStorage.getItem('user_id');
 
-      console.log("storedJwtToken : ", storedJwtToken);
-      console.log("storedUserId : ", storedUserId);
+      if (storedJwtToken && storedUserId) {
+        const parsedJwtToken = JSON.parse(storedJwtToken);
+        const parsedUserId = JSON.parse(storedUserId);
 
-      const parsedJwtToken = JSON.parse(storedJwtToken);
-      const parsedUserId = JSON.parse(storedUserId);
-
-      console.log("parsedJwtToken : ", parsedJwtToken);
-      console.log("parsedUserId : ", parsedUserId)
-
-      // if (storedJwtToken && storedUserId) {
-      //   const parsedJwtToken = JSON.parse(storedJwtToken);
-      //   const parsedUserId = JSON.parse(storedUserId);
-
-      //   setItemWithExpiry('jwt_token', parsedJwtToken, expiryTime * 60 * 1000);
-      //   setItemWithExpiry('user_id', parsedUserId, expiryTime * 60 * 1000);
-      // }
+        setItemWithExpiry('jwt_token', parsedJwtToken.value, expiryTime * 60 * 1000);
+        setItemWithExpiry('user_id', parsedUserId.value, expiryTime * 60 * 1000);
+      }
 
       navigate(`/quiz/${quizType}`);
     } catch (error) {
