@@ -38,16 +38,16 @@ function Home() {
     setActiveTab(tabName);
 
     // 탭 클릭 시 세션 타이머 연장
-    const storedJwtToken = localStorage.getItem('jwt_token');
-    const storedUserId = localStorage.getItem('user_id');
+    // const storedJwtToken = localStorage.getItem('jwt_token');
+    // const storedUserId = localStorage.getItem('user_id');
 
-    if (storedJwtToken && storedUserId) {
-      const parsedJwtToken = JSON.parse(storedJwtToken);
-      const parsedUserId = JSON.parse(storedUserId);
+    // if (storedJwtToken && storedUserId) {
+    //   const parsedJwtToken = JSON.parse(storedJwtToken);
+    //   const parsedUserId = JSON.parse(storedUserId);
 
-      setItemWithExpiry('jwt_token', parsedJwtToken, expiryTime * 60 * 1000);
-      setItemWithExpiry('user_id', parsedUserId, expiryTime * 60 * 1000);
-    }
+    //   setItemWithExpiry('jwt_token', parsedJwtToken, expiryTime * 60 * 1000);
+    //   setItemWithExpiry('user_id', parsedUserId, expiryTime * 60 * 1000);
+    // }
   };
 
 
@@ -60,16 +60,16 @@ function Home() {
         return;
       }
       // 퀴즈 클릭 시 세션 타이머 연장
-      const storedJwtToken = localStorage.getItem('jwt_token');
-      const storedUserId = localStorage.getItem('user_id');
+      // const storedJwtToken = localStorage.getItem('jwt_token');
+      // const storedUserId = localStorage.getItem('user_id');
 
-      if (storedJwtToken && storedUserId) {
-        const parsedJwtToken = JSON.parse(storedJwtToken);
-        const parsedUserId = JSON.parse(storedUserId);
+      // if (storedJwtToken && storedUserId) {
+      //   const parsedJwtToken = JSON.parse(storedJwtToken);
+      //   const parsedUserId = JSON.parse(storedUserId);
 
-        setItemWithExpiry('jwt_token', parsedJwtToken, expiryTime * 60 * 1000);
-        setItemWithExpiry('user_id', parsedUserId, expiryTime * 60 * 1000);
-      }
+      //   setItemWithExpiry('jwt_token', parsedJwtToken, expiryTime * 60 * 1000);
+      //   setItemWithExpiry('user_id', parsedUserId, expiryTime * 60 * 1000);
+      // }
 
       navigate(`/quiz/${quizType}`);
     } catch (error) {

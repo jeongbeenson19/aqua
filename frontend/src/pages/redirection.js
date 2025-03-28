@@ -10,7 +10,7 @@ const Redirection = () => {
   const needsInfo = new URLSearchParams(window.location.search).get('needs_info') === "true";
   const kakaoId = new URLSearchParams(window.location.search).get('kakao_id');
 
-  const expiryTime = 60;
+  const expiryTime = 120;
 
   useEffect(() => {
     if (jwtToken && userId) {
