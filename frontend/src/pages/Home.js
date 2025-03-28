@@ -45,8 +45,8 @@ function Home() {
       const parsedJwtToken = JSON.parse(storedJwtToken);
       const parsedUserId = JSON.parse(storedUserId);
 
-      setItemWithExpiry('jwt_token', storedJwtToken, expiryTime * 60 * 1000);
-      setItemWithExpiry('user_id', storedUserId, expiryTime * 60 * 1000);
+      setItemWithExpiry('jwt_token', parsedJwtToken, expiryTime * 60 * 1000);
+      setItemWithExpiry('user_id', parsedUserId, expiryTime * 60 * 1000);
     }
   };
 
@@ -67,8 +67,8 @@ function Home() {
         const parsedJwtToken = JSON.parse(storedJwtToken);
         const parsedUserId = JSON.parse(storedUserId);
 
-        setItemWithExpiry('jwt_token', storedJwtToken, expiryTime * 60 * 1000);
-        setItemWithExpiry('user_id', storedUserId, expiryTime * 60 * 1000);
+        setItemWithExpiry('jwt_token', parsedJwtToken, expiryTime * 60 * 1000);
+        setItemWithExpiry('user_id', parsedUserId, expiryTime * 60 * 1000);
       }
 
       navigate(`/quiz/${quizType}`);
