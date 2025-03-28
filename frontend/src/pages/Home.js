@@ -19,6 +19,8 @@ function Home() {
   const [layout, setLayout] = useState(null);
   const [scores, setScores] = useState([]);
 
+  const expiryTime = 60;
+
   // 퀴즈 과목
   const quizTitles = {
     SCT: "스포츠 사회학",
