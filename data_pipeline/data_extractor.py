@@ -5,6 +5,7 @@ import os
 
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "dulcet-opus-443011-u1-dfe77b2064f0.json"
 
+#i am back!
 
 def pdf_to_images(pdf_path, output_folder, dpi=300):
     """
