@@ -82,7 +82,7 @@ async def generate_quiz_from_mongodb(subject, new_quiz_set_number, new_quiz_id):
 
     # quiz_id 숫자 부분 기준으로 정렬
     def extract_number(quiz):
-        match = re.search(r"EDU_(\d+)", quiz["quiz_id"])
+        match = re.search(r"(\d+)", quiz["quiz_id"])
         return int(match.group(1)) if match else float('inf')
 
     new_quiz_set["quiz"].sort(key=extract_number)
@@ -93,4 +93,4 @@ async def generate_quiz_from_mongodb(subject, new_quiz_set_number, new_quiz_id):
 
     print(f"새로운 퀴즈셋이 {output_path}에 저장되었습니다! 🎉")
 
-asyncio.run(generate_quiz_from_mongodb(subject="SCT", new_quiz_set_number=4, new_quiz_id=60))
+asyncio.run(generate_quiz_from_mongodb(subject="SCT", new_quiz_set_number=10, new_quiz_id=180))
