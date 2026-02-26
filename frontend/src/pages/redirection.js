@@ -7,9 +7,6 @@ const Redirection = () => {
   const jwtToken = new URLSearchParams(window.location.search).get('jwt_token');
   const userId = new URLSearchParams(window.location.search).get('user_id');
 
-  const needsInfo = new URLSearchParams(window.location.search).get('needs_info') === "true";
-  const kakaoId = new URLSearchParams(window.location.search).get('kakao_id');
-
   const expiryTime = 120;
 
   useEffect(() => {
@@ -22,7 +19,7 @@ const Redirection = () => {
       alert("오류가 발생하였습니다. 다시 로그인해주세요!");
       navigate('/login');
     }
-  }, []);
+  }, [jwtToken, navigate, userId]);
 
   return <div>로그인 처리 중입니다.....</div>;
 };

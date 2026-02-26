@@ -20,7 +20,7 @@ app = FastAPI()
 DOMAIN = os.getenv("DOMAIN")
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000",
+    allow_origins=["http://127.0.0.1:3000",
                    "https://aqua-sports-cert.com",
                    "https://www.aqua-sports-cert.com",
                    "https://api.aqua-sports-cert.com"],
@@ -547,4 +547,3 @@ async def get_mean_score(
     mean_scores = df.groupby("quiz_type")["score"].mean().to_dict()
 
     return {"user_id": user_id, "mean_scores": mean_scores}
-
