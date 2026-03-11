@@ -1,115 +1,97 @@
-/* 모달 배경 오버레이 */
 .modal_overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  inset: 0;
+  background: rgba(10, 25, 52, 0.52);
+  backdrop-filter: blur(5px);
+  display: grid;
+  place-items: center;
   z-index: 1000;
+  padding: 16px;
 }
 
-/* 모달 콘텐츠 */
 .report_modal {
-  background: #fafafa;
-  border-radius: 15px;
-  box-shadow: 0 4px 8px #0000004d;
-  display: flex;
-  flex-direction: column;
-  margin: 15px;
-  min-width: 320px;
-  width: 38vh;
-  z-index: 1001;
+  width: min(480px, 100%);
+  border-radius: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 30px 60px rgba(5, 20, 44, 0.3);
+  overflow: hidden;
 }
 
 .modal_header {
-  color: #1249B1;
-  position: relative;
   display: flex;
-  justify-content: center;
   align-items: center;
-  padding: 10px;
-  margin: 20px;
-  margin-bottom: 10px;
+  justify-content: space-between;
+  padding: 16px 18px;
+  border-bottom: 1px solid var(--line-soft);
 }
 
 .modal_header h3 {
-  margin: 5px;
-  font-family: 'iLoveYouSon', sans-serif;
-  letter-spacing: 0.1em;
-  font-weight: bold;
-  font-size: 25px;
+  margin: 0;
+  font-family: var(--font-heading);
+  color: var(--text-primary);
 }
 
 .modal_header button {
-  color: #1249B1;
-  position: absolute;
-  right: -5%;
-  top: 0%;
-  transform: translateY(-50%);
-  background: none;
-  border: none;
-  font-size: 20px;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  border: 1px solid var(--line-soft);
+  background: #ffffff;
+  color: var(--text-secondary);
   cursor: pointer;
-  width: 30px;
-  margin: 0;
-  padding: 5px;
 }
 
-
-
-
 .modal_body {
-  padding: 18px 16px 15px 16px;
-  background: #1249B1;
-  border-radius: 15px;
+  padding: 18px;
+  display: grid;
+  gap: 12px;
 }
 
 .report_modal label {
-  text-align: left;
-  display: block;
-  margin-bottom: 5px;
-  color: #FAFAFA;
-  font-weight: bold;
-  padding-left: 5px;
-  font-family: 'Black Han Sans', sans-serif;
-  font-size: 16px;
-  font-weight: lighter;
+  font-size: 0.86rem;
+  color: var(--text-secondary);
+  font-weight: 700;
 }
 
 .report_modal select,
 .report_modal input,
 .report_modal textarea {
-  padding: 8px 20px;
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
-  border-radius: 28px;
-}
-
-.report_modal .select_box {
   width: 100%;
+  border-radius: 12px;
+  border: 1px solid var(--line-soft);
+  background: #ffffff;
+  padding: 11px 12px;
+  color: var(--text-primary);
+  outline: none;
 }
 
-.report_modal .input_box {
-  width: 85%;
+.report_modal select:focus,
+.report_modal input:focus,
+.report_modal textarea:focus {
+  border-color: rgba(20, 82, 168, 0.48);
+  box-shadow: 0 0 0 3px rgba(20, 82, 168, 0.14);
 }
 
 .report_modal .textarea_box {
-  width: 85%;
-  height: 150px;
-  resize: none;
+  min-height: 132px;
+  resize: vertical;
 }
 
 .submit_btn {
-  padding: 10px;
-  width: 85%;
-  background-color: #8FAFEC;
-  color: #000000;
-  border: none;
-  border-radius: 20px;
+  margin-top: 2px;
+  border: 0;
+  border-radius: 12px;
+  padding: 12px;
   cursor: pointer;
-  margin-top: 10px;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: var(--text-on-primary);
+  background: linear-gradient(130deg, #0f2f66 0%, #1f5eb8 100%);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.submit_btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 20px rgba(15, 47, 102, 0.26);
 }

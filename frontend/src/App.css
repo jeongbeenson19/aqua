@@ -1,23 +1,77 @@
-/* Black Han Sans 폰트 */
-/* @import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&family=Outfit:wght@500;600;700;800&display=swap');
 
-@font-face {
-  font-family: 'hmfmmuex';
-  src: url('/public/fonts/hmfmmuex.ttc') format('truetype');
-  font-weight: normal;
-  font-style: normal;
+:root {
+  --font-heading: 'Outfit', 'Noto Sans KR', sans-serif;
+  --font-body: 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+
+  --bg-page: #eef4ff;
+  --bg-surface: rgba(255, 255, 255, 0.78);
+  --bg-surface-strong: #ffffff;
+  --bg-primary: #0f2f66;
+  --bg-primary-soft: #1f4f9f;
+  --bg-accent: #0aa4af;
+  --bg-accent-soft: #def8fa;
+
+  --text-primary: #10264f;
+  --text-secondary: #4d648f;
+  --text-muted: #6f7c96;
+  --text-on-primary: #f4f9ff;
+
+  --line-soft: rgba(15, 47, 102, 0.12);
+  --line-strong: rgba(15, 47, 102, 0.24);
+
+  --radius-xl: 28px;
+  --radius-lg: 20px;
+  --radius-md: 14px;
+
+  --shadow-card: 0 20px 45px rgba(20, 52, 98, 0.12);
+  --shadow-soft: 0 12px 24px rgba(20, 52, 98, 0.08);
 }
 
-@font-face {
-  font-family: 'DaughterMom';
-  src: url('/public/fonts/NanumSungulssiDaughterMom.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
+* {
+  box-sizing: border-box;
 }
 
-@font-face {
-  font-family: 'iLoveYouSon';
-  src: url('/public/fonts/NanumSungulssiLoveYouSon.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(circle at 10% 15%, rgba(26, 161, 189, 0.18), transparent 45%),
+    radial-gradient(circle at 90% 0%, rgba(15, 79, 170, 0.16), transparent 38%),
+    linear-gradient(145deg, #eff4ff 0%, #f8fbff 50%, #edf4ff 100%);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: left;
+}
+
+/* Prefer whitespace-based wrapping and only break long unspaced tokens when needed. */
+:where(h1, h2, h3, h4, h5, h6, p, li, span, button, label, strong, a) {
+  white-space: normal;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+.text-wrap-by-space {
+  white-space: normal;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+.App {
+  min-height: 100vh;
+  color: var(--text-primary);
 }
