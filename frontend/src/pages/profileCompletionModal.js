@@ -33,6 +33,11 @@ function ProfileCompletionModal({
         <div className={styles.modalHeader}>
           <p className={styles.eyebrow}>PROFILE REQUIRED</p>
           <h2>이름과 이메일을 입력해주세요</h2>
+          <p className={styles.description}>
+            {missingFieldNames
+              ? `${missingFieldNames} 정보가 비어 있어 로그인 마무리를 위해 입력이 필요합니다.`
+              : "로그인을 완료하려면 이름과 이메일을 입력해주세요."}
+          </p>
         </div>
 
         <form className={styles.formBody} onSubmit={onSubmit}>
