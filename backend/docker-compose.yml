@@ -26,7 +26,9 @@ services:
       - ./certs:/etc/letsencrypt
       - ./data:/var/www/certbot
     ports:
-      - "80:80"
+    - "80:80"
+    - "443:443"
+
     networks:
       - aqua_network
     restart: unless-stopped
