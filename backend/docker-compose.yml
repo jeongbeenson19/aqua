@@ -1,62 +1,62 @@
 services:
-  # FastAPI 서비스
   fastapi:
     build: .
-    ports:
-      - "8000:8000"
     container_name: fastapi
+    restart: unless-stopped
     env_file:
-     - .env  # 🔥 .env 파일 명시적으로 추가
+      - .env
     depends_on:
-      - db  # MySQL DB 의존성 추가
+      - db
     environment:
-      DATABASE_URL: "${DATABASE_PY_URL}"  # 환경변수 DATABASE_PY_URL
-      MONGO_PW: "${MONGO_PW}"  # MongoDB 패스워드 추가
-      USE_PROXY_HEADERS: "True"  # ✅ 프록시 헤더 신뢰 설정
-      FASTAPI_FORWARDED_ALLOW_IPS: "*"  # ✅ 모든 프록시 IP 허용
+      DATABASE_PY_URL: "mysql+mysqlconnector://root:${MYSQL_PW}@db:3306/${RDS_DB_NAME}"
+      DATABASE_URL: "mysql+mysqlconnector://root:${MYSQL_PW}@db:3306/${RDS_DB_NAME}"
+      MONGO_PW: "${MONGO_PW}"
+    expose:
+      - "8000"
     networks:
       - aqua_network
 
-  # Nginx 서비스 (Reverse Proxy 역할)
   nginx:
     image: nginx:latest
     container_name: nginx
+    depends_on:
+      - fastapi
     volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf  # Nginx 설정 파일
-      - ./certs:/etc/letsencrypt  # 인증서 저장소
-      - ./data:/var/www/certbot  # Certbot 웹 루트
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./certs:/etc/letsencrypt
+      - ./data:/var/www/certbot
     ports:
-      - "80:80"  # HTTP 포트
-      - "443:443"  # HTTPS 포트
+      - "80:80"
     networks:
       - aqua_network
     restart: unless-stopped
 
-  # MySQL DB 서비스
   db:
     image: mysql:8.0
     container_name: mysql-db
     restart: always
     env_file:
-      - .env  # 🔥 .env 파일 명시적으로 추가
+      - .env
     environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_PW}  # MySQL 루트 패스워드
-      MYSQL_DATABASE: ${RDS_DB_NAME}  # MySQL DB 이름
-    ports:
-      - "3306:3306"  # DB 포트
+      MYSQL_ROOT_PASSWORD: ${MYSQL_PW}
+      MYSQL_DATABASE: ${RDS_DB_NAME}
+    expose:
+      - "3306"
     volumes:
-      - mysql_data:/var/lib/mysql  # MySQL 데이터 볼륨
+      - mysql_data:/var/lib/mysql
+    networks:
+      - aqua_network
 
-  # Certbot 서비스 (SSL 인증서 관리)
   certbot:
     image: certbot/certbot
     container_name: certbot
     volumes:
-      - ./certs:/etc/letsencrypt  # 인증서 저장소
-      - ./data:/var/www/certbot  # Certbot 웹 루트
+      - ./certs:/etc/letsencrypt
+      - ./data:/var/www/certbot
     entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+    networks:
+      - aqua_network
 
-# MySQL 데이터 영속성을 위한 볼륨
 volumes:
   mysql_data:
 
