@@ -5,12 +5,6 @@ services:
     restart: unless-stopped
     env_file:
       - .env
-    depends_on:
-      - db
-    environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_PW}
-      MYSQL_DATABASE: ${RDS_DB_NAME}
-      MONGO_PW: "${MONGO_PW}"
     expose:
       - "8000"
     networks:
@@ -33,22 +27,6 @@ services:
       - aqua_network
     restart: unless-stopped
 
-  db:
-    image: mysql:8.0
-    container_name: mysql-db
-    restart: always
-    env_file:
-      - .env
-    environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_PW}
-      MYSQL_DATABASE: ${RDS_DB_NAME}
-    expose:
-      - "3306"
-    volumes:
-      - mysql_data:/var/lib/mysql
-    networks:
-      - aqua_network
-
   certbot:
     image: certbot/certbot
     container_name: certbot
@@ -58,9 +36,6 @@ services:
     entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
     networks:
       - aqua_network
-
-volumes:
-  mysql_data:
 
 networks:
   aqua_network:
