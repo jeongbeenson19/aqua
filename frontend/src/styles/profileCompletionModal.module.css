@@ -1,0 +1,185 @@
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1100;
+  display: grid;
+  place-items: center;
+  padding: 18px;
+  background: rgba(10, 25, 52, 0.58);
+  backdrop-filter: blur(6px);
+}
+
+.modalPanel {
+  width: min(520px, 100%);
+  border-radius: 26px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.97) 0%, rgba(245, 250, 255, 0.96) 100%);
+  box-shadow: 0 36px 68px rgba(5, 20, 44, 0.32);
+  overflow: hidden;
+  animation: modalEntrance 0.22s ease;
+}
+
+.modalHeader {
+  padding: 24px 24px 12px;
+}
+
+.eyebrow {
+  margin: 0;
+  color: #1b549f;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-size: 0.76rem;
+  font-family: var(--font-heading);
+}
+
+.modalHeader h2 {
+  margin: 10px 0 0;
+  font-family: var(--font-heading);
+  color: var(--text-primary);
+  font-size: clamp(1.28rem, 2.6vw, 1.65rem);
+}
+
+.description {
+  margin: 10px 0 0;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+.formBody {
+  padding: 12px 24px 24px;
+  display: grid;
+  gap: 14px;
+}
+
+.noticeCard {
+  display: grid;
+  gap: 10px;
+  padding: 16px;
+  border-radius: 18px;
+  background: rgba(223, 242, 255, 0.6);
+  border: 1px solid rgba(15, 47, 102, 0.08);
+}
+
+.noticeCard h3 {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: 0.98rem;
+  color: var(--text-primary);
+}
+
+.noticeList {
+  margin: 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 6px;
+}
+
+.noticeList li {
+  color: var(--text-secondary);
+  line-height: 1.55;
+  font-size: 0.9rem;
+}
+
+.policyLink {
+  width: fit-content;
+  color: #1452a8;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.policyLink:hover {
+  text-decoration: underline;
+}
+
+.fieldGroup {
+  display: grid;
+  gap: 8px;
+}
+
+.fieldGroup span {
+  font-size: 0.87rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+
+.fieldGroup input {
+  width: 100%;
+  border-radius: 14px;
+  border: 1px solid var(--line-soft);
+  background: #ffffff;
+  padding: 13px 14px;
+  color: var(--text-primary);
+  outline: none;
+}
+
+.fieldGroup input:focus {
+  border-color: rgba(20, 82, 168, 0.48);
+  box-shadow: 0 0 0 3px rgba(20, 82, 168, 0.14);
+}
+
+.fieldGroup input:disabled {
+  background: rgba(241, 245, 251, 0.92);
+  color: var(--text-muted);
+}
+
+.checkRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.checkRow input {
+  margin-top: 2px;
+  width: 16px;
+  height: 16px;
+}
+
+.errorText {
+  margin: 0;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: rgba(201, 48, 72, 0.08);
+  color: #b4374e;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.submitButton {
+  border: 0;
+  border-radius: 14px;
+  padding: 13px 16px;
+  cursor: pointer;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: var(--text-on-primary);
+  background: linear-gradient(130deg, #0f2f66 0%, #1f5eb8 100%);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+}
+
+.submitButton:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 26px rgba(15, 47, 102, 0.26);
+}
+
+.submitButton:disabled {
+  cursor: wait;
+  opacity: 0.78;
+}
+
+@keyframes modalEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}

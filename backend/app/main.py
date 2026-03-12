@@ -11,8 +11,20 @@ from dotenv import load_dotenv
 from app.crud import get_last_set_id_from_mysql, update_user_progress
 from app.database import mongo_db, SessionLocal, engine
 from app.models import QuizSetResult, QuizResult, User
-from app.schemas import QuizResults
-from app.utils import is_collection_exists, validate_quiz_length, validate_quiz_result_length, get_or_create_user, get_db, create_jwt_token, decode_jwt, update_user_info
+from app.schemas import QuizResults, UserProfileResponse, UserProfileUpdate
+from app.utils import (
+    is_collection_exists,
+    validate_quiz_length,
+    validate_quiz_result_length,
+    get_or_create_user,
+    get_db,
+    create_jwt_token,
+    decode_jwt,
+    update_user_info,
+    get_missing_user_profile_fields,
+    is_user_profile_incomplete,
+    update_user_profile_by_user_id,
+)
 
 load_dotenv()
 
@@ -63,6 +75,19 @@ def serialize_quiz_set_result(quiz_set_result: QuizSetResult) -> dict:
         ),
         "quiz_type": quiz_set_result.quiz_type,
         "score": quiz_set_result.score,
+    }
+
+
+def serialize_user_profile(user: User) -> dict:
+    missing_fields = get_missing_user_profile_fields(user)
+    nickname = user.nickname.strip() if user.nickname else None
+    email = user.email.strip() if user.email else None
+    return {
+        "user_id": user.user_id,
+        "nickname": nickname or None,
+        "email": email or None,
+        "missing_fields": missing_fields,
+        "profile_required": bool(missing_fields),
     }
 
 # 로그인 요청 URL 생성
@@ -132,6 +157,7 @@ def kakao_callback(code: str, db: Session = Depends(get_db)):
     query_params = urlencode({
         "jwt_token": jwt_token,
         "user_id": user.user_id,
+        "profile_required": str(is_user_profile_incomplete(user)).lower(),
     })
 
     redirect_url = f"{LOGIN_REDIRECT_URI}?{query_params}"
@@ -160,6 +186,30 @@ def kakao_complete(
     })
 
     return RedirectResponse(url=f"{LOGIN_REDIRECT_URI}?{query_params}", status_code=303)
+
+
+@app.get("/users/me/profile", response_model=UserProfileResponse)
+def get_my_profile(user: User = Depends(decode_jwt)):
+    return serialize_user_profile(user)
+
+
+@app.put("/users/me/profile", response_model=UserProfileResponse)
+def update_my_profile(
+    profile: UserProfileUpdate,
+    user: User = Depends(decode_jwt),
+    db: Session = Depends(get_db),
+):
+    updated_user = update_user_profile_by_user_id(
+        db=db,
+        user_id=user.user_id,
+        email=profile.email,
+        nickname=profile.nickname,
+    )
+
+    if not updated_user:
+        raise HTTPException(status_code=404, detail="User not found")
+
+    return serialize_user_profile(updated_user)
 
 
 @app.get("/quiz/{quiz_type}/{user_id}")

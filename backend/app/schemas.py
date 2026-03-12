@@ -1,5 +1,9 @@
-from pydantic import BaseModel, ValidationError, model_validator, conint
-from typing import List, Dict
+import re
+from pydantic import BaseModel, ValidationError, model_validator, conint, field_validator
+from typing import List, Dict, Optional
+
+
+EMAIL_PATTERN = re.compile(r"^[^\s@]+@[^\s@]+\.[^\s@]+$")
 
 
 class QuizContent(BaseModel):
@@ -42,3 +46,39 @@ class QuizResults(BaseModel):
     quiz_type: str
     score: int
     quiz_results: List[QuizResultItem]
+
+
+class UserProfileResponse(BaseModel):
+    user_id: str
+    nickname: Optional[str]
+    email: Optional[str]
+    missing_fields: List[str]
+    profile_required: bool
+
+
+class UserProfileUpdate(BaseModel):
+    nickname: str
+    email: str
+
+    @field_validator("nickname", "email", mode="before")
+    @classmethod
+    def strip_text_fields(cls, value):
+        if isinstance(value, str):
+            return value.strip()
+        return value
+
+    @field_validator("nickname")
+    @classmethod
+    def validate_nickname(cls, value: str):
+        if not value:
+            raise ValueError("nickname must not be empty")
+        return value
+
+    @field_validator("email")
+    @classmethod
+    def validate_email(cls, value: str):
+        if not value:
+            raise ValueError("email must not be empty")
+        if not EMAIL_PATTERN.fullmatch(value):
+            raise ValueError("email format is invalid")
+        return value

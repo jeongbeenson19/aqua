@@ -1,0 +1,67 @@
+.page {
+  min-height: 100vh;
+  padding: 32px 18px;
+}
+
+.sheet {
+  width: min(860px, 100%);
+  margin: 0 auto;
+  border-radius: 28px;
+  border: 1px solid var(--line-soft);
+  background: rgba(255, 255, 255, 0.84);
+  backdrop-filter: blur(14px);
+  box-shadow: var(--shadow-card);
+  padding: clamp(24px, 4vw, 40px);
+}
+
+.eyebrow {
+  margin: 0;
+  color: #1b549f;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  font-family: var(--font-heading);
+}
+
+.sheet h1 {
+  margin: 10px 0 0;
+  font-family: var(--font-heading);
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  color: var(--text-primary);
+}
+
+.updatedAt {
+  margin: 10px 0 0;
+  color: var(--text-muted);
+  font-size: 0.92rem;
+}
+
+.section {
+  margin-top: 26px;
+  padding-top: 22px;
+  border-top: 1px solid var(--line-soft);
+}
+
+.section:first-of-type {
+  margin-top: 28px;
+}
+
+.section h2 {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  color: var(--text-primary);
+}
+
+.section p,
+.section li {
+  margin-top: 12px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  font-size: 0.96rem;
+}
+
+.section ul {
+  margin: 0;
+  padding-left: 20px;
+}

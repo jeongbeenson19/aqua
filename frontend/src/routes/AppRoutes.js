@@ -5,6 +5,7 @@ import Redirection from "../pages/redirection";
 import Home from "../pages/Home";
 import Quiz from "../pages/quiz";
 import ExamReview from "../pages/examReview";
+import PrivacyPolicy from "../pages/privacyPolicy";
 
 
 const AppRoutes = () => {
@@ -15,6 +16,7 @@ const AppRoutes = () => {
       <Route path="/" element={<Home />} />
       <Route path="/quiz/:subjectId" element={<Quiz />} />
       <Route path="/examreview/:attempedId" element={<ExamReview />} />
+      <Route path="/privacy-policy" element={<PrivacyPolicy />} />
 
     </Routes>
   );
