@@ -5,6 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.trustedhost import TrustedHostMiddleware
 from fastapi.responses import RedirectResponse
 from sqlalchemy.orm import Session
+from sqlalchemy.exc import IntegrityError
 from urllib.parse import urlencode
 from dotenv import load_dotenv
 from app.crud import get_last_set_id_from_mysql, update_user_progress
@@ -38,6 +39,31 @@ DISCORD_WEBHOOK_URL = os.getenv("DISCORD_WEBHOOK_URL")
 KAKAO_CLIENT_ID = os.getenv("KAKAO_CLIENT_ID")
 KAKAO_REDIRECT_URI = os.getenv("KAKAO_REDIRECT_URI")
 LOGIN_REDIRECT_URI = os.getenv("LOGIN_REDIRECT_URI")
+QUIZ_SET_STORAGE_SEPARATOR = "::"
+
+
+def build_stored_quiz_set_id(quiz_type: str, quiz_set_id: str) -> str:
+    return f"{quiz_type}{QUIZ_SET_STORAGE_SEPARATOR}{quiz_set_id}"
+
+
+def decode_stored_quiz_set_id(quiz_type: str, quiz_set_id: str) -> str:
+    prefix = f"{quiz_type}{QUIZ_SET_STORAGE_SEPARATOR}"
+    if quiz_set_id.startswith(prefix):
+        return quiz_set_id[len(prefix):]
+    return quiz_set_id
+
+
+def serialize_quiz_set_result(quiz_set_result: QuizSetResult) -> dict:
+    return {
+        "id": quiz_set_result.id,
+        "user_id": quiz_set_result.user_id,
+        "quiz_set_id": decode_stored_quiz_set_id(
+            quiz_set_result.quiz_type,
+            quiz_set_result.quiz_set_id,
+        ),
+        "quiz_type": quiz_set_result.quiz_type,
+        "score": quiz_set_result.score,
+    }
 
 # 로그인 요청 URL 생성
 @app.get("/auth/kakao/login")
@@ -205,23 +231,46 @@ async def submit_quiz(
         quiz_set_id = quiz_results.quiz_set_id
         quiz_type = quiz_results.quiz_type
         score = quiz_results.score
+        stored_quiz_set_id = build_stored_quiz_set_id(quiz_type, quiz_set_id)
 
-        with Session(engine) as session_quiz_set_result:
-            # QuizSetResult 생성
-            quiz_set_result = QuizSetResult(
-                user_id=user_id,
-                quiz_set_id=quiz_set_id,
-                quiz_type=quiz_type,
-                score=score,
-            )
-            session_quiz_set_result.add(quiz_set_result)
-            session_quiz_set_result.commit()
-            session_quiz_set_result.refresh(quiz_set_result)
-            result_id = quiz_set_result.id
-            print("QuizSetResult created with ID:", result_id)
+        with SessionLocal() as session:
+            created_quiz_set_result = False
 
-            with Session(engine) as session_quiz_result:
-                # QuizResult 저장
+            try:
+                quiz_set_result = session.query(QuizSetResult).filter(
+                    QuizSetResult.user_id == user_id,
+                    QuizSetResult.quiz_type == quiz_type,
+                    QuizSetResult.quiz_set_id == stored_quiz_set_id,
+                ).first()
+
+                if quiz_set_result is None:
+                    legacy_quiz_set_result = session.query(QuizSetResult).filter(
+                        QuizSetResult.user_id == user_id,
+                        QuizSetResult.quiz_type == quiz_type,
+                        QuizSetResult.quiz_set_id == quiz_set_id,
+                    ).first()
+
+                    if legacy_quiz_set_result is not None:
+                        legacy_quiz_set_result.quiz_set_id = stored_quiz_set_id
+                        quiz_set_result = legacy_quiz_set_result
+                    else:
+                        quiz_set_result = QuizSetResult(
+                            user_id=user_id,
+                            quiz_set_id=stored_quiz_set_id,
+                            quiz_type=quiz_type,
+                            score=score,
+                        )
+                        session.add(quiz_set_result)
+                        session.flush()
+                        created_quiz_set_result = True
+
+                quiz_set_result.score = score
+                result_id = quiz_set_result.id
+
+                session.query(QuizResult).filter(
+                    QuizResult.result_id == result_id
+                ).delete()
+
                 for result in quiz_results.quiz_results:
                     print("Processing quiz result:", result)
                     quiz_result = QuizResult(
@@ -230,14 +279,58 @@ async def submit_quiz(
                         user_answer=result.user_answer,
                         is_correct=result.is_correct
                     )
-                    session_quiz_result.add(quiz_result)
+                    session.add(quiz_result)
 
-                session_quiz_result.commit()
-                print("All quiz results committed successfully.")
+                if created_quiz_set_result:
+                    update_user_progress(
+                        session=session,
+                        user_id=user_id,
+                        quiz_type=quiz_type,
+                        commit=False,
+                    )
 
-            update_user_progress(session=Session(engine), user_id=user_id, quiz_type=quiz_type)
+                session.commit()
+                session.refresh(quiz_set_result)
+                print("QuizSetResult saved with ID:", result_id)
 
-        return {"quiz_set_id": quiz_set_result.id, "score": quiz_set_result.score}
+            except IntegrityError:
+                session.rollback()
+
+                quiz_set_result = session.query(QuizSetResult).filter(
+                    QuizSetResult.user_id == user_id,
+                    QuizSetResult.quiz_type == quiz_type,
+                    QuizSetResult.quiz_set_id == stored_quiz_set_id,
+                ).first()
+
+                if quiz_set_result is None:
+                    raise
+
+                quiz_set_result.score = score
+                result_id = quiz_set_result.id
+
+                session.query(QuizResult).filter(
+                    QuizResult.result_id == result_id
+                ).delete()
+
+                for result in quiz_results.quiz_results:
+                    session.add(
+                        QuizResult(
+                            result_id=result_id,
+                            quiz_id=result.quiz_id,
+                            user_answer=result.user_answer,
+                            is_correct=result.is_correct,
+                        )
+                    )
+
+                session.commit()
+                session.refresh(quiz_set_result)
+                print("QuizSetResult reused after duplicate insert race:", result_id)
+
+        return {
+            "result_id": quiz_set_result.id,
+            "quiz_set_id": quiz_set_id,
+            "score": quiz_set_result.score,
+        }
 
     except Exception as e:
         print("Error occurred:", str(e))
@@ -259,7 +352,12 @@ async def fetch_attempted_quiz_sets_list(
             QuizSetResult.user_id == user_id).all()
 
     # 쿼리 결과를 반환
-    return {"attempted_quiz_sets": attempted_quiz_sets_list}
+    return {
+        "attempted_quiz_sets": [
+            serialize_quiz_set_result(quiz_set_result)
+            for quiz_set_result in attempted_quiz_sets_list
+        ]
+    }
 
 
 @app.get("/attempted/{result_id}/{quiz_type}/{quiz_set_id}")
@@ -286,6 +384,7 @@ async def fetch_attempted_quiz_set(
     }
 
     collection_name = f"{quiz_type.lower()}"
+    quiz_set_id = decode_stored_quiz_set_id(quiz_type, quiz_set_id)
 
     if not is_collection_exists(mongo_db, collection_name):
         raise Exception(f"Collection '{collection_name}' does not exist.")
@@ -360,153 +459,6 @@ async def create_quiz_report(
 
     return {"message": "Bug report sent to Discord successfully"}
 
-
-@app.get("/my_page/plot/sunburst/{user_id}")
-async def my_page_plot(
-        user_id: str = Path(..., description="User ID for fetching quiz results")
-):
-    """
-    마이페이지에 출력할 plotly로 생성된 sunburst 플롯을 요청합니다.
-    """
-    import pandas as pd
-    import plotly.graph_objects as go
-
-    with Session(engine) as session_quiz_set_result:
-        attempted_quiz_set_result = session_quiz_set_result.query(QuizSetResult).filter(
-            QuizSetResult.user_id == user_id
-        ).all()
-
-    quiz_set_result_dict = {
-        quiz_set.id: {
-            "quiz_set_id": quiz_set.quiz_set_id,
-            "quiz_type": quiz_set.quiz_type
-        }
-        for quiz_set in attempted_quiz_set_result
-    }
-
-    rows = []  # 모든 퀴즈셋 데이터를 저장할 리스트
-
-    for result_id, quiz_set_result in quiz_set_result_dict.items():
-        with Session(engine) as session_quiz_result:
-            attempted_quiz_set = session_quiz_result.query(QuizResult).filter(
-                QuizResult.result_id == result_id
-            ).all()
-
-        quiz_result_dict = {
-            quiz.quiz_id: {
-                "user_answer": quiz.user_answer,
-                "is_correct": quiz.is_correct
-            }
-            for quiz in attempted_quiz_set
-        }
-
-        collection_name = f"{quiz_set_result['quiz_type'].lower()}"
-
-        if not is_collection_exists(mongo_db, collection_name):
-            raise Exception(f"Collection '{collection_name}' does not exist.")
-
-        collection = mongo_db[collection_name]
-        quiz_set = collection.find_one({"quiz_set_id": quiz_set_result['quiz_set_id']}, {"_id": 0})
-
-        if not quiz_set:
-            raise HTTPException(status_code=404,
-                                detail=f"No quiz set found for set_id_{quiz_set_result['quiz_set_id']} in subject '{quiz_set_result['quiz_type']}'.")
-
-        for quiz_id, result in quiz_result_dict.items():
-            quiz_data = next((quiz for quiz in quiz_set["quiz"] if quiz["quiz_id"] == quiz_id), None)
-            if quiz_data:
-                quiz_content = quiz_data["quiz_content"]
-                quiz_content.pop("sub_topic", None)
-                quiz_content.pop("question_text", None)
-                quiz_content.pop("example", None)
-                quiz_content.pop("options", None)
-                quiz_content.pop("correct_option", None)
-                quiz_content.pop("description", None)
-
-                rows.append({
-                    "quiz_id": quiz_id,
-                    "subject": quiz_content["subject"],
-                    "topic": quiz_content["topic"],
-                    "is_correct": 1 if result["is_correct"] else 0
-                })
-            else:
-                rows.append({
-                    "quiz_id": quiz_id,
-                    "subject": "Unknown",
-                    "topic": "Unknown",
-                    "is_correct": 1 if result["is_correct"] else 0
-                })
-
-    if not rows:
-        raise HTTPException(status_code=404, detail="No quiz results found.")
-
-    df = pd.DataFrame(rows)
-    # Sunburst 차트를 위한 데이터 처리
-    subject_topic_dict = {}  # 주제별 데이터를 저장할 딕셔너리
-
-    for _, row in df.iterrows():
-        subject = row['subject']
-        topic = row['topic'].strip()  # 공백 제거
-        is_correct = row['is_correct']
-
-        if subject not in subject_topic_dict:
-            subject_topic_dict[subject] = {}
-
-        if topic not in subject_topic_dict[subject]:
-            subject_topic_dict[subject][topic] = {"correct": 0, "total": 0}
-
-        subject_topic_dict[subject][topic]["total"] += 1
-        if is_correct:
-            subject_topic_dict[subject][topic]["correct"] += 1
-
-    labels = ["Total"]
-    parents = [""]
-    values = [df.shape[0]]  # 전체 문제 개수
-    colors = [df["is_correct"].mean()]  # 전체 평균 정답률
-
-    for subject, topics in subject_topic_dict.items():
-        labels.append(subject)
-        parents.append("Total")  # 과목(subject)의 부모는 "Total"
-        values.append(sum(topic["total"] for topic in topics.values()))
-        colors.append(sum(topic["correct"] for topic in topics.values()) / values[-1])
-
-        for topic, result in topics.items():
-            labels.append(topic)
-            parents.append(subject)  # ⬅️ topic의 부모를 subject로 설정!
-            values.append(result["total"])
-            colors.append(result["correct"] / result["total"] if result["total"] > 0 else 0)
-
-    # 평균 점수
-    avg_score = df["is_correct"].mean()
-    # Sunburst 차트 생성
-
-    labels = list(labels)  # labels를 list로 변환
-    parents = list(parents)  # parents를 list로 변환
-    values = list(values)  # values를 list로 변환
-    colors = list(colors)  # colors를 list로 변환
-
-    fig = go.Figure(go.Sunburst(
-        labels=labels,
-        parents=parents,
-        values=values,
-        branchvalues='total',
-        marker=dict(
-            colors=colors,
-            colorscale='RdBu',
-            cmid=avg_score
-        ),
-        hovertemplate='<b>%{label}</b><br>푼 문제 수: %{value}<br>정답률: %{color:.2f}',
-        maxdepth=2
-    ))
-
-    fig.update_layout(
-        margin=dict(t=10, b=10, r=10, l=10),
-        width=400,
-        height=400
-    )
-    return {"plot": fig.to_json()}
-
-
 @app.get("/my_page/mean_score/{user_id}")
 async def get_mean_score(
     user_id: str = Path(..., description="유저 ID")
@@ -522,7 +474,7 @@ async def get_mean_score(
 
     quiz_set_result_dict = {
         quiz_set.id: {
-            "quiz_set_id": quiz_set.quiz_set_id,
+            "quiz_set_id": decode_stored_quiz_set_id(quiz_set.quiz_type, quiz_set.quiz_set_id),
             "quiz_type": quiz_set.quiz_type,
             "score": quiz_set.score
         }
@@ -542,7 +494,7 @@ async def get_mean_score(
     df = pd.DataFrame(rows)
 
     if df.empty:
-        return {"message": "No quiz results found for this user."}
+        return {"user_id": user_id, "mean_scores": {}}
 
     mean_scores = df.groupby("quiz_type")["score"].mean().to_dict()
 

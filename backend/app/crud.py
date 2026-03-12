@@ -21,11 +21,12 @@ def get_last_set_id_from_mysql(user_id: str, quiz_type: str, db_session: Session
     return result  # 기존 값 반환
 
 
-def update_user_progress(session: Session, user_id: str, quiz_type: str):
+def update_user_progress(session: Session, user_id: str, quiz_type: str, commit: bool = True):
     stmt = (
         update(UserProgress)
         .where(UserProgress.user_id == user_id, UserProgress.quiz_type == quiz_type)
         .values(last_set_id=UserProgress.last_set_id + 1)  # 기존 값에 +1
     )
     session.execute(stmt)
-    session.commit()
+    if commit:
+        session.commit()

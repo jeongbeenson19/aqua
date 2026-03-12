@@ -295,12 +295,52 @@
 .analyticsSection {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 18px;
+}
+
+.analyticsHero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: 14px;
+}
+
+.analyticsIntro {
+  border-radius: 20px;
+  border: 1px solid rgba(15, 47, 102, 0.1);
+  padding: clamp(18px, 2.4vw, 24px);
+  background:
+    radial-gradient(circle at top right, rgba(10, 164, 175, 0.18), transparent 28%),
+    linear-gradient(145deg, rgba(14, 47, 102, 0.98), rgba(34, 89, 179, 0.95));
+  color: var(--text-on-primary);
+  box-shadow: var(--shadow-card);
+}
+
+.analyticsEyebrow {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: 0.76rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0.82;
+}
+
+.analyticsIntro h2 {
+  margin: 12px 0 0;
+  font-family: var(--font-heading);
+  font-size: clamp(1.18rem, 2.1vw, 1.8rem);
+  line-height: 1.24;
+}
+
+.analyticsDescription {
+  margin: 10px 0 0;
+  max-width: 48ch;
+  line-height: 1.6;
+  color: rgba(244, 249, 255, 0.84);
 }
 
 .analyticsSummary {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: 1fr;
   gap: 12px;
 }
 
@@ -324,63 +364,99 @@
   font-size: clamp(1.18rem, 2vw, 1.5rem);
 }
 
-.analyticsGrid {
-  display: grid;
-  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
-  gap: 14px;
-}
-
-.chartCard,
-.scoreCard {
+.scoreBoard {
   border-radius: 18px;
   border: 1px solid var(--line-soft);
   background: #ffffff;
-  padding: 16px;
+  padding: clamp(16px, 2.4vw, 22px);
   box-shadow: var(--shadow-soft);
 }
 
-.chartCard h2,
-.scoreCard h2 {
+.scoreBoardHeader {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.scoreBoardHeader h2 {
   margin: 0;
   font-family: var(--font-heading);
-  font-size: 1.08rem;
+  font-size: clamp(1.04rem, 1.8vw, 1.3rem);
 }
 
-.plotContainer {
-  margin-top: 12px;
-  min-height: 280px;
-}
-
-.loadingText {
-  margin: 34px 0;
+.scoreBoardHeader p {
+  margin: 0;
   color: var(--text-secondary);
+  font-size: 0.88rem;
 }
 
-.scoreList {
+.scoreCardGrid {
   list-style: none;
-  margin: 14px 0 0;
+  margin: 0;
   padding: 0;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 12px;
 }
 
-.scoreTop {
+.subjectScoreCard {
+  height: 100%;
+  border-radius: 16px;
+  border: 1px solid rgba(15, 47, 102, 0.1);
+  background: linear-gradient(145deg, rgba(243, 248, 255, 0.96), rgba(255, 255, 255, 0.98));
+  padding: 16px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+.subjectScoreTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.subjectCopy {
+  min-width: 0;
+}
+
+.subjectRank {
+  margin: 0;
+  font-size: 0.76rem;
+  font-family: var(--font-heading);
+  letter-spacing: 0.08em;
+  color: #1c5ac1;
+}
+
+.subjectScoreTop h3 {
+  margin: 6px 0 0;
+  font-size: 1rem;
+  color: var(--text-primary);
+}
+
+.subjectScoreTop strong {
+  flex-shrink: 0;
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  color: var(--text-primary);
+}
+
+.subjectMeta {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 8px;
-  margin-bottom: 6px;
+  margin-top: 12px;
 }
 
-.scoreTop span {
-  font-size: 0.91rem;
+.subjectMeta span {
+  border-radius: 999px;
+  background: rgba(15, 47, 102, 0.06);
+  padding: 6px 10px;
+  font-size: 0.76rem;
   color: var(--text-secondary);
-}
-
-.scoreTop strong {
-  font-family: var(--font-heading);
-  color: var(--text-primary);
 }
 
 .scoreTrack {
@@ -407,7 +483,7 @@
     justify-content: flex-start;
   }
 
-  .analyticsGrid {
+  .analyticsHero {
     grid-template-columns: 1fr;
   }
 }
@@ -431,6 +507,15 @@
   }
 
   .analyticsSummary {
+    grid-template-columns: 1fr;
+  }
+
+  .scoreBoardHeader {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .scoreCardGrid {
     grid-template-columns: 1fr;
   }
 
