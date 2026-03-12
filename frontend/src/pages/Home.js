@@ -1,10 +1,8 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import Plot from "react-plotly.js";
 import { getItemWithExpiry, setItemWithExpiry } from "../pages/auth";
 import styles from "../styles/home.module.css";
-import "../styles/plot.css";
 
 const backendURL = process.env.REACT_APP_BACKEND_URL;
 
@@ -32,8 +30,6 @@ function Home() {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("과목");
   const [attemptedNotes, setAttemptedNotes] = useState([]);
-  const [plotData, setPlotData] = useState(null);
-  const [plotLayout, setPlotLayout] = useState(null);
   const [scores, setScores] = useState([]);
 
   const userId = getItemWithExpiry("user_id");
@@ -60,6 +56,8 @@ function Home() {
     const total = scores.reduce((acc, item) => acc + Number(item.score || 0), 0);
     return Math.round(total / scores.length);
   }, [scores]);
+
+  const bestSubject = scores[0] || null;
 
   const refreshSessionExpiry = () => {
     const storedJwtToken = localStorage.getItem("jwt_token");
@@ -97,46 +95,9 @@ function Home() {
   };
 
   useEffect(() => {
-    const fetchPlotSunburst = async () => {
-      if (!userId) {
-        return;
-      }
-
-      try {
-        const response = await axios.get(`${backendURL}/my_page/plot/sunburst/${userId}`);
-
-        if (response.status === 200) {
-          const parsedData = JSON.parse(response.data.plot);
-          setPlotData(parsedData);
-          setPlotLayout({
-            ...(parsedData.layout || {}),
-            autosize: true,
-            margin: { t: 20, r: 10, l: 10, b: 10 },
-            paper_bgcolor: "transparent",
-            plot_bgcolor: "transparent",
-            font: { family: "Noto Sans KR, sans-serif", color: "#10264f" },
-          });
-          return;
-        }
-
-        alert("마이페이지를 가져오는 데 실패했습니다.");
-      } catch (error) {
-        console.error("마이페이지 차트 요청 실패 : ", error.message);
-      }
-    };
-
-    fetchPlotSunburst();
-  }, [userId]);
-
-  useEffect(() => {
     const fetchMeanScore = async () => {
       if (!userId) {
-        setScores(
-          Object.keys(quizTitles).map((key) => ({
-            subject: quizTitles[key],
-            score: 0,
-          }))
-        );
+        setScores([]);
         return;
       }
 
@@ -144,11 +105,15 @@ function Home() {
         const response = await axios.get(`${backendURL}/my_page/mean_score/${userId}`);
 
         if (response.status === 200) {
-          const { mean_scores: meanScores } = response.data;
-          const updatedScores = Object.keys(quizTitles).map((key) => ({
-            subject: quizTitles[key],
-            score: meanScores[key] ?? 0,
-          }));
+          const meanScores = response.data.mean_scores || {};
+          const updatedScores = Object.entries(meanScores)
+            .filter(([key]) => Boolean(quizTitles[key]))
+            .map(([key, score]) => ({
+              code: key,
+              subject: quizTitles[key],
+              score: Math.round(Number(score) || 0),
+            }))
+            .sort((left, right) => right.score - left.score);
 
           setScores(updatedScores);
           return;
@@ -201,6 +166,18 @@ function Home() {
     localStorage.removeItem("jwt_token");
     localStorage.removeItem("user_id");
     navigate("/login");
+  };
+
+  const getScoreLabel = (score) => {
+    if (score >= 80) {
+      return "상위권";
+    }
+
+    if (score >= 60) {
+      return "안정권";
+    }
+
+    return "보강 필요";
   };
 
   return (
@@ -301,56 +278,75 @@ function Home() {
 
           {activeTab === "마이페이지" && (
             <section className={styles.analyticsSection}>
-              <div className={styles.analyticsSummary}>
-                <article className={styles.metricCard}>
-                  <p>과목 평균 점수</p>
-                  <h3>{averageScore}점</h3>
-                </article>
-                <article className={styles.metricCard}>
-                  <p>기록된 과목 수</p>
-                  <h3>{scores.length}개</h3>
-                </article>
-              </div>
+              <section className={styles.analyticsHero}>
+                <div className={styles.analyticsIntro}>
+                  <p className={styles.analyticsEyebrow}>Performance Snapshot</p>
+                  <h2>
+                    {bestSubject ? `${bestSubject.subject} 과목이 가장 안정적입니다.` : "아직 집계할 성적이 없습니다."}
+                  </h2>
+                  <p className={styles.analyticsDescription}>
+                    마이페이지 평균은 실제로 응시한 과목만 기준으로 계산합니다. 미응시 과목은 평균과 목록에서 제외됩니다.
+                  </p>
+                </div>
 
-              <div className={styles.analyticsGrid}>
-                <article className={styles.chartCard}>
-                  <h2>시험 결과 분석</h2>
-                  {plotData ? (
-                    <Plot
-                      data={plotData.data}
-                      layout={plotLayout}
-                      config={{ displayModeBar: false, responsive: true }}
-                      className={styles.plotContainer}
-                      useResizeHandler
-                      style={{ width: "100%", height: "100%" }}
-                    />
-                  ) : (
-                    <p className={styles.loadingText}>차트 로딩 중...</p>
-                  )}
-                </article>
+                <div className={styles.analyticsSummary}>
+                  <article className={styles.metricCard}>
+                    <p>응시 과목 평균</p>
+                    <h3>{scores.length ? `${averageScore}점` : "-"}</h3>
+                  </article>
+                  <article className={styles.metricCard}>
+                    <p>응시 과목 수</p>
+                    <h3>{scores.length}개</h3>
+                  </article>
+                  <article className={styles.metricCard}>
+                    <p>누적 풀이 기록</p>
+                    <h3>{attemptedNoteList.length}회</h3>
+                  </article>
+                </div>
+              </section>
 
-                <article className={styles.scoreCard}>
-                  <h2>과목별 평균 점수</h2>
-                  <ul className={styles.scoreList}>
+              {scores.length === 0 ? (
+                <div className={styles.emptyState}>
+                  <h3>아직 집계된 평균 점수가 없습니다.</h3>
+                  <p>과목 탭에서 문제를 풀면 응시한 과목만 기준으로 평균이 정리됩니다.</p>
+                </div>
+              ) : (
+                <section className={styles.scoreBoard}>
+                  <div className={styles.scoreBoardHeader}>
+                    <h2>과목별 평균 점수</h2>
+                    <p>응시 데이터가 있는 과목만 표시합니다.</p>
+                  </div>
+
+                  <ul className={styles.scoreCardGrid}>
                     {scores.map((item, index) => {
-                      const score = Number(item.score || 0);
-                      const safeScore = Math.max(0, Math.min(100, score));
+                      const safeScore = Math.max(0, Math.min(100, item.score));
 
                       return (
-                        <li key={`${item.subject}-${index}`}>
-                          <div className={styles.scoreTop}>
-                            <span>{item.subject}</span>
-                            <strong>{score}점</strong>
-                          </div>
-                          <div className={styles.scoreTrack}>
-                            <span style={{ width: `${safeScore}%` }} />
-                          </div>
+                        <li key={`${item.code}-${index}`}>
+                          <article className={styles.subjectScoreCard}>
+                            <div className={styles.subjectScoreTop}>
+                              <div className={styles.subjectCopy}>
+                                <p className={styles.subjectRank}>#{index + 1}</p>
+                                <h3>{item.subject}</h3>
+                              </div>
+                              <strong>{item.score}점</strong>
+                            </div>
+
+                            <div className={styles.scoreTrack}>
+                              <span style={{ width: `${safeScore}%` }} />
+                            </div>
+
+                            <div className={styles.subjectMeta}>
+                              <span>{item.code}</span>
+                              <span>{getScoreLabel(item.score)}</span>
+                            </div>
+                          </article>
                         </li>
                       );
                     })}
                   </ul>
-                </article>
-              </div>
+                </section>
+              )}
             </section>
           )}
         </main>
