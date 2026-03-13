@@ -31,6 +31,8 @@ function Home() {
   const [activeTab, setActiveTab] = useState("과목");
   const [attemptedNotes, setAttemptedNotes] = useState([]);
   const [scores, setScores] = useState([]);
+  const [weakAreas, setWeakAreas] = useState([]);
+  const [isWeakAreasLoading, setIsWeakAreasLoading] = useState(false);
 
   const userId = getItemWithExpiry("user_id");
   const token = getItemWithExpiry("jwt_token");
@@ -126,7 +128,7 @@ function Home() {
     };
 
     fetchMeanScore();
-  }, [userId]);
+  }, [backendURL, userId]);
 
   useEffect(() => {
     const fetchAttemptedNotes = async () => {
@@ -154,7 +156,41 @@ function Home() {
     };
 
     fetchAttemptedNotes();
-  }, [token, userId]);
+  }, [backendURL, token, userId]);
+
+  useEffect(() => {
+    const fetchWeakAreas = async () => {
+      if (!userId || !token) {
+        setWeakAreas([]);
+        setIsWeakAreasLoading(false);
+        return;
+      }
+
+      setIsWeakAreasLoading(true);
+
+      try {
+        const response = await axios.get(`${backendURL}/users/${userId}/weak-areas`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (response.status === 200) {
+          setWeakAreas(response.data.weak_areas || []);
+          return;
+        }
+
+        setWeakAreas([]);
+      } catch (error) {
+        console.error("취약 개념 분석 요청 실패:", error.message);
+        setWeakAreas([]);
+      } finally {
+        setIsWeakAreasLoading(false);
+      }
+    };
+
+    fetchWeakAreas();
+  }, [backendURL, token, userId]);
 
   const handleExamReviewClick = (resultId, quizType, quizSetId) => {
     navigate(`/examreview/${resultId}`, {
@@ -166,6 +202,21 @@ function Home() {
     localStorage.removeItem("jwt_token");
     localStorage.removeItem("user_id");
     navigate("/login");
+  };
+
+  const handleWeakAreaDrill = (area) => {
+    if (!token) {
+      alert("로그인 후 이용해 주세요.");
+      navigate("/login");
+      return;
+    }
+
+    refreshSessionExpiry();
+    const search = new URLSearchParams({
+      topic: area.topic,
+      sub_topic: area.sub_topic,
+    }).toString();
+    navigate(`/drill/${area.quiz_type}?${search}`);
   };
 
   const getScoreLabel = (score) => {
@@ -303,6 +354,69 @@ function Home() {
                     <h3>{attemptedNoteList.length}회</h3>
                   </article>
                 </div>
+              </section>
+
+              <section className={styles.weakAreaBoard}>
+                <div className={styles.scoreBoardHeader}>
+                  <div>
+                    <h2>취약 개념 리커버리</h2>
+                    <p>최근 오답 기록을 분석해 복습 우선순위를 추천합니다.</p>
+                  </div>
+                </div>
+
+                {isWeakAreasLoading ? (
+                  <div className={styles.analysisLoading}>
+                    <h3>취약 개념을 분석하는 중입니다.</h3>
+                    <p>최근 오답 기록을 바탕으로 바로 복습할 개념을 정리하고 있습니다.</p>
+                  </div>
+                ) : weakAreas.length === 0 ? (
+                  <div className={styles.emptyState}>
+                    <h3>아직 복습이 필요한 취약 개념이 없습니다.</h3>
+                    <p>오답이 쌓이면 이곳에 우선 복습할 개념과 바로가기 버튼이 나타납니다.</p>
+                  </div>
+                ) : (
+                  <ul className={styles.weakAreaGrid}>
+                    {weakAreas.map((area) => (
+                      <li key={`${area.quiz_type}-${area.topic}-${area.sub_topic}`}>
+                        <article className={styles.weakAreaCard}>
+                          <div className={styles.weakAreaHead}>
+                            <div>
+                              <p className={styles.weakAreaSubject}>{area.subject}</p>
+                              <h3>{area.topic}</h3>
+                              <p className={styles.weakAreaSubTopic}>{area.sub_topic}</p>
+                            </div>
+                            <span className={styles.priorityChip}>{area.priority_label}</span>
+                          </div>
+
+                          <div className={styles.weakAreaStats}>
+                            <span>정답률 {area.accuracy}%</span>
+                            <span>오답 {area.incorrect_count}회</span>
+                            <span>응시 {area.attempts}회</span>
+                          </div>
+
+                          {area.example_question ? (
+                            <p className={styles.weakAreaQuestion}>{area.example_question}</p>
+                          ) : null}
+
+                          <div className={styles.weakAreaFooter}>
+                            <p>
+                              {area.recommended_quiz_count}문제 복습 추천
+                              {area.available_quiz_count ? ` · 출제 가능 ${area.available_quiz_count}문제` : ""}
+                            </p>
+                            <button
+                              type="button"
+                              className={styles.recoveryButton}
+                              onClick={() => handleWeakAreaDrill(area)}
+                              disabled={!area.recommended_quiz_count}
+                            >
+                              집중 복습 시작
+                            </button>
+                          </div>
+                        </article>
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </section>
 
               {scores.length === 0 ? (

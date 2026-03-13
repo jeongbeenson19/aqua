@@ -1,6 +1,9 @@
 import os
+from collections import defaultdict
+from typing import Optional
+
 import requests
-from fastapi import FastAPI, HTTPException, Path, Depends
+from fastapi import FastAPI, HTTPException, Path, Depends, Query
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.trustedhost import TrustedHostMiddleware
 from fastapi.responses import RedirectResponse
@@ -52,6 +55,17 @@ KAKAO_CLIENT_ID = os.getenv("KAKAO_CLIENT_ID")
 KAKAO_REDIRECT_URI = os.getenv("KAKAO_REDIRECT_URI")
 LOGIN_REDIRECT_URI = os.getenv("LOGIN_REDIRECT_URI")
 QUIZ_SET_STORAGE_SEPARATOR = "::"
+DEFAULT_WEAK_AREA_LIMIT = 3
+DEFAULT_DRILL_LIMIT = 5
+QUIZ_TYPE_LABELS = {
+    "SCT": "스포츠 사회학",
+    "EDU": "스포츠 교육학",
+    "PSY": "스포츠 심리학",
+    "HIS": "한국 체육사",
+    "PHY": "운동 생리학",
+    "KIN": "운동 역학",
+    "ETH": "스포츠 윤리",
+}
 
 
 def build_stored_quiz_set_id(quiz_type: str, quiz_set_id: str) -> str:
@@ -89,6 +103,171 @@ def serialize_user_profile(user: User) -> dict:
         "missing_fields": missing_fields,
         "profile_required": bool(missing_fields),
     }
+
+
+def get_quiz_collection(quiz_type: str):
+    collection_name = f"{quiz_type.lower()}"
+    if not is_collection_exists(mongo_db, collection_name):
+        return None
+    return mongo_db[collection_name]
+
+
+def fetch_quiz_set_document(quiz_type: str, quiz_set_id: str):
+    collection = get_quiz_collection(quiz_type)
+    if collection is None:
+        return None
+
+    normalized_quiz_set_id = decode_stored_quiz_set_id(quiz_type, quiz_set_id)
+    return collection.find_one({"quiz_set_id": normalized_quiz_set_id}, {"_id": 0})
+
+
+def get_quiz_type_title(quiz_type: str, fallback_subject: Optional[str] = None) -> str:
+    return QUIZ_TYPE_LABELS.get(quiz_type, fallback_subject or quiz_type)
+
+
+def load_user_attempt_entries(user_id: str) -> list[dict]:
+    attempt_entries = []
+
+    with Session(engine) as session:
+        quiz_set_results = session.query(QuizSetResult).filter(
+            QuizSetResult.user_id == user_id
+        ).all()
+
+        for quiz_set_result in quiz_set_results:
+            quiz_set = fetch_quiz_set_document(
+                quiz_set_result.quiz_type,
+                quiz_set_result.quiz_set_id,
+            )
+
+            if not quiz_set:
+                continue
+
+            quiz_lookup = {
+                quiz["quiz_id"]: quiz
+                for quiz in quiz_set.get("quiz", [])
+                if quiz.get("quiz_id")
+            }
+
+            quiz_results = session.query(QuizResult).filter(
+                QuizResult.result_id == quiz_set_result.id
+            ).all()
+
+            for quiz_result in quiz_results:
+                quiz_data = quiz_lookup.get(quiz_result.quiz_id)
+                if not quiz_data:
+                    continue
+
+                attempt_entries.append({
+                    "result_id": quiz_set_result.id,
+                    "quiz_type": quiz_set_result.quiz_type,
+                    "quiz_set_id": decode_stored_quiz_set_id(
+                        quiz_set_result.quiz_type,
+                        quiz_set_result.quiz_set_id,
+                    ),
+                    "score": quiz_set_result.score,
+                    "quiz_id": quiz_result.quiz_id,
+                    "user_answer": quiz_result.user_answer,
+                    "is_correct": bool(quiz_result.is_correct),
+                    "quiz": quiz_data,
+                    "quiz_content": quiz_data.get("quiz_content", {}),
+                })
+
+    return attempt_entries
+
+
+def collect_concept_quizzes(quiz_type: str, topic: str, sub_topic: str) -> list[dict]:
+    collection = get_quiz_collection(quiz_type)
+    if collection is None:
+        return []
+
+    concept_quizzes = {}
+    for quiz_set in collection.find({}, {"_id": 0, "quiz": 1}):
+        for quiz in quiz_set.get("quiz", []):
+            quiz_id = quiz.get("quiz_id")
+            quiz_content = quiz.get("quiz_content", {})
+            if not quiz_id:
+                continue
+            if quiz_content.get("topic") != topic:
+                continue
+            if quiz_content.get("sub_topic") != sub_topic:
+                continue
+            concept_quizzes.setdefault(quiz_id, quiz)
+
+    return list(concept_quizzes.values())
+
+
+def build_weak_area_summaries(user_id: str) -> list[dict]:
+    area_stats = {}
+
+    for entry in load_user_attempt_entries(user_id):
+        quiz_content = entry.get("quiz_content") or {}
+        topic = quiz_content.get("topic")
+        sub_topic = quiz_content.get("sub_topic")
+        if not topic or not sub_topic:
+            continue
+
+        key = (entry["quiz_type"], topic, sub_topic)
+        if key not in area_stats:
+            area_stats[key] = {
+                "quiz_type": entry["quiz_type"],
+                "subject": get_quiz_type_title(
+                    entry["quiz_type"],
+                    quiz_content.get("subject"),
+                ),
+                "topic": topic,
+                "sub_topic": sub_topic,
+                "attempts": 0,
+                "correct_count": 0,
+                "incorrect_count": 0,
+                "example_question": quiz_content.get("question_text"),
+            }
+
+        area_stats[key]["attempts"] += 1
+        if entry["is_correct"]:
+            area_stats[key]["correct_count"] += 1
+        else:
+            area_stats[key]["incorrect_count"] += 1
+
+    weak_areas = []
+    for summary in area_stats.values():
+        if summary["incorrect_count"] <= 0:
+            continue
+
+        accuracy = round((summary["correct_count"] / summary["attempts"]) * 100)
+        available_quiz_count = len(
+            collect_concept_quizzes(
+                summary["quiz_type"],
+                summary["topic"],
+                summary["sub_topic"],
+            )
+        )
+
+        if summary["incorrect_count"] >= 3 or accuracy <= 40:
+            priority_label = "집중 복습"
+        elif summary["incorrect_count"] >= 2 or accuracy <= 65:
+            priority_label = "재점검 필요"
+        else:
+            priority_label = "가벼운 복습"
+
+        weak_areas.append({
+            **summary,
+            "accuracy": accuracy,
+            "priority_label": priority_label,
+            "available_quiz_count": available_quiz_count,
+            "recommended_quiz_count": min(DEFAULT_DRILL_LIMIT, available_quiz_count),
+        })
+
+    weak_areas.sort(
+        key=lambda item: (
+            -item["incorrect_count"],
+            item["accuracy"],
+            -item["attempts"],
+            item["quiz_type"],
+            item["topic"],
+            item["sub_topic"],
+        )
+    )
+    return weak_areas
 
 # 로그인 요청 URL 생성
 @app.get("/auth/kakao/login")
@@ -508,6 +687,105 @@ async def create_quiz_report(
         raise HTTPException(status_code=response.status_code, detail="Failed to send webhook")
 
     return {"message": "Bug report sent to Discord successfully"}
+
+
+@app.get("/users/{user_id}/weak-areas")
+async def get_weak_areas(
+    user_id: str = Path(..., description="유저 ID"),
+    limit: int = Query(DEFAULT_WEAK_AREA_LIMIT, ge=1, le=10),
+    user: User = Depends(decode_jwt),
+):
+    if user.user_id != user_id:
+        raise HTTPException(status_code=403, detail="User ID mismatch")
+
+    weak_areas = build_weak_area_summaries(user_id)
+    return {
+        "user_id": user_id,
+        "total_weak_areas": len(weak_areas),
+        "weak_areas": weak_areas[:limit],
+    }
+
+
+@app.get("/users/{user_id}/drill/{quiz_type}")
+async def get_concept_drill(
+    user_id: str = Path(..., description="유저 ID"),
+    quiz_type: str = Path(..., description="과목 코드"),
+    topic: str = Query(..., description="대분류 개념"),
+    sub_topic: str = Query(..., description="세부 개념"),
+    limit: int = Query(DEFAULT_DRILL_LIMIT, ge=1, le=10),
+    user: User = Depends(decode_jwt),
+):
+    if user.user_id != user_id:
+        raise HTTPException(status_code=403, detail="User ID mismatch")
+
+    concept_quizzes = collect_concept_quizzes(quiz_type, topic, sub_topic)
+    if not concept_quizzes:
+        raise HTTPException(status_code=404, detail="No concept drill quizzes found")
+
+    attempt_stats_by_quiz_id = defaultdict(lambda: {"attempts": 0, "incorrect_count": 0})
+    for entry in load_user_attempt_entries(user_id):
+        quiz_content = entry.get("quiz_content") or {}
+        if entry["quiz_type"] != quiz_type:
+            continue
+        if quiz_content.get("topic") != topic:
+            continue
+        if quiz_content.get("sub_topic") != sub_topic:
+            continue
+
+        quiz_stats = attempt_stats_by_quiz_id[entry["quiz_id"]]
+        quiz_stats["attempts"] += 1
+        if not entry["is_correct"]:
+            quiz_stats["incorrect_count"] += 1
+
+    def drill_rank(quiz: dict):
+        quiz_stats = attempt_stats_by_quiz_id.get(
+            quiz.get("quiz_id"),
+            {"attempts": 0, "incorrect_count": 0},
+        )
+        attempts = quiz_stats["attempts"]
+        incorrect_count = quiz_stats["incorrect_count"]
+
+        if incorrect_count > 0:
+            priority = 0
+        elif attempts == 0:
+            priority = 1
+        else:
+            priority = 2
+
+        return priority, -incorrect_count, attempts, quiz.get("quiz_id", "")
+
+    selected_quizzes = sorted(concept_quizzes, key=drill_rank)[:limit]
+    repeated_wrong_count = 0
+    unseen_count = 0
+    for quiz in selected_quizzes:
+        quiz_stats = attempt_stats_by_quiz_id.get(
+            quiz.get("quiz_id"),
+            {"attempts": 0, "incorrect_count": 0},
+        )
+        if quiz_stats["incorrect_count"] > 0:
+            repeated_wrong_count += 1
+        elif quiz_stats["attempts"] == 0:
+            unseen_count += 1
+
+    quiz_subject = None
+    if selected_quizzes:
+        quiz_subject = selected_quizzes[0].get("quiz_content", {}).get("subject")
+
+    return {
+        "quiz_type": quiz_type,
+        "quiz_title": get_quiz_type_title(quiz_type, quiz_subject),
+        "topic": topic,
+        "sub_topic": sub_topic,
+        "quiz_set_id": f"drill::{quiz_type}::{topic}::{sub_topic}",
+        "quiz": selected_quizzes,
+        "summary": {
+            "total_candidates": len(concept_quizzes),
+            "selected_count": len(selected_quizzes),
+            "repeated_wrong_count": repeated_wrong_count,
+            "unseen_count": unseen_count,
+        },
+    }
+
 
 @app.get("/my_page/mean_score/{user_id}")
 async def get_mean_score(
